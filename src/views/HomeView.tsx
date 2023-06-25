@@ -16,7 +16,7 @@ export const HomeView = () => {
         <div style={styles.sideBarArea}>
           <SideBar />
         </div>
-        <div style={styles.mainArea}>
+        <div style={styles.outletArea}>
           <Outlet />
         </div>
       </div>
@@ -45,5 +45,6 @@ const styles: { [key: string]: CSSProperties } = {
   },
   outletArea:{
     width: '80vw',
+    float:'left'
   }
 }
