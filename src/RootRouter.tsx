@@ -8,6 +8,7 @@ import {UserInfoView} from "./views/UserInfoView.tsx";
 import {SignupView} from "./views/SignupView.tsx";
 import {AskQuestionView} from "./views/AskQuestionView.tsx";
 import {TagQuestionsView} from "./views/TagQuestionsView.tsx";
+import {QuestionView} from "./views/QuestionView.tsx";
 
 export const RootRouter = () => {
 	return (
@@ -19,11 +20,12 @@ export const RootRouter = () => {
 				element={<HomeView/>}
 				children={[
 					<Route element={<QuestionsView/>} path={"/questions"}>
-						<Route element={<TagQuestionsView/>} path={"/tag/:content"}></Route>
+						<Route element={<TagQuestionsView/>} path={"questions/tag/:content"}></Route>
 					</Route>,
 					<Route element={<TagsView/>} path={"/tags"}/>,
 					<Route element={<UsersView/>} path={"/users"}/>,
 					<Route element={<UserInfoView/>} path={"/user/:userid"}/>,
+					<Route element={<QuestionView/>} path={"/question/:quesid"}/>,
 				]}
 			/>
 			<Route element={<AskQuestionView/>} path={"/create-question"}/>

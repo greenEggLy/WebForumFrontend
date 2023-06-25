@@ -7,8 +7,9 @@ interface Props {
 	answer: IAnswerCard;
 }
 
-export const AnswerCard = ({answer}: Props) => {
 
+// 用户界面显示自己回答的问题
+export const AnswerCard = ({answer}: Props) => {
 	return (
 		<Card className={"answer-card"}>
 			<Link to={`/question/${answer.question_id}`}>
