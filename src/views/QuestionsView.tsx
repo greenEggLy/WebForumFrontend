@@ -9,12 +9,13 @@ import {QuestionCard} from "../components/question/question-page/QuestionCard.ts
 
 const fetchNum = 50;
 
-const tabs: ITab[] = [
+export const tabs: ITab[] = [
 	{tab: 'thumbs', title: 'Thumbs'},
 	{tab: 'newquestion', title: 'New Questions'},
 ]
 
 export const QuestionsView = () => {
+	// const params = useParams()
 	const [nextFetch, setNextFetch] = useState<number>(0);
 	const [tab, setTab] = useState<ITab>(tabs[0])
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
@@ -23,8 +24,7 @@ export const QuestionsView = () => {
 		setNextFetch(nextFetch + fetchNum)
 	}, [])
 
-	const changeTab = async (selectTab: ITab | string) => {
-		if (typeof selectTab === "string") return;
+	const changeTab = async (selectTab: ITab) => {
 		if (tab === selectTab) return;
 		const response = await Ques_GetQuestionsByTab(selectTab.tab, 0, fetchNum)
 		if (!response.ok) {
@@ -49,9 +49,9 @@ export const QuestionsView = () => {
 
 	return <div>
 		<div className={"view-title"}>questions</div>
-		<div className="questions-filter-tabs">
+		<div className="filter-tabs">
 			{tabs.map((tab) => (
-				<FilterTabItem tab={tab.tab} title={tab.title} tabItem={tab} func={changeTab}/>
+				<FilterTabItem tab={tab} func={changeTab}/>
 			))}
 		</div>
 		<div className={"questions-show"}>

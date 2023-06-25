@@ -10,3 +10,8 @@ export const Ques_GetQuestionsByTag = async (tag: string) => {
 	const url = `${root}/questions?tag=${tag}`
 	return await fetch(url, getRequestInit())
 }
+
+export const Ques_GetQuestionsByTagAndTab = async (tag: string, tab: string) => {
+	const url = `${root}/questions?tag=${tag}&tab=${tab}`
+	return await fetch(url, getRequestInit())
+}
