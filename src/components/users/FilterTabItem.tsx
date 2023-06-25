@@ -1,16 +1,22 @@
+import {ITab} from "../../views/UsersView.tsx";
+
 interface Props {
 	tab: string;
 	title: string;
-	func: (tab: string) => void
+	tabItem?: ITab;
+	func: (tab: ITab | string) => Promise<void>
 }
 
 // 用户filter选择
-export const FilterTabItem = ({tab, title, func}: Props) => {
+export const FilterTabItem = ({tab, title, tabItem, func}: Props) => {
 	return (
 		<button
 			className={"filter-tab"}
 			onClick={async () => {
-				await func(tab);
+				if (tabItem)
+					await func(tabItem);
+				else
+					await func(tab)
 			}}
 		>
 			{title}
