@@ -22,14 +22,14 @@ export const UsersView = () => {
 	const [users, setUsers] = useState<IUserCard[]>([]);
 	const [filterText, setFilterText] = useState<string>("")
 
-	const getUserByTab = async (tab: string) => {
-		const response = await Users_FilterByTab(tab);
+	const getUserByTab = async (tab: ITab) => {
+		const response = await Users_FilterByTab(tab.tab);
 		if (!response.ok) message.error(`get user by ${tab} error!`);
 		const json: Promise<IUserCard[]> = response.json();
 		setUsers(await json);
 	};
 	useEffect(() => {
-		getUserByTab(tabs[0].tab).catch(err => console.error(err))
+		getUserByTab(tabs[0]).catch(err => console.error(err))
 	}, [])
 
 	useEffect(() => {
@@ -63,8 +63,7 @@ export const UsersView = () => {
 				<div className="users-filter-tabs">
 					{tabs.map((tab) => (
 						<FilterTabItem
-							tab={tab.tab}
-							title={tab.title}
+							tab={tab}
 							func={getUserByTab}
 							// setUsers={setUsers}
 						/>
