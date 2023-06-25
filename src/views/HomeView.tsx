@@ -1,34 +1,32 @@
-import { CodeRunning, ParseMarkdown } from "../service/MarkdownService.ts";
-import { useEffect, useState } from "react";
+import { SearchBar } from "../components/Home/SearchBar";
+import { SideBar } from "../components/Home/SideBar";
 
 export const HomeView = () => {
-  const [show, setShow] = useState<string>("");
-  useEffect(() => {
-    CodeRunning();
-  }, [show]);
   return (
-    <div>
-      <button
-        onClick={() => {
-          let s = ParseMarkdown(
-            document.querySelector("#markdown-content")?.textContent
-          );
-          if (!s) return;
-          setShow(s);
-        }}
-      >
-        {" "}
-        hahaha{" "}
-      </button>
-      <textarea
-        onChange={(e) => {
-          let s = ParseMarkdown(e.target.value);
-          if (!s) return;
-          // let source = new DOMParser().parseFromString(s,'text/html');
-          setShow(s);
-        }}
-      ></textarea>
-      <div dangerouslySetInnerHTML={{ __html: show }}></div>
+    <div style={styles.home}>
+      <div style={styles.searchBar}>
+        {/*this search bar needs to be reconstructed because it's too ugly*/}
+        <SearchBar />
+      </div>
+      <div>
+        <div style={styles.sideBarArea}>
+          <SideBar />
+        </div>
+      </div>
     </div>
-  );
+  )
 };
+
+const styles = {
+  searchBar: {
+    height: '5vh',
+  },
+  home:{
+    height: '100vh',
+    width: '100vw',
+  },
+  sideBarArea:{
+    width: '20vw',
+    height: '100vh',
+  }
+}
