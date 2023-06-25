@@ -27,14 +27,16 @@ export const HomeView = () => {
 
 const styles: { [key: string]: CSSProperties } = {
   searchBar: {
-    height: '5vh',
+    height: '2rem',
   },
   home:{
     height: '100vh',
     width: '100vw',
   },
   mainArea:{
-
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    maxWidth: '100vw',
   },
   sideBarArea:{
     width: '20vw',
