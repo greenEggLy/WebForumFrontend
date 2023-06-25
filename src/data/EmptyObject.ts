@@ -1,4 +1,4 @@
-import {IQuestion, ITag, IUser, IUserCard} from "../Interface.ts";
+import {IAnswerBrief, IQuestion, ITag, IUser, IUserBrief, IUserCard} from "../Interface.ts";
 
 export const EmptyUser: IUser = {
 	id: 0,
@@ -21,6 +21,12 @@ export const EmptyUser: IUser = {
 	following: [],
 };
 
+export const EmptyUserBrief: IUserBrief = {
+	id: "",
+	userName: "",
+	avatar: ""
+}
+
 
 export const EmptyUserCard: IUserCard = {
 	id: 0,
@@ -32,18 +38,29 @@ export const EmptyUserCard: IUserCard = {
 	fields: []
 }
 
+export const EmptyAnswerBrief: IAnswerBrief = {
+	id: "",
+	userCard: EmptyUserBrief,
+	content: "",
+	likeCount: 0,
+	dislikeCount: 0,
+	userLike: false,
+	userDislike: false,
+}
+
 export const EmptyQuestion: IQuestion = {
-	id: 0,
+	id: "0",
+	userCard: EmptyUserBrief,
 	title: "",
 	content: "",
-	create_time: new Date(),
-	last_edit: new Date(),
-	browse_time: 0,
-	user: EmptyUserCard,
-	star_users: [],
-	like_users: [],
+	starCount: 0,
+	likeCount: 0,
+	dislikeCount: 0,
+	userStar: false,
+	userLike: false,
+	userDislike: false,
 	answers: [],
-	tags: [],
+	tags: []
 };
 
 export const EmptyTag: ITag = {
