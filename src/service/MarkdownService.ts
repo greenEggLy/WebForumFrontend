@@ -27,12 +27,12 @@ export const ParseMarkdown = (lines: string | null | undefined) => {
 };
 
 export const CodeRunning = () => {
-  let items = document.querySelectorAll("code");
+  const items = document.querySelectorAll("code");
   items.forEach((item) => {
     item.onclick = () => {
-      let arr = item.className.match(lang_reg);
+      const arr = item.className.match(lang_reg);
       if (!arr) return;
-      let language = arr[1].toUpperCase();
+      const language = arr[1].toUpperCase();
       if (!languages.includes(language)) {
         message.error("暂不支持该语言");
       }
