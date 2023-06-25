@@ -4,7 +4,11 @@ import {IUser} from "../Interface.ts";
 import {EmptyUser} from "../data/EmptyObject.ts";
 import {User_GetUser} from "../service/UserService.ts";
 import {TagShowItem} from "../components/tag/TagShowItem.tsx";
+import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
+import {AnswerCard} from "../components/users/AnswerCard.tsx";
 
+
+// user-self data view
 export const UserInfoView = () => {
 	const params = useParams();
 	const [user, setUser] = useState<IUser>(EmptyUser);
@@ -20,7 +24,7 @@ export const UserInfoView = () => {
 	return (
 		<div>
 			<div className={"view-title"}>{"User Info"}</div>
-			<div className={"user-info-header-frame"}>
+			<div className={"user-info-header-wrapper"}>
 				<div className={"user-avatar"}>
 					<img alt={"haha"} resource={user.avatar}/>
 				</div>
@@ -29,14 +33,35 @@ export const UserInfoView = () => {
 					<text className={"user-email"}>{user.email}</text>
 					<text className={"user-location"}>{user.location}</text>
 					<span>
-            {user.fields.map((field) => (
-				<TagShowItem tag_name={field.content}/>
-			))}
-          </span>
+						{user.fields.map((field) => (
+							<TagShowItem tag_name={field.content}/>
+						))}
+					</span>
 				</div>
 			</div>
 			<div className={"user-likes-and-save"}>
-
+				{
+					user.like_questions.map(question => (
+						<QuestionCard question={question}/>
+					))
+				}
+				{
+					user.star_questions.map(question => (
+						<QuestionCard question={question}/>
+					))
+				}
+			</div>
+			<div className={"user-creates-and-answers"}>
+				{
+					user.questions.map(question => (
+						<QuestionCard question={question}/>
+					))
+				}
+				{
+					user.answers.map(answer => (
+						<AnswerCard answer={answer}/>
+					))
+				}
 			</div>
 		</div>
 	);

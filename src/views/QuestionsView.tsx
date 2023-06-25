@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {QUES_GetQuestions} from "../service/QuestionsService.ts";
+import {Ques_GetQuestionsByTab} from "../service/QuestionsService.ts";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {ITab} from "./UsersView.tsx";
 import {message} from "antd";
@@ -9,39 +9,35 @@ import {QuestionCard} from "../components/question/question-page/QuestionCard.ts
 
 const fetchNum = 50;
 
-const tabs: ITab[] = [
+export const tabs: ITab[] = [
 	{tab: 'thumbs', title: 'Thumbs'},
 	{tab: 'newquestion', title: 'New Questions'},
 ]
 
 export const QuestionsView = () => {
+	// const params = useParams()
 	const [nextFetch, setNextFetch] = useState<number>(0);
-	const [tab, setTab] = useState<ITab>(tabs[1])
+	const [tab, setTab] = useState<ITab>(tabs[0])
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
 	useEffect(() => {
-		QUES_GetQuestions(tabs[0].tab, nextFetch, fetchNum).catch(err => console.error(err))
+		Ques_GetQuestionsByTab(tabs[0].tab, nextFetch, fetchNum).catch(err => console.error(err))
 		setNextFetch(nextFetch + fetchNum)
 	}, [])
 
-	const changeTab = async (selectTab: string) => {
-		if (tab.tab === selectTab) return;
-		const response = await QUES_GetQuestions(selectTab, 0, fetchNum)
+	const changeTab = async (selectTab: ITab) => {
+		if (tab === selectTab) return;
+		const response = await Ques_GetQuestionsByTab(selectTab.tab, 0, fetchNum)
 		if (!response.ok) {
 			message.error(`无法查询问题信息`)
 			return
 		}
-		tabs.forEach(tab => {
-			if (tab.tab === selectTab) {
-				setTab(tab);
-				return;
-			}
-		})
+		setTab(selectTab)
 		setNextFetch(fetchNum)
 		setQuestions(await response.json());
 	}
 
 	const fetchMore = async (selectTab: string) => {
-		const response = await QUES_GetQuestions(selectTab, nextFetch, fetchNum);
+		const response = await Ques_GetQuestionsByTab(selectTab, nextFetch, fetchNum);
 		if (!response.ok) {
 			message.error(`无法查询问题信息`)
 			return
@@ -53,9 +49,9 @@ export const QuestionsView = () => {
 
 	return <div>
 		<div className={"view-title"}>questions</div>
-		<div className="questions-filter-tabs">
+		<div className="filter-tabs">
 			{tabs.map((tab) => (
-				<FilterTabItem tab={tab.tab} title={tab.title} func={changeTab}/>
+				<FilterTabItem tab={tab} func={changeTab}/>
 			))}
 		</div>
 		<div className={"questions-show"}>

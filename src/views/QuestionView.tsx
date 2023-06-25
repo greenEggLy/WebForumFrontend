@@ -5,7 +5,7 @@ import {EmptyQuestion} from "../data/EmptyObject.ts";
 import {Que_GetQuestion} from "../service/QuestionService.ts";
 import {message} from "antd";
 import {QuestionVote} from "../components/question/question-page/QuestionVote.tsx";
-import {QuestionCont} from "../components/question/question-page/QuestionCont.tsx";
+import {AnswerContent} from "../components/question/question-page/AnswerContent.tsx";
 
 export const QuestionView = () => {
 	const params = useParams();
@@ -30,7 +30,7 @@ export const QuestionView = () => {
         <span>
           <QuestionVote question={question}/>
 			{/*<QuestionContent content={question.content} />*/}
-			<QuestionCont content={question.content}/>
+			<AnswerContent content={question.content}/>
         </span>
 			</div>
 			<div className={"question-answers"}>{}</div>
