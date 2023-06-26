@@ -4,7 +4,7 @@ import {IQuestion} from "../Interface.ts";
 import {EmptyQuestion} from "../data/EmptyObject.ts";
 import {Que_GetQuestion} from "../service/QuestionService.ts";
 import {message} from "antd";
-import {QuestionVote} from "../components/question/question-page/QuestionVote.tsx";
+import {VoteBar} from "../components/question/question-page/VoteBar.tsx";
 import {AnswerContent} from "../components/question/question-page/AnswerContent.tsx";
 
 export const QuestionView = () => {
@@ -27,13 +27,19 @@ export const QuestionView = () => {
 		<div>
 			<div className={"view-title"}>{question.title}</div>
 			<div className={"question-content"}>
-        <span>
-          <QuestionVote question={question}/>
-			{/*<QuestionContent content={question.content} />*/}
-			<AnswerContent content={question.content}/>
-        </span>
+				<span>
+					<VoteBar content={question}/>
+					<AnswerContent content={question.content}/>
+				</span>
 			</div>
-			<div className={"question-answers"}>{}</div>
+			<div className={"question-answers"}>{
+				question.answers.map(answer => (
+					<span>
+						<VoteBar content={answer}/>
+						<AnswerContent content={answer.content}/>
+					</span>
+				))
+			}</div>
 		</div>
 	);
 };
