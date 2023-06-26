@@ -2,6 +2,7 @@ import {IAnswerBrief, IQuestion} from "../../../Interface.ts";
 import {Button} from "antd";
 import {CaretDownOutlined, CaretUpOutlined, StarOutlined} from '@ant-design/icons'
 import {useEffect, useState} from "react";
+import {Que_DislikeQuestion, Que_LikeQuestion, Que_StarQuestion} from "../../../service/QuestionService.ts";
 
 interface Props {
 	content: IQuestion | IAnswerBrief;
@@ -37,7 +38,7 @@ export const VoteBar = ({content}: Props) => {
 		}
 	}
 
-	const clickLike = () => {
+	const clickLike = async () => {
 		if (status === 1) {
 			setLikeCount(likeCount - 1)
 			setStatus(0)
@@ -45,10 +46,14 @@ export const VoteBar = ({content}: Props) => {
 			setLikeCount(likeCount + 1);
 			setStatus(1);
 		}
-		// TODO: api
+		const response = await Que_LikeQuestion(content.id)
+		if (!response.ok) {
+			return;
+		}
+		/// TODO: return?
 	}
 
-	const clickDislike = () => {
+	const clickDislike = async () => {
 		if (status === 1) {
 			setLikeCount(likeCount - 1)
 			setStatus(2)
@@ -57,12 +62,20 @@ export const VoteBar = ({content}: Props) => {
 		} else {
 			setStatus(0)
 		}
-		// TODO: api
+		const response = await Que_DislikeQuestion(content.id)
+		if (!response.ok) {
+			return;
+		}
+		// TODO: return?
 	}
 
-	const clickStar = () => {
+	const clickStar = async () => {
 		// TODO: api
 		setStar(!star);
+		const response = await Que_StarQuestion(content.id)
+		if (!response.ok) {
+			return;
+		}
 	}
 
 

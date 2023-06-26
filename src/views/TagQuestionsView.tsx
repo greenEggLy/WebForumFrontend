@@ -55,9 +55,7 @@ export const TagQuestionsView = () => {
 				{`Filter Questions by Tag: ${params.content}`}
 			</div>
 			<div className="filter-tabs">
-				{tabs.map((tab) => (
-					<FilterTabItem tab={tab} func={tabFilter}/>
-				))}
+				<FilterTabItem tabs={tabs} func={tabFilter} />
 			</div>
 			<div className={"questions"}>
 				{

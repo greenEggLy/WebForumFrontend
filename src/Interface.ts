@@ -125,3 +125,18 @@ export interface IUserFollow {
 	avatar: string;
 	username: string;
 }
+
+export interface ISearchRequest {
+	pageNumber: 0;
+	/// TODO
+}
+
+export interface ISearchResponse {
+	data: IQuestion[] | IUserCard[];
+	currentPage: number;
+	totalPages: number;
+	totalCount: number; // 所有满足条件的结果数
+	pageSize: number;
+	hasPreviousPage: boolean;
+	hasNextPage: boolean;
+}

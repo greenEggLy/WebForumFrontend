@@ -3,11 +3,24 @@ import {Ques_GetQuestionsByTab} from "../service/QuestionsService.ts";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {ITab} from "./UsersView.tsx";
 import {message} from "antd";
-import {IQuestionCard} from "../Interface.ts";
+import { IQuestionCard } from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
-
+import {CSSProperties} from "react";
 
 const fetchNum = 50;
+
+//for test
+//@ts-ignore
+const testQuestion: IQuestionCard = {
+	id:1,
+	title: '为什么我还没放暑假？',
+	last_edit: new Date(),
+	browse_time: 1437,
+	tags: [
+		{id: 1, content: 'test1'},
+		{id: 2, content: 'test2'},
+	]
+}
 
 export const tabs: ITab[] = [
 	{tab: 'thumbs', title: 'Thumbs'},
@@ -22,6 +35,8 @@ export const QuestionsView = () => {
 	useEffect(() => {
 		Ques_GetQuestionsByTab(tabs[0].tab, nextFetch, fetchNum).catch(err => console.error(err))
 		setNextFetch(nextFetch + fetchNum)
+		//for test
+		setQuestions([testQuestion, testQuestion, testQuestion])
 	}, [])
 
 	const changeTab = async (selectTab: ITab) => {
@@ -48,13 +63,13 @@ export const QuestionsView = () => {
 	}
 
 	return <div>
-		<div className={"view-title"}>questions</div>
-		<div className="filter-tabs">
-			{tabs.map((tab) => (
-				<FilterTabItem tab={tab} func={changeTab}/>
-			))}
+		<div className={"view-title"} style={styles.titleContainer}>
+			<h2>All Questions</h2>
 		</div>
-		<div className={"questions-show"}>
+		<div className="filter-tabs" style={styles.filterContainer}>
+			<FilterTabItem tabs={tabs} func={changeTab} />
+		</div>
+		<div className={"questions-show"} style={styles.questionContainer}>
 			{
 				questions.map(question => (<QuestionCard question={question}/>))
 			}
@@ -67,3 +82,16 @@ export const QuestionsView = () => {
 		</div>
 	</div>;
 };
+
+const styles: { [key: string]: CSSProperties } = {
+	titleContainer: {
+		height: '15vh',
+		marginLeft: '10px',
+	},
+	filterContainer: {
+		height: '10vh',
+	},
+	questionContainer: {
+		backgroundColor: '#f5f5f5',
+	}
+}
