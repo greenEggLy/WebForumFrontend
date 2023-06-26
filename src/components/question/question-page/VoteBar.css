@@ -1,0 +1,20 @@
+.vote-button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+}
+
+.star-button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: none;
+}
+
+.icon {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+}
