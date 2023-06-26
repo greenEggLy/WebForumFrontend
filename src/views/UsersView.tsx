@@ -61,13 +61,7 @@ export const UsersView = () => {
 				</div>
 
 				<div className="users-filter-tabs">
-					{tabs.map((tab) => (
-						<FilterTabItem
-							tab={tab}
-							func={getUserByTab}
-							// setUsers={setUsers}
-						/>
-					))}
+						<FilterTabItem tabs={tabs} func={getUserByTab} />
 				</div>
 			</div>
 			<List

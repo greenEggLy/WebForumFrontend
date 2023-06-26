@@ -66,17 +66,15 @@ export const QuestionsView = () => {
 		<div className={"view-title"} style={styles.titleContainer}>
 			<h2>All Questions</h2>
 		</div>
-		<div className="filter-tabs">
-			{tabs.map((tab) => (
-				<FilterTabItem tab={tab} func={changeTab}/>
-			))}
+		<div className="filter-tabs" style={styles.filterContainer}>
+			<FilterTabItem tabs={tabs} func={changeTab} />
 		</div>
 		<div className={"questions-show"} style={styles.questionContainer}>
 			{
 				questions.map(question => (<QuestionCard question={question}/>))
 			}
 		</div>
-		<div className={"fetch-more-button"} style={styles.filterContainer}>
+		<div className={"fetch-more-button"}>
 			<button onClick={() => {
 				fetchMore(tab.tab).catch(err => console.error(err))
 			}}>show more
@@ -91,7 +89,7 @@ const styles: { [key: string]: CSSProperties } = {
 		marginLeft: '10px',
 	},
 	filterContainer: {
-		height: '5vh',
+		height: '10vh',
 	},
 	questionContainer: {
 		backgroundColor: '#f5f5f5',
