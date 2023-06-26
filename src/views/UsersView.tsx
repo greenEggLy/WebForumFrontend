@@ -4,7 +4,8 @@ import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {Input, List, message} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
 import {Users_FilterByName, Users_FilterByTab} from "../service/UsersService.ts";
-
+import {styles} from "../stylesheets/global.tsx";
+import {UserList} from "../constants/test.ts";
 export interface ITab {
 	tab: string;
 	title: string;
@@ -21,31 +22,40 @@ const tabs: ITab[] = [
 export const UsersView = () => {
 	const [users, setUsers] = useState<IUserCard[]>([]);
 	const [filterText, setFilterText] = useState<string>("")
-
 	const getUserByTab = async (tab: ITab) => {
-		const response = await Users_FilterByTab(tab.tab);
-		if (!response.ok) message.error(`get user by ${tab} error!`);
-		const json: Promise<IUserCard[]> = response.json();
-		setUsers(await json);
+		setUsers(UserList);
 	};
-	useEffect(() => {
-		getUserByTab(tabs[0]).catch(err => console.error(err))
-	}, [])
 
-	useEffect(() => {
-		const getUsers = setTimeout(async () => {
-			const response = await Users_FilterByName(filterText)
-			if (!response.ok) {
-				message.error("暂不能获取用户信息")
-				return;
-			}
-			setUsers(await response.json())
-		}, 2000)
-		return () => clearTimeout(getUsers)
-	}, [filterText])
+	// const getUserByTab = async (tab: ITab) => {
+	// 	const response = await Users_FilterByTab(tab.tab);
+	// 	if (!response.ok) message.error(`get user by ${tab} error!`);
+	// 	const json: Promise<IUserCard[]> = response.json();
+	// 	setUsers(await json);
+	// };
+	// useEffect(() => {
+	// 	getUserByTab(tabs[0]).catch(err => console.error(err))
+	// }, [])
+
+	// useEffect(() => {
+	// 	const getUsers = setTimeout(async () => {
+	// 		const response = await Users_FilterByName(filterText)
+	// 		if (!response.ok) {
+	// 			message.error("暂不能获取用户信息")
+	// 			return;
+	// 		}
+	// 		setUsers(await response.json())
+	// 	}, 2000)
+	// 	return () => clearTimeout(getUsers)
+	// }, [filterText])
+	useEffect(()=>{
+		setUsers(UserList);
+	})
+
 	return (
 		<div>
-			<div className={"view-title"} style={{fontSize: "large"}}>Users</div>
+			<div className={"view-title"} style={styles.titleContainer}>
+				<h2>Users</h2>
+			</div>
 			<div className="userview-header">
 				<div className="inputbox">
 					<Input
@@ -60,19 +70,19 @@ export const UsersView = () => {
 					</Input>
 				</div>
 
-				<div className="users-filter-tabs">
+				<div className="filter-tabs" style={styles.filterContainer}>
 						<FilterTabItem tabs={tabs} func={getUserByTab} />
 				</div>
 			</div>
 			<List
 				grid={{
-					gutter: 16,
-					xs: 1,
-					sm: 2,
+					gutter: 500,
+					xs: 3,
+					sm: 4,
 					md: 4,
-					lg: 4,
-					xl: 6,
-					xxl: 3,
+					lg: 5,
+					xl:5,
+					xxl:6,
 				}}
 				dataSource={users}
 				renderItem={(user) => (

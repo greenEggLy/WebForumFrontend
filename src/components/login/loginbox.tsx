@@ -2,7 +2,8 @@ import React, { useEffect, useState} from 'react';
 import {Form, Input, Button, Checkbox,Col,Row,Card} from 'antd';
 import {UserOutlined,LockOutlined} from "@ant-design/icons";
 import color from "../../constants/color.ts";
-import Logo from '../../assets/logos/biglogo.png'
+import Logo from '../../assets/logos/biglogo.png';
+import {history} from "../../service/History.ts";
 const LoginForm : React.FC = () => {
     const [form] = Form.useForm();
     const [remember, setRemember] = useState(false);
@@ -16,6 +17,7 @@ const LoginForm : React.FC = () => {
             //     setFinish(true);
             //     navigation.navigate("Home");
             // }
+            history.push('/home');
             setFinish(true);
         };
         autologin();

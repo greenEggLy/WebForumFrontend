@@ -7,4 +7,5 @@ export default {
     lgrayblue:"#778ca3",
     card: "white",
     warning: "#E03D2E",
+    gblue:"#0fb9b1",
 };

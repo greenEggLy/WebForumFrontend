@@ -5,8 +5,7 @@ import {ITab} from "./UsersView.tsx";
 import {message} from "antd";
 import { IQuestionCard } from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
-import {CSSProperties} from "react";
-
+import {styles} from "../stylesheets/global.tsx";
 const fetchNum = 50;
 
 //for test
@@ -83,15 +82,3 @@ export const QuestionsView = () => {
 	</div>;
 };
 
-const styles: { [key: string]: CSSProperties } = {
-	titleContainer: {
-		height: '15vh',
-		marginLeft: '10px',
-	},
-	filterContainer: {
-		height: '10vh',
-	},
-	questionContainer: {
-		backgroundColor: '#f5f5f5',
-	}
-}
