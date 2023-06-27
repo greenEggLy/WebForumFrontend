@@ -1,10 +1,11 @@
 import {IUserCard} from "../Interface.ts";
 import {useEffect, useState} from "react";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {Input, List} from "antd";
+import {Input, List, Row, Col, Divider} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
 import {styles} from "../stylesheets/global.tsx";
 import {UserList} from "../constants/test.ts";
+const { Search } = Input;
 export interface ITab {
 	tab: string;
 	title: string;
@@ -56,9 +57,9 @@ export const UsersView = () => {
 			<div className={"view-title"} style={styles.titleContainer}>
 				<h2>Users</h2>
 			</div>
-			<div className="userview-header">
-				<div className="inputbox">
-					<Input
+			<Row className="userview-header" style={styles.filterContainer}>
+				<Col span={8} className="inputbox" style={styles.questionContainer}>
+					<Search
 						id="userfilter"
 						name="userfilter"
 						className="filter-input"
@@ -67,22 +68,25 @@ export const UsersView = () => {
 						value={filterText}
 						onChange={e => setFilterText(e.target.value)}
 					>
-					</Input>
-				</div>
+					</Search>
+				</Col>
 
-				<div className="filter-tabs" style={styles.filterContainer}>
+				<Col span={8} className="filter-tabs" >
 						<FilterTabItem tabs={tabs} func={getUserByTab} />
-				</div>
-			</div>
+				</Col>
+			</Row>
+			<Divider style={{marginBottom:'0px',marginTop:'2px'}}/>
+			<div style={{  paddingTop:'1rem',paddingLeft:'1rem',height:'100%',backgroundColor: '#f5f5f5'}}>
 			<List
+
 				grid={{
-					gutter: 500,
-					xs: 3,
-					sm: 4,
-					md: 4,
-					lg: 5,
-					xl:5,
-					xxl:6,
+					gutter:10,
+					xs: 1,
+					sm: 2,
+					md: 3,
+					lg: 3,
+					xl:4,
+					xxl:4,
 				}}
 				dataSource={users}
 				renderItem={(user) => (
@@ -91,6 +95,6 @@ export const UsersView = () => {
 					</List.Item>
 				)}
 			/>
-		</div>
-	);
-};
+			</div>
+		</div>)
+}

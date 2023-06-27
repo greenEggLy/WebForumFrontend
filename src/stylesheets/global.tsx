@@ -6,16 +6,13 @@ export const styles: { [key: string]: CSSProperties } = {
         marginLeft: '10px',
     },
     filterContainer: {
-        height:'4rem',
+        height:'3rem',
         marginBottom:'0px',
-        marginLeft: '10px',
-
-
-
     },
     questionContainer: {
-        backgroundColor: '#f5f5f5',
-        borderBlockColor: color.dgrayblue
+        borderBlockColor: color.dgrayblue,
+        marginRight:'6rem',
+        marginLeft: '10px'
     },
 
 }

@@ -10,7 +10,7 @@ interface Props {
 // users展示界面的用户卡片
 export const UserCardItem = ({user}: Props) => {
 	return (
-		<Card className={"user-card"} bordered={true} style={{width:"17rem",height:"7rem",marginRight:"-2rem"}}>
+		<Card className={"user-card"} bordered={true} style={{width:"17rem",height:"7rem",marginRight:'1rem'}}>
 			<Row className={"user-card-upper"} style={{width:"22rem",height:"8rem"}}>
 				<Col className={"user-card-left"} span={6} >
 					<img src={user.avatar} style={{
