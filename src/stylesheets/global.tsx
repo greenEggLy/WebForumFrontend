@@ -2,7 +2,7 @@ import {CSSProperties} from "react";
 
 export const styles: { [key: string]: CSSProperties } = {
     titleContainer: {
-        height: '15vh',
+        height: '5vh',
         marginLeft: '10px',
     },
     filterContainer: {

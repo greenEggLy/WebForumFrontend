@@ -1,9 +1,8 @@
 import {IUserCard} from "../Interface.ts";
 import {useEffect, useState} from "react";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {Input, List, message} from "antd";
+import {Input, List} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
-import {Users_FilterByName, Users_FilterByTab} from "../service/UsersService.ts";
 import {styles} from "../stylesheets/global.tsx";
 import {UserList} from "../constants/test.ts";
 export interface ITab {
@@ -22,6 +21,7 @@ const tabs: ITab[] = [
 export const UsersView = () => {
 	const [users, setUsers] = useState<IUserCard[]>([]);
 	const [filterText, setFilterText] = useState<string>("")
+	// @ts-ignore
 	const getUserByTab = async (tab: ITab) => {
 		setUsers(UserList);
 	};

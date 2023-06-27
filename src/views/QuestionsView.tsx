@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {Ques_GetQuestionsByTab} from "../service/QuestionsService.ts";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {ITab} from "./UsersView.tsx";
 import {message} from "antd";
 import { IQuestionCard } from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
-import {styles} from "../stylesheets/global.tsx";
 const fetchNum = 50;
+import './QuestionsView.css'
 
 //for test
 //@ts-ignore
@@ -27,6 +28,7 @@ export const tabs: ITab[] = [
 ]
 
 export const QuestionsView = () => {
+	const navigate = useNavigate()
 	// const params = useParams()
 	const [nextFetch, setNextFetch] = useState<number>(0);
 	const [tab, setTab] = useState<ITab>(tabs[0])
@@ -50,6 +52,11 @@ export const QuestionsView = () => {
 		setQuestions(await response.json());
 	}
 
+	const clickQuestion = (questionId: number) => {
+		const navigateUrl = `/question/${questionId}`
+		navigate(navigateUrl)
+	}
+
 	const fetchMore = async (selectTab: string) => {
 		const response = await Ques_GetQuestionsByTab(selectTab, nextFetch, fetchNum);
 		if (!response.ok) {
@@ -62,15 +69,15 @@ export const QuestionsView = () => {
 	}
 
 	return <div>
-		<div className={"view-title"} style={styles.titleContainer}>
+		<div className={"title-container"} >
 			<h2>All Questions</h2>
 		</div>
-		<div className="filter-tabs" style={styles.filterContainer}>
+		<div className="filter-container" >
 			<FilterTabItem tabs={tabs} func={changeTab} />
 		</div>
-		<div className={"questions-show"} style={styles.questionContainer}>
+		<div className={"question-container"} >
 			{
-				questions.map(question => (<QuestionCard question={question}/>))
+				questions.map(question => (<QuestionCard question={question} click={clickQuestion}/>))
 			}
 		</div>
 		<div className={"fetch-more-button"}>

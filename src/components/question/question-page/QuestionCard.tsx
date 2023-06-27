@@ -4,15 +4,16 @@ import {TagShowItem} from "../../tag/TagShowItem.tsx";
 
 interface Props {
 	question: IQuestionCard;
+	click: (id: number) => void;
 }
 
 // 问题缩略图
-export const QuestionCard = ({question}: Props) => {
+export const QuestionCard = ({question, click}: Props,) => {
 
 	return (
-		<div className={"question-card"}>
+		<div className={"question-card"} >
 			<div className={"question-card-title"}>
-				<text>{question.title}</text>
+				<a onClick={() => {click(question.id)}}>{question.title}</a>
 			</div>
 			<div className={"question-card-info"}>
                 <span>

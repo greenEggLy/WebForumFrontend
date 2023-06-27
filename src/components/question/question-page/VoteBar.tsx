@@ -1,6 +1,6 @@
 import {IAnswerBrief, IQuestion} from "../../../Interface.ts";
 import {Button} from "antd";
-import {CaretDownOutlined, CaretUpOutlined, StarOutlined} from '@ant-design/icons'
+import {CaretDownOutlined, CaretUpOutlined, StarOutlined, StarFilled} from '@ant-design/icons'
 import {useEffect, useState} from "react";
 import {Que_DislikeQuestion, Que_LikeQuestion, Que_StarQuestion} from "../../../service/QuestionService.ts";
 import "./VoteBar.css"
@@ -90,7 +90,7 @@ export const VoteBar = ({content}: Props) => {
 				<CaretDownOutlined className={'icon'}/>
 			</Button>
 			<Button className={"star-button"} color={getColor("star")} onClick={() => clickStar()}>
-				<StarOutlined className={'icon'}/>
+				{star ? <StarFilled className={'icon-star'}/> : <StarOutlined className={"icon"} />}
 			</Button>
 		</div>
 	);
