@@ -1,22 +1,21 @@
-import {useEffect, useState} from "react";
+import {CSSProperties, useEffect, useState} from "react";
 import {Ques_GetQuestionsByTab} from "../service/QuestionsService.ts";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {ITab} from "./UsersView.tsx";
 import {message} from "antd";
-import { IQuestionCard } from "../Interface.ts";
+import {IQuestionCard} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
-import {CSSProperties} from "react";
 
 const fetchNum = 50;
 
 //for test
 //@ts-ignore
 const testQuestion: IQuestionCard = {
-	id:1,
-	title: '为什么我还没放暑假？',
+	Id: 1,
+	Title: '为什么我还没放暑假？',
 	last_edit: new Date(),
 	browse_time: 1437,
-	tags: [
+	Tags: [
 		{id: 1, content: 'test1'},
 		{id: 2, content: 'test2'},
 	]
@@ -67,7 +66,7 @@ export const QuestionsView = () => {
 			<h2>All Questions</h2>
 		</div>
 		<div className="filter-tabs" style={styles.filterContainer}>
-			<FilterTabItem tabs={tabs} func={changeTab} />
+			<FilterTabItem tabs={tabs} func={changeTab}/>
 		</div>
 		<div className={"questions-show"} style={styles.questionContainer}>
 			{

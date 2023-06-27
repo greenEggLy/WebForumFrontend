@@ -89,11 +89,11 @@ export interface IAnswer {
 // }
 
 export interface IQuestionCard {
-	id: number;
-	title: string;
-	last_edit: Date;
-	browse_time: number;
-	tags: ITag[];
+	Id: number;
+	Title: string;
+	voteNumber: number;
+	AnswerNumber: number;
+	Tags: ITag[];
 }
 
 export interface IAnswerRecord {

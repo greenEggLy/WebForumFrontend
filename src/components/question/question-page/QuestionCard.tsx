@@ -12,7 +12,7 @@ export const QuestionCard = ({question}: Props) => {
 	return (
 		<div className={"question-card"}>
 			<div className={"question-card-title"}>
-				<text>{question.title}</text>
+				<text>{question.Title}</text>
 			</div>
 			<div className={"question-card-info"}>
                 <span>
@@ -22,7 +22,7 @@ export const QuestionCard = ({question}: Props) => {
 			</div>
 			<div className={"question-card-tag"}>
 				{
-					question.tags.map(tag => {
+					question.Tags.map(tag => {
 						return (<span> <TagShowItem tag_name={tag.content}/> </span>)
 					})
 				}
