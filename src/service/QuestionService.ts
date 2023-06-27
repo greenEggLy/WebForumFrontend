@@ -1,19 +1,16 @@
 import {ITag} from "../Interface.ts";
-import {emptyPostRequestInit, getRequestInit, postRequestInit, root} from "./global.ts";
-import * as dayjs from "dayjs";
+import {getRequestInit, postRequestInit, root} from "./global.ts";
 
 export const Que_PostQuestion = async (
 	title: string,
 	content: string,
 	tags: ITag[]
 ) => {
-	const url = `${root}/question/post-new-question`;
+	const url = `${root}/question/new`;
 	const json = {
-		title: title,
-		content: content,
-		create_time: dayjs(new Date()).toJSON(),
-		last_edit: dayjs(new Date()).toJSON(),
-		tags: tags,
+		Title: title,
+		Content: content,
+		Tags: tags,
 	};
 	const body = JSON.stringify(json);
 	return await fetch(url, postRequestInit(body));
@@ -25,17 +22,20 @@ export const Que_GetQuestion = async (id: string) => {
 };
 
 export const Que_LikeQuestion = async (id: string) => {
-	const url = `${root}/question/${id}/like-change`
-	return await fetch(url, emptyPostRequestInit());
+	const url = `${root}/question/like`
+	const body = JSON.stringify({Id: id});
+	return await fetch(url, postRequestInit(body));
 }
 
 
 export const Que_DislikeQuestion = async (id: string) => {
-	const url = `${root}/question/${id}/dislike-change`
-	return await fetch(url, emptyPostRequestInit());
+	const url = `${root}/question/dislike`
+	const body = JSON.stringify({Id: id});
+	return await fetch(url, postRequestInit(body));
 }
 
 export const Que_StarQuestion = async (id: string) => {
-	const url = `${root}/question/${id}/star-change`
-	return await fetch(url, emptyPostRequestInit());
+	const url = `${root}/question/star`
+	const body = JSON.stringify({Id: id});
+	return await fetch(url, postRequestInit(body));
 }

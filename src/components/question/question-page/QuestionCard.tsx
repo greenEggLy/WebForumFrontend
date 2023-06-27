@@ -23,7 +23,7 @@ export const QuestionCard = ({question, click}: Props,) => {
 			</div>
 			<div className={"question-card-tag"}>
 				{
-					question.tags.map(tag => {
+					question.Tags.map(tag => {
 						return (<span> <TagShowItem tag_name={tag.content}/> </span>)
 					})
 				}

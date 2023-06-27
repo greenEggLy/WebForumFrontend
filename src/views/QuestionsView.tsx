@@ -4,7 +4,7 @@ import {Ques_GetQuestionsByTab} from "../service/QuestionsService.ts";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {ITab} from "./UsersView.tsx";
 import {message} from "antd";
-import { IQuestionCard } from "../Interface.ts";
+import {IQuestionCard} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 const fetchNum = 50;
 import './QuestionsView.css'
@@ -12,8 +12,8 @@ import './QuestionsView.css'
 //for test
 //@ts-ignore
 const testQuestion: IQuestionCard = {
-	id:1,
-	title: '为什么我还没放暑假？',
+	Id: 1,
+	Title: '为什么我还没放暑假？',
 	last_edit: new Date(),
 	browse_time: 1437,
 	tags: [

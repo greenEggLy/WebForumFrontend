@@ -16,7 +16,6 @@ const buttonColor = [
 ]
 
 // 问题点赞
-// TODO
 export const VoteBar = ({content}: Props) => {
 	const [status, setStatus] = useState<0 | 1 | 2>(0)
 	const [likeCount, setLikeCount] = useState<number>(content.likeCount);
@@ -49,9 +48,9 @@ export const VoteBar = ({content}: Props) => {
 		}
 		const response = await Que_LikeQuestion(content.id)
 		if (!response.ok) {
+			message.error("like fail")
 			return;
 		}
-		/// TODO: return?
 	}
 
 	const clickDislike = async () => {
@@ -65,16 +64,16 @@ export const VoteBar = ({content}: Props) => {
 		}
 		const response = await Que_DislikeQuestion(content.id)
 		if (!response.ok) {
+			message.error("dislike fail")
 			return;
 		}
-		// TODO: return?
 	}
 
 	const clickStar = async () => {
-		// TODO: api
 		setStar(!star);
 		const response = await Que_StarQuestion(content.id)
 		if (!response.ok) {
+			message.error("star fail")
 			return;
 		}
 	}
