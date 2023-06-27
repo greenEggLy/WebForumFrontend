@@ -1,6 +1,5 @@
 export default {
     primary: "black",
-    gray: "#666666",
     black: "#000000",
     white: "#FFFFFF",
     dgrayblue:"#4b6584",
@@ -8,4 +7,8 @@ export default {
     card: "white",
     warning: "#E03D2E",
     gblue:"#0fb9b1",
+    lgray:"#EEEEEE",
+    gray:"#666666"
+
+
 };

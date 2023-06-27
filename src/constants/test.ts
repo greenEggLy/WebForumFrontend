@@ -33,4 +33,4 @@ const User2:IUserCard={
     profile: "一名软件学院老师",
     fields: [tag1,tag2,tag3]
 }
-export const UserList:IUserCard[]=[User1,User2];
+export const UserList:IUserCard[]=[User1,User2,User1,User2,User1,User2,User1,User2];
