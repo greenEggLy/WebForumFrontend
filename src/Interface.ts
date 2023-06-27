@@ -61,6 +61,7 @@ export interface IQuestion {
 export interface ITag {
 	id: number;
 	content: string;
+	description: string;
 }
 
 

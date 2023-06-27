@@ -29,14 +29,17 @@ const testQuestion: IQuestion = {
 		{
 			id: 1,
 			content: "暑假",
+			description: "关于暑假的问题"
 		},
 		{
 			id: 2,
 			content: "SJTU",
+			description: "关于SJTU的问题"
 		},
 		{
 			id: 3,
 			content: "SE",
+			description: "关于SE的问题"
 		}
 	],
 	answers: [
