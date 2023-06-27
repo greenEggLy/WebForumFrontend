@@ -53,6 +53,7 @@ export interface IQuestion {
 	userStar: boolean;
 	userLike: boolean;
 	userDislike: boolean;
+	CreateTime: Date;
 	answers: IAnswerBrief[];
 	tags: ITag[]
 }
@@ -93,8 +94,9 @@ export interface IAnswer {
 export interface IQuestionCard {
 	Id: number;
 	Title: string;
-	voteNumber: number;
+	VoteNumber: number;
 	AnswerNumber: number;
+	CreateTime: Date;
 	Tags: ITag[];
 }
 

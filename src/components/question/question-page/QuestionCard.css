@@ -1,0 +1,36 @@
+.question-card {
+    border-radius: 0.5rem;
+    box-shadow: darkgray 0px 0px 5px 0.2px;
+    background-color: white;
+    margin: 1rem;
+    width: 90%;
+    padding: 1rem;
+}
+
+.question-popularity-container {
+    color: gray;
+    margin-bottom: 0.5rem;
+}
+
+.question-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+}
+
+.question-card-footer {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.question-card-tag-container {
+    margin-top: 0.5rem;
+    width: fit-content;
+    display: inline;
+}
+
+.question-time-container {
+    float: right;
+    display: inline;
+    color: gray;
+}
