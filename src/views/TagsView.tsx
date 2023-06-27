@@ -1,14 +1,19 @@
-import {List, message} from "antd";
+import { List, message } from "antd";
 import {useEffect, useState} from "react";
 import {ITag} from "../Interface.ts";
 import {TagCard} from "../components/tag/TagCard.tsx";
 import {Tag_GetAllTags} from "../service/TagService.ts";
+import {tag1, tag2, tag3} from "../constants/test"
+import './TagsView.css'
+import Search from "antd/es/input/Search";
 
 export const TagsView = () => {
 	const [tags, setTags] = useState<ITag[]>([])
 
 	useEffect(() => {
 		getAllTags().catch(err => console.error(err))
+		//for test
+		setTags([tag1, tag2, tag3, tag1, tag2])
 	}, [])
 
 	const getAllTags = async () => {
@@ -21,13 +26,19 @@ export const TagsView = () => {
 	}
 	return (<div>
 		<div className={"view-title"}>
-			{'Tags'}
+			<h2>Tags</h2>
 		</div>
-		<List
-			grid={{gutter: 16, column: 4}}
-			dataSource={tags}
-			renderItem={item => <TagCard tag={item}/>}
-		>
-		</List>
+		<div className={'tag-search-bar-container'}>
+			<Search placeholder={"Search tags"} />
+		</div>
+		<div className={'tag-card-container'}>
+			<List
+				grid={{gutter: 16, column: 4}}
+				dataSource={tags}
+				renderItem={item => <TagCard tag={item}/>}
+				style={{marginLeft: '1rem'}}
+			>
+			</List>
+		</div>
 	</div>);
 };

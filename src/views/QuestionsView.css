@@ -1,0 +1,16 @@
+h2 {
+    font-weight: normal!important;
+}
+
+.title-container {
+    height: 10vh;
+    margin-left: 1rem;
+}
+
+.filter-container {
+    height: 5vh;
+}
+
+.question-container {
+    background-color: #f5f5f5;
+}

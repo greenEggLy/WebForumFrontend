@@ -1,0 +1,23 @@
+.tag-card {
+    border-radius: 0.5rem;
+    box-shadow: darkgray 0px 0px 5px 0.2px;
+    background-color: white;
+    margin: 0.5rem;
+    height: 10rem;
+}
+
+.tag {
+    margin: 0.5rem;
+}
+
+.tag-description-container {
+    margin: 0.5rem;
+    font-size: 0.7rem;
+    height: 50%;
+}
+
+.tag-question-number-container {
+    margin: 0.5rem;
+    font-size: 0.5rem;
+    color: darkgray;
+}
