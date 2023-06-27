@@ -62,6 +62,7 @@ export interface ITag {
 	id: number;
 	content: string;
 	description: string;
+	question_number: number;
 }
 
 

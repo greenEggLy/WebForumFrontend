@@ -1,11 +1,11 @@
 import {IUserCard} from "../Interface.ts";
 import {useEffect, useState} from "react";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {Input, List, Row, Col, Divider} from "antd";
+import {Input, List, Divider} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
-import {styles} from "../stylesheets/global.tsx";
 import {UserList} from "../constants/test.ts";
 const { Search } = Input;
+import "./UsersView.css"
 export interface ITab {
 	tab: string;
 	title: string;
@@ -54,29 +54,24 @@ export const UsersView = () => {
 
 	return (
 		<div>
-			<div className={"view-title"} style={styles.titleContainer}>
+			<div className={"view-title"}>
 				<h2>Users</h2>
 			</div>
-			<Row className="userview-header" style={styles.filterContainer}>
-				<Col span={8} className="inputbox" style={styles.questionContainer}>
-					<Search
-						id="userfilter"
-						name="userfilter"
-						className="filter-input"
-						autoComplete="off"
-						placeholder="Filter by user"
-						value={filterText}
-						onChange={e => setFilterText(e.target.value)}
-					>
-					</Search>
-				</Col>
-
-				<Col span={8} className="filter-tabs" >
+			<div className={"search-bar-container"}>
+						<Search
+							id="userfilter"
+							name="userfilter"
+							className="filter-input"
+							autoComplete="off"
+							placeholder="Filter by user"
+							value={filterText}
+							onChange={e => setFilterText(e.target.value)}
+						>
+						</Search>
 						<FilterTabItem tabs={tabs} func={getUserByTab} />
-				</Col>
-			</Row>
+			</div>
 			<Divider style={{marginBottom:'0px',marginTop:'2px'}}/>
-			<div style={{  paddingTop:'1rem',paddingLeft:'1rem',height:'100%',backgroundColor: '#f5f5f5'}}>
+			<div className={"user-card-container"} >
 			<List
 
 				grid={{

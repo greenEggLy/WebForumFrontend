@@ -1,19 +1,22 @@
 import {ITag} from "../Interface.ts";
 import {IUserCard} from "../Interface.ts";
-const tag1:ITag={
+export const tag1:ITag={
     id:1,
     content:"Coding",
-    description:"计算机"
+    description:"计算机计算机计算机计算机计算机计算机计算机计算机计算机计算机计算机计算机计算机计算机",
+    question_number: 233,
 }
-const tag2:ITag={
+export const tag2:ITag={
     id:2,
     content:"计算机",
-    description:"计算机"
+    description:"计算机",
+    question_number: 233,
 }
-const tag3:ITag={
+export const tag3:ITag={
     id:3,
     content:"软件",
-    description:"计算机"
+    description:"计算机",
+    question_number: 233,
 }
 const User1:IUserCard={
     id:1,

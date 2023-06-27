@@ -50,6 +50,7 @@ export const SideBar: React.FC = () => {
       defaultOpenKeys={['sub1']}
       mode="inline"
       items={items}
+      style={{height: '100%'}}
     />
   );
 };

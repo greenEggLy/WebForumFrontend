@@ -17,8 +17,8 @@ const testQuestion: IQuestionCard = {
 	last_edit: new Date(),
 	browse_time: 1437,
 	tags: [
-		{id: 1, content: 'test1', description: 'test1'},
-		{id: 2, content: 'test2', description: 'test2'},
+		{id: 1, content: 'test1', description: 'test1', question_number: 2},
+		{id: 2, content: 'test2', description: 'test2', question_number: 2},
 	]
 }
 

@@ -39,12 +39,12 @@ const styles: { [key: string]: CSSProperties } = {
     maxWidth: '100vw',
   },
   sideBarArea:{
-    width: '20vw',
+    width: '15vw',
     height: '100vh',
     float:'left'
   },
   outletArea:{
-    width: '80vw',
+    width: '85vw',
     float:'left'
   }
 }
