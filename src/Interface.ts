@@ -91,7 +91,7 @@ export interface IAnswer {
 export interface IQuestionCard {
 	Id: number;
 	Title: string;
-	voteNumber: number;
+	VoteNumber: number;
 	AnswerNumber: number;
 	Tags: ITag[];
 }
@@ -126,17 +126,16 @@ export interface IUserFollow {
 	username: string;
 }
 
-export interface ISearchRequest {
-	pageNumber: 0;
-	/// TODO
-}
-
-export interface ISearchResponse {
-	data: IQuestion[] | IUserCard[];
+export interface ISearchQuestionsResponse {
+	result: IQuestionCard[];
 	currentPage: number;
 	totalPages: number;
-	totalCount: number; // 所有满足条件的结果数
-	pageSize: number;
-	hasPreviousPage: boolean;
-	hasNextPage: boolean;
+	totalItems: number; // 所有满足条件的结果数
+}
+
+export interface ISearchUserCardResponse {
+	result: IUserCard[];
+	currentPage: number;
+	totalPages: number;
+	totalItems: number; // 所有满足条件的结果数
 }
