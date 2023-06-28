@@ -6,12 +6,18 @@ import {User_GetUser} from "../service/UserService.ts";
 import {TagShowItem} from "../components/tag/TagShowItem.tsx";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {AnswerCard} from "../components/users/AnswerCard.tsx";
+import {useNavigate} from "react-router-dom";
 
 
 // user-self data view
 export const UserInfoView = () => {
 	const params = useParams();
 	const [user, setUser] = useState<IUser>(EmptyUser);
+	const navigate = useNavigate();
+	const clickQuestion = (questionId: number) => {
+		const navigateUrl = `/question/${questionId}`
+		navigate(navigateUrl)
+	}
 	useEffect(() => {
 		const getUserInfo = async (id: string) => {
 			const response = await User_GetUser(id);
@@ -42,19 +48,19 @@ export const UserInfoView = () => {
 			<div className={"user-likes-and-save"}>
 				{
 					user.like_questions.map(question => (
-						<QuestionCard question={question}/>
+						<QuestionCard question={question} click={clickQuestion}/>
 					))
 				}
 				{
 					user.star_questions.map(question => (
-						<QuestionCard question={question}/>
+						<QuestionCard question={question} click={clickQuestion}/>
 					))
 				}
 			</div>
 			<div className={"user-creates-and-answers"}>
 				{
 					user.questions.map(question => (
-						<QuestionCard question={question}/>
+						<QuestionCard question={question} click={clickQuestion}/>
 					))
 				}
 				{

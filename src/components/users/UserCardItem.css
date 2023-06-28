@@ -1,0 +1,49 @@
+.user-card {
+    border-radius: 0.5rem;
+    box-shadow: darkgray 0px 0px 5px 0.2px;
+    background-color: white;
+    margin: 0.5rem;
+    height: 10rem;
+}
+
+.user-avatar-container {
+    height: 100%;
+    width: 40%;
+    float: left;
+    margin-top: 1rem;
+}
+
+.avatar {
+    width: 90%;
+    margin: 5%;
+}
+
+p{
+    margin: 0.2rem;
+}
+
+.username{
+    font-size: 1.0rem;
+    font-weight: bold;
+}
+
+.location{
+    font-size: 0.5rem;
+    color: darkgray;
+}
+
+.follower_number{
+    font-size: 0.5rem;
+    color: darkgray;
+}
+
+.profile{
+    font-size: 0.75rem;
+}
+
+.user-description-container{
+    height: 100%;
+    width: 60%;
+    float: right;
+    margin-top: 1rem;
+}

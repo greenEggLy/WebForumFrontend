@@ -5,7 +5,8 @@ import {message, Pagination} from "antd";
 import {IQuestionCard, ISearchQuestionsResponse} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {QuestionsService} from "../service/QuestionsService.ts";
-
+import './QuestionsView.css'
+import {useNavigate} from "react-router-dom";
 
 //for test
 const testQuestion: IQuestionCard = {
@@ -25,6 +26,7 @@ export const Tabs: ITab[] = [
 ]
 
 export const QuestionsView = () => {
+	const navigate = useNavigate()
 	// const params = useParams()
 	const [currentPage, setCurrentPage] = useState<number>(0);
 	const [totalItems, setTotalItems] = useState<number>(0);
@@ -64,6 +66,11 @@ export const QuestionsView = () => {
 		// setTotalPages(json.totalPages);
 	}
 
+	const clickQuestion = (questionId: number) => {
+		const navigateUrl = `/question/${questionId}`
+		navigate(navigateUrl)
+	}
+
 	const fetchMore = async (currentPage: number, pageSize: number) => {
 		const response = await QuestionsService.GetByTab(tab.tab, currentPage, pageSize);
 		if (!response.ok) {
@@ -78,15 +85,15 @@ export const QuestionsView = () => {
 	}
 
 	return <div>
-		<div className={"view-title"} style={styles.titleContainer}>
+		<div className={"title-container"} >
 			<h2>All Questions</h2>
 		</div>
-		<div className="filter-tabs" style={styles.filterContainer}>
-			<FilterTabItem tabs={Tabs} func={changeTab}/>
+		<div className="filter-container" >
+			<FilterTabItem tabs={Tabs} func={changeTab} />
 		</div>
-		<div className={"questions-show"} style={styles.questionContainer}>
+		<div className={"question-container"} >
 			{
-				questions.map(question => (<QuestionCard question={question}/>))
+				questions.map(question => (<QuestionCard question={question} click={clickQuestion}/>))
 			}
 		</div>
 		<div className={"pagination"}>
@@ -98,15 +105,3 @@ export const QuestionsView = () => {
 	</div>;
 };
 
-const styles: { [key: string]: CSSProperties } = {
-	titleContainer: {
-		height: '15vh',
-		marginLeft: '10px',
-	},
-	filterContainer: {
-		height: '10vh',
-	},
-	questionContainer: {
-		backgroundColor: '#f5f5f5',
-	}
-}

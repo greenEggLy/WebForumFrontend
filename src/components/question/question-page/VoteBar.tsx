@@ -1,8 +1,9 @@
 import {IAnswerBrief, IQuestion} from "../../../Interface.ts";
-import {Button, message} from "antd";
-import {CaretDownOutlined, CaretUpOutlined, StarOutlined} from '@ant-design/icons'
+import {Button} from "antd";
+import {CaretDownOutlined, CaretUpOutlined, StarOutlined, StarFilled} from '@ant-design/icons'
 import {useEffect, useState} from "react";
 import {Que_DislikeQuestion, Que_LikeQuestion, Que_StarQuestion} from "../../../service/QuestionService.ts";
+import "./VoteBar.css"
 
 interface Props {
 	content: IQuestion | IAnswerBrief;
@@ -80,16 +81,19 @@ export const VoteBar = ({content}: Props) => {
 
 	return (
 		<div className="question-vote-bar">
-			<Button className={"vote-button"} color={getColor("up")} onClick={() => clickLike()}>
-				<CaretUpOutlined/>
+			<Button className={"vote-button"} color={getColor("up")} onClick={() => clickLike() }>
+				<CaretUpOutlined className={'icon'}/>
 			</Button>
 			<div className="vote-number">{likeCount}</div>
 			<Button className={"vote-button"} color={getColor("down")} onClick={() => clickDislike()}>
-				<CaretDownOutlined/>
+				<CaretDownOutlined className={'icon'}/>
 			</Button>
 			<Button className={"star-button"} color={getColor("star")} onClick={() => clickStar()}>
-				<StarOutlined/>
+				{star ? <StarFilled className={'icon-star'}/> : <StarOutlined className={"icon"} />}
 			</Button>
 		</div>
 	);
+
 };
+
+

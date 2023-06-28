@@ -8,11 +8,13 @@ import {QuestionCard} from "../components/question/question-page/QuestionCard.ts
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {Tabs} from "./QuestionsView.tsx";
 import {ITab} from "./UsersView.tsx";
+import { useNavigate } from "react-router-dom";
 
 export const TagQuestionsView = () => {
 	const params = useParams();
 	const [tag, setTag] = useState<string>("")
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
+	const navigate = useNavigate()
 	useEffect(() => {
 		const tag = params.content;
 		if (!tag) {
@@ -48,6 +50,11 @@ export const TagQuestionsView = () => {
 		setQuestions(await response.json())
 	}
 
+	const clickQuestion = (questionId: number) => {
+		const navigateUrl = `/question/${questionId}`
+		navigate(navigateUrl)
+	}
+
 
 	return (
 		<div className={"questions-view"}>
@@ -59,7 +66,7 @@ export const TagQuestionsView = () => {
 			</div>
 			<div className={"questions"}>
 				{
-					questions.map(question => <QuestionCard question={question}/>)
+					questions.map(question => <QuestionCard question={question} click={clickQuestion}/>)
 				}
 			</div>
 		</div>)
