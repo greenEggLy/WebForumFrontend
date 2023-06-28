@@ -14,5 +14,10 @@ export const styles: { [key: string]: CSSProperties } = {
         marginRight:'6rem',
         marginLeft: '10px'
     },
+    TabContainer: {
+        borderBlockColor: color.dgrayblue,
+        color:color.dgrayblue,
+        outlineColor:color.dgrayblue
+    }
 
 }

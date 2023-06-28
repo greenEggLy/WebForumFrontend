@@ -8,7 +8,9 @@ export default {
     warning: "#E03D2E",
     gblue:"#0fb9b1",
     lgray:"#EEEEEE",
-    gray:"#666666"
+    gray:"#666666",
+    lblue:"#E1F5FE",
+    tblue:"#2196F3"
 
 
 };

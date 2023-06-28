@@ -1,5 +1,6 @@
-import {SearchOutlined} from "@ant-design/icons";
-import { Input } from "antd";
+import {BulbOutlined, SearchOutlined, TagsOutlined, UserOutlined} from "@ant-design/icons";
+import {Input, MenuProps} from "antd";
+import React from "react";
 
 export const SearchBar = () => {
   return (

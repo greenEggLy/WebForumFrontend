@@ -55,7 +55,7 @@ export const UsersView = () => {
 	return (
 		<div>
 			<div className={"view-title"}>
-				<h2>Users</h2>
+				<h2 className={"view-title"}>Users</h2>
 			</div>
 			<div className={"search-bar-container"}>
 						<Search
