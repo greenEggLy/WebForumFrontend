@@ -106,7 +106,7 @@ const LoginForm : React.FC = () => {
 };
 const LoginBox:React.FC = () =>{
     return(
-        <Row justify="center">
+        <Row justify="center" style={{paddingTop:"20vh"}}>
             <Col span={8} ><img src={Logo} style={{
                 width: '104%',
                 height: '100%',
