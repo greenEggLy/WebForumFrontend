@@ -43,7 +43,7 @@ export const UserInfoView = () => {
 				<p>
 					<text>我的标签:</text>
 				<span>
-					{user.fields.map((field) => (
+					{user.fields.map((field:ITag) => (
 						<TagShowItem tag_name={field.content}/>
 					))}
 					</span>

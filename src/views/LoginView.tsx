@@ -1,6 +1,11 @@
 import Loginbox from "../components/login/loginbox.tsx";
-import color from "../constants/color.ts";
+import './LoginView.css'
 export const LoginView = () => {
-  return <div style={{backgroundColor:color.lgray,height:"100vh",alignItems:"center"}}>
-        <Loginbox/></div>;
+  return (
+    <div className={'login-view-container'}>
+      <div className={'login-card-container'}>
+          <Loginbox/>
+      </div>
+    </div>
+  );
 };

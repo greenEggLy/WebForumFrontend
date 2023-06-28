@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Form, Input, Button, message, Row, Col, Card} from 'antd';
+import {Form, Input, Button, message} from 'antd';
 import Logo from "../../assets/logos/biglogo.png";
 import color from "../../constants/color.ts";
 const RegisterForm : React.FC = () => {
@@ -46,7 +46,7 @@ const RegisterForm : React.FC = () => {
         <a>waiting......</a>
     );
     return (
-
+        <div style={{margin:'1rem'}}>
         <Form form={form} initialValues={{ remember: true }} onSubmitCapture={handleLogin} className={"login_form"}>
                 <h1 style={{textAlign:"center",color:color.dgrayblue}}>注册用户</h1>
                 <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
@@ -73,22 +73,27 @@ const RegisterForm : React.FC = () => {
                     </Button>
                 </Form.Item>
             </Form>
-
-
+        </div>
 
     );
 };
 const RegisterBox:React.FC = () =>{
     return(
-        <Row justify="center">
-            <Col span={8} ><img src={Logo} style={{
-                width: '104%',
-                height: '100%',
-                objectFit:"fill",
-                borderTopLeftRadius:'30px',borderBottomLeftRadius:'30px'
-            }}/></Col>
-            <Col span={7} ><Card style={{borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderTopRightRadius:'30px',borderBottomRightRadius:'30px'}}><RegisterForm/></Card></Col>
-        </Row>
+      <div style={{width:"100%", height:"100%"}}>
+        <div style={{float:'left', width:'50%', height:'100%'}}>
+          <img src={Logo} style={{
+            width: '104%',
+            height: '100%',
+            objectFit:"fill",
+            borderTopLeftRadius:'30px',borderBottomLeftRadius:'30px'
+          }}/>
+        </div>
+        <div style={{float:'right', width:'50%', height:'100%', backgroundColor:'white'}}>
+          <div>
+            <RegisterForm/>
+          </div>
+        </div>
+      </div>
 
 
     )

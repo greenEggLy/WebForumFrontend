@@ -8,20 +8,11 @@ import {IQuestionCard} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 const fetchNum = 50;
 import './QuestionsView.css'
+import {testQuestion1, testQuestion2, testQuestion3} from "../constants/test";
 
 //for test
 //@ts-ignore
-const testQuestion: IQuestionCard = {
-	Id: 1,
-	Title: '为什么我还没放暑假？',
-	CreateTime: new Date(2023, 5, 27, 16, 50, 0),
-	Tags: [
-		{id: 1, content: 'test1', description: 'test1', question_number: 2},
-		{id: 2, content: 'test2', description: 'test2', question_number: 2},
-	],
-	VoteNumber: 10,
-	AnswerNumber: 20
-}
+
 
 export const tabs: ITab[] = [
 	{tab: 'thumbs', title: 'Thumbs'},
@@ -38,7 +29,7 @@ export const QuestionsView = () => {
 		Ques_GetQuestionsByTab(tabs[0].tab, nextFetch, fetchNum).catch(err => console.error(err))
 		setNextFetch(nextFetch + fetchNum)
 		//for test
-		setQuestions([testQuestion, testQuestion, testQuestion])
+		setQuestions([testQuestion1, testQuestion2, testQuestion3])
 	}, [])
 
 	const changeTab = async (selectTab: ITab) => {

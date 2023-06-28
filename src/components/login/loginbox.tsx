@@ -1,13 +1,16 @@
 import React, { useEffect, useState} from 'react';
-import {Form, Input, Button, Checkbox,Col,Row,Card} from 'antd';
+import {Form, Input, Button, Checkbox} from 'antd';
 import {UserOutlined,LockOutlined} from "@ant-design/icons";
 import color from "../../constants/color.ts";
 import Logo from '../../assets/logos/biglogo.png';
 import {history} from "../../service/History.ts";
+import {useNavigate} from "react-router-dom";
+
 const LoginForm : React.FC = () => {
     const [form] = Form.useForm();
     const [remember, setRemember] = useState(false);
     const [finish,setFinish] = useState(false);
+    const navigate = useNavigate();
     // const getToken = async () => {
     //     return await AsyncStorage.getItem("token");
     // };
@@ -17,7 +20,7 @@ const LoginForm : React.FC = () => {
             //     setFinish(true);
             //     navigation.navigate("Home");
             // }
-            history.push('/home');
+            history.push('/');
             setFinish(true);
         };
         autologin();
@@ -42,14 +45,14 @@ const LoginForm : React.FC = () => {
         // });
     };
     const doReg = () => {
-        // navigation.navigate("/sign-up");
+        navigate('/sign-up')
     };
    const findAccount = () => {};
     if(!finish)return(
         <a>waiting......</a>
     );
     return (
-        <div style={{alignItems:"center",marginTop:'10%',marginLeft:'5%'}} >
+        <div className={'login-card'} style={{alignItems:"center",marginTop:'10%',marginLeft:'5%', marginRight:'5%'}} >
         <h1 style={{textAlign:"center",color:color.dgrayblue}}>登录</h1>
         <Form form={form} onSubmitCapture={handleLogin} style={{marginBottom:'15%'}}>
             <Form.Item
@@ -106,16 +109,28 @@ const LoginForm : React.FC = () => {
 };
 const LoginBox:React.FC = () =>{
     return(
-        <Row justify="center" style={{paddingTop:"20vh"}}>
-            <Col span={8} ><img src={Logo} style={{
-                width: '104%',
-                height: '100%',
-                objectFit:"fill",
-                borderTopLeftRadius:'30px',borderBottomLeftRadius:'30px'
-            }}/></Col>
-            <Col span={7} ><Card style={{borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderTopRightRadius:'30px',borderBottomRightRadius:'30px'}}><LoginForm/></Card></Col>
-        </Row>
-
+        // <Row justify="center" >
+        //     <Col span={8} ><img src={Logo} style={{
+        //         width: '104%',
+        //         height: '100%',
+        //         objectFit:"fill",
+        //         borderTopLeftRadius:'30px',borderBottomLeftRadius:'30px'
+        //     }}/></Col>
+        //     <Col span={7} ><Card style={{borderTopLeftRadius:'0px',borderBottomLeftRadius:'0px',borderTopRightRadius:'30px',borderBottomRightRadius:'30px'}}><LoginForm/></Card></Col>
+        // </Row>
+        <div style={{width:"100%", height:"100%"}}>
+            <div style={{float:'left', width:'50%', height:'100%'}}>
+                <img src={Logo} style={{
+                    width: '104%',
+                    height: '100%',
+                    objectFit:"fill",
+                    borderTopLeftRadius:'30px',borderBottomLeftRadius:'30px'
+                }}/>
+            </div>
+            <div style={{float:'right', width:'50%', height:'100%', backgroundColor:'white'}}>
+                <div><LoginForm/></div>
+            </div>
+        </div>
 
     )
 }
