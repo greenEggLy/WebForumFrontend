@@ -11,6 +11,7 @@ h2 {
     height: 5vh;
 }
 
-.question-container {
-    background-color: #f5f5f5;
+.question-list-container {
+    height: auto;
 }
+

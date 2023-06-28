@@ -3,8 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {Ques_GetQuestionsByTab} from "../service/QuestionsService.ts";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {ITab} from "./UsersView.tsx";
-import {message} from "antd";
-import { IQuestionCard } from "../Interface.ts";
+import { List, message } from "antd";
+import {IQuestionCard} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 const fetchNum = 50;
 import './QuestionsView.css'
@@ -12,14 +12,15 @@ import './QuestionsView.css'
 //for test
 //@ts-ignore
 const testQuestion: IQuestionCard = {
-	id:1,
-	title: '为什么我还没放暑假？',
-	last_edit: new Date(),
-	browse_time: 1437,
-	tags: [
+	Id: 1,
+	Title: '为什么我还没放暑假？',
+	CreateTime: new Date(2023, 5, 27, 16, 50, 0),
+	Tags: [
 		{id: 1, content: 'test1', description: 'test1', question_number: 2},
 		{id: 2, content: 'test2', description: 'test2', question_number: 2},
-	]
+	],
+	VoteNumber: 10,
+	AnswerNumber: 20
 }
 
 export const tabs: ITab[] = [
@@ -75,10 +76,17 @@ export const QuestionsView = () => {
 		<div className="filter-container" >
 			<FilterTabItem tabs={tabs} func={changeTab} />
 		</div>
-		<div className={"question-container"} >
+		<div className={"question-list-container"} >
+			<List>
 			{
-				questions.map(question => (<QuestionCard question={question} click={clickQuestion}/>))
+				questions.map(question => (
+					<div>
+						<QuestionCard question={question} click={clickQuestion}/>
+					</div>
+						)
+				)
 			}
+			</List>
 		</div>
 		<div className={"fetch-more-button"}>
 			<button onClick={() => {
