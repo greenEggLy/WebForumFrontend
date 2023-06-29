@@ -7,7 +7,7 @@ import {QuestionCard} from "../components/question/question-page/QuestionCard.ts
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {Tabs} from "./QuestionsView.tsx";
 import {ITab} from "./UsersView.tsx";
-import {QuesGetByTag} from "../service/QuestionsService.ts";
+import {QuesGetWizTag} from "../service/QuestionsService.ts";
 
 export const TagQuestionsView = () => {
 	const params = useParams();
@@ -27,7 +27,7 @@ export const TagQuestionsView = () => {
 	}, [params.content])
 
 	const getQuestionsByTag = async (tag: string) => {
-		const response = await QuesGetByTag(tag, tab.tab)
+		const response = await QuesGetWizTag(tag, tab.tab)
 		if (!response.ok) {
 			message.error("error")
 			history.back();
@@ -39,9 +39,9 @@ export const TagQuestionsView = () => {
 	const tabFilter = async (tab: ITab | string) => {
 		let response: Response
 		if (typeof tab === "string")
-			response = await QuesGetByTag(tag, tab)
+			response = await QuesGetWizTag(tag, tab)
 		else {
-			response = await QuesGetByTag(tag, tab.tab)
+			response = await QuesGetWizTag(tag, tab.tab)
 		}
 		if (!response.ok) {
 			message.error("err")

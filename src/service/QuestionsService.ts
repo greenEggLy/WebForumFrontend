@@ -3,23 +3,29 @@ import {getRequestInit, root} from "./global.ts";
 
 const questionsRoot = `${root}/question`;
 
-export const QuesGetByTab = async (tab: string, currentPage: number, pageSize: number) => {
-	const url = `${questionsRoot}?tab=${tab}&currentPage=${currentPage}&pageSize=${pageSize}`
+export const QuesGet = async (tab?: string | null, currentPage?: number | null, pageSize?: number | null, tagName?: string | null, keyword?: string | null) => {
+	if (!tab) tab = "heat";
+	if (!currentPage) currentPage = 0;
+	if (!pageSize) pageSize = 30;
+	let url = questionsRoot;
+	if (tagName && tagName !== "") {
+		url = `${url}/tagged/${tagName}`;
+	} else {
+		url = `${url}/search`
+	}
+	url = `${url}?tab=${tab}&currentPage=${currentPage}&pageSize=${pageSize}`
+	if (keyword && keyword !== "") {
+		url = `${url}&keyword=${keyword}`;
+	}
+	console.log(url);
 	return await fetch(url, getRequestInit())
 }
 
-export const QuesGetByTabAndKeyword = async (tag: string, tab: string) => {
-	const url = `${questionsRoot}?tag=${tag}&tab=${tab}`
+export const QuesGetWizTag = async (tagName: string, tab: string, currentPage: number, pageSize: number, keyword?: string) => {
+	let url = `${questionsRoot}/tagged?tagName=${tagName}&tab=${tab}&currentPage=${currentPage}&pageSize=${pageSize}`;
+	if (keyword && keyword !== "") {
+		url = `${url}&keyword=${keyword}`;
+	}
 	return await fetch(url, getRequestInit())
-}
-
-export const QuesGetByTag = async (tagName: string, tab: string) => {
-	const url = `${questionsRoot}/tagged?tagName=${tagName}&tab=${tab}`
-	return await fetch(url, getRequestInit())
-}
-
-export const QuesGetByTagTabAndKeyword = async (tag: string, tab: string, keyWord: string, currentPage: number, pageSize: number) => {
-	const url = `${questionsRoot}/tagged?tag=${tag}&tab=${tab}&keyWord=${keyWord}&currentPage=${currentPage}&pageSize=${pageSize}`;
-	return await fetch(url, getRequestInit());
 }
 

@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {RootState} from "../../app/store.ts";
+import type {PayloadAction} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit';
 
 
 interface KeywordState {
@@ -19,8 +19,6 @@ export const keywordSlice = createSlice({
 		}
 	}
 })
-
-export const keywordContent = (state: RootState) => state.keyword;
 
 export const {changeKeyword} = keywordSlice.actions;
 

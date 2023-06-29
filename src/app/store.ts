@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {keywordReducer} from "../features/keyword/keywordSlice";
+import keywordReducer from "../features/keyword/keywordSlice"
+import tagReducer from "../features/tag/tagSlice"
 
 
-const store = configureStore({
+export const store = configureStore({
 	reducer: {
 		keyword: keywordReducer,
+		tag: tagReducer,
 	},
 })
 

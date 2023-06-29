@@ -7,7 +7,12 @@ import {IQuestionCard, ISearchQuestionsResponse} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import './css/QuestionsView.css'
 import {testQuestion1, testQuestion2, testQuestion3} from "../constants/test";
-import {QuesGetByTab} from "../service/QuestionsService.ts";
+import {QuesGet} from "../service/QuestionsService.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../app/store.ts";
+import {getTagName} from "../utils/path.ts";
+import {changeTag} from "../features/tag/tagSlice.ts";
+import RankCard from "../components/SideCard/RankCard.tsx";
 
 
 export const Tabs: ITab[] = [
@@ -17,22 +22,32 @@ export const Tabs: ITab[] = [
 
 export const QuestionsView = () => {
 	const navigate = useNavigate()
-	// const params = useParams()
+	// global information
+	const keyword = useSelector((state: RootState) => state.keyword.value);
+	const tag = useSelector((state: RootState) => state.tag.value);
+	const dispatch = useDispatch();
+	// page items
 	const [currentPage, setCurrentPage] = useState<number>(0);
+	const [pageSize, setPageSize] = useState<number>(30);
 	const [totalItems, setTotalItems] = useState<number>(0);
+	// current tab info
 	const [tab, setTab] = useState<ITab>(Tabs[0])
+	// main and side questions
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
 	const [hotquestions, setHotquestions] = useState<IQuestionCard[]>([])
 	useEffect(() => {
-		console.log("init!");
-		init().catch(err => console.error(err));
+		const tagName = getTagName(window.location.href);
+		dispatch(changeTag(tagName));
+		getQues()
+			.catch(err => console.error(err))
+		// .catch(_ => navigate("/questions"));
 		//for test
 		setQuestions([testQuestion1, testQuestion2, testQuestion3]);
 		setHotquestions([testQuestion1, testQuestion2, testQuestion3])
 	}, [])
 
-	const init = async () => {
-		const response = await QuesGetByTab(Tabs[0].tab, currentPage, 30)
+	const getQues = async () => {
+		const response = await QuesGet(tab.tab, currentPage, pageSize, tag, keyword)
 		setCurrentPage(currentPage + 1);
 		if (!response.ok) {
 			message.error('error');
@@ -46,12 +61,12 @@ export const QuestionsView = () => {
 
 	const changeTab = async (selectTab: ITab) => {
 		if (tab === selectTab) return;
-		const response = await QuesGetByTab(selectTab.tab, currentPage, 30)
+		setTab(selectTab)
+		const response = await QuesGet(selectTab.tab, currentPage, 30, tag, keyword)
 		if (!response.ok) {
 			message.error(`无法查询问题信息`)
 			return
 		}
-		setTab(selectTab)
 		const json: ISearchQuestionsResponse = await response.json();
 		setQuestions(json.result);
 		setTotalItems(json.totalItems);
@@ -65,7 +80,7 @@ export const QuestionsView = () => {
 	}
 
 	const fetchMore = async (currentPage: number, pageSize: number) => {
-		const response = await QuesGetByTab(tab.tab, currentPage, pageSize);
+		const response = await QuesGet(tab.tab, currentPage, pageSize, tag, keyword);
 		if (!response.ok) {
 			message.error(`无法查询问题信息`)
 			return
@@ -100,13 +115,14 @@ export const QuestionsView = () => {
 			<div className={"pagination"}>
 				<Pagination defaultCurrent={1} total={totalItems} current={currentPage} defaultPageSize={30}
 							onChange={(page, pageSize) => {
+								setPageSize(pageSize);
 								fetchMore(page, pageSize).catch(err => console.error(err));
 							}}/>
 			</div>
 		</div>
-		{/*<div className={"side-container"}>*/}
-		{/*	<RankCard questions={hotquestions} type={"最热问题"}/>*/}
-		{/*</div>*/}
+		<div className={"side-container"}>
+			<RankCard questions={hotquestions} type={"最热问题"}/>
+		</div>
 	</div>;
 };
 
