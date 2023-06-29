@@ -7,7 +7,6 @@ import {UsersView} from "./views/UsersView.tsx";
 import {UserInfoView} from "./views/UserInfoView.tsx";
 import {SignupView} from "./views/SignupView.tsx";
 import {AskQuestionView} from "./views/AskQuestionView.tsx";
-import {TagQuestionsView} from "./views/TagQuestionsView.tsx";
 import {QuestionView} from "./views/QuestionView.tsx";
 
 export const RootRouter = () => {
@@ -19,8 +18,8 @@ export const RootRouter = () => {
 				path={"/"}
 				element={<HomeView/>}
 				children={[
-					<Route element={<QuestionsView/>} path={"/questions"}>
-						<Route element={<TagQuestionsView/>} path={"questions/tagged/:content"}></Route>
+					<Route element={<QuestionsView/>} path={"/questions/*"}>
+						{/*<Route element={<TagQuestionsView/>} path={"questions/tagged/:content"}></Route>*/}
 					</Route>,
 					<Route element={<TagsView/>} path={"/tags"}/>,
 					<Route element={<UsersView/>} path={"/users"}/>,
