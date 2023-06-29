@@ -6,7 +6,7 @@ import {message} from "antd";
 import {Ques_GetQuestionsByTag, Ques_GetQuestionsByTagAndTab} from "../service/QuestionsService.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {tabs} from "./QuestionsView.tsx";
+import {Tabs} from "./QuestionsView.tsx";
 import {ITab} from "./UsersView.tsx";
 import { useNavigate } from "react-router-dom";
 
@@ -62,7 +62,7 @@ export const TagQuestionsView = () => {
 				{`Filter Questions by Tag: ${params.content}`}
 			</div>
 			<div className="filter-tabs">
-				<FilterTabItem tabs={tabs} func={tabFilter} />
+				<FilterTabItem tabs={Tabs} func={tabFilter}/>
 			</div>
 			<div className={"questions"}>
 				{
