@@ -4,12 +4,39 @@
     background-color: #171134;
 }
 
-.logout-button-container{
+.top-logo-container {
+    display: inline-block;
+    width: 25vw!important;
+    position:absolute;
+    top: 0;
+    left: 0;
+}
+
+.top-search-box-container{
+    display: inline-block;
+    width: 50vw;
+    height:2rem;
+    margin-top: 0.5rem;
+    position: absolute;
+    left: 25vw;
+    top: 0;
+}
+
+.logout-button-container {
+    display: inline-block;
+    width: 20vw;
+    height: 3rem;
+    position: absolute;
+    left: 75vw;
+    top: 0;
+}
+
+.logout-button{
     float: right;
-    width: 5rem;
-    height: 80%;
+    width: 50%;
+    height: 2rem;
     margin-right: 1.5rem;
-    margin-top: 0.4rem;
+    margin-top: 0.6rem;
     background-color: deepskyblue;
     color: white;
     text-align: center;

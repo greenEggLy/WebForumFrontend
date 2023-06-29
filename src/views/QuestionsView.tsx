@@ -7,6 +7,7 @@ import {IQuestionCard, ISearchQuestionsResponse} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import './css/QuestionsView.css'
 import {testQuestion1, testQuestion2, testQuestion3} from "../constants/test";
+import {Button} from "react-bootstrap";
 
 import RankCard from "../components/SideCard/RankCard.tsx";
 import {QuesGetByTab} from "../service/QuestionsService.ts";
@@ -85,6 +86,11 @@ export const QuestionsView = () => {
 				<h2>All Questions</h2>
 			</div>
 			<div className="filter-container">
+				<div className={"post-button-frame"}>
+					<button className={"post-question-button"} onClick={() => {}}>
+						{"POST QUESTION"}
+					</button>
+				</div>
 				<FilterTabItem tabs={Tabs} func={changeTab}/>
 			</div>
 			<div className={"question-list-container"}>

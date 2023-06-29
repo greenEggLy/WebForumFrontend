@@ -21,15 +21,14 @@ export const FilterTabItem = ({tabs, setTab, func}: Props) => {
 	}
 
 	return (
-		<span>
 			<Segmented options={tabs.map(tab => tab.tab)} onChange={onChange} style={styles.segmented}/>
-		</span>
 	);
 };
 
 const styles: { [key: string]: CSSProperties } = {
 	segmented: {
-		position: "absolute",
-		right: '1rem'
+		float:"right",
+		margin:"1rem",
+		marginTop:0
 	}
 }

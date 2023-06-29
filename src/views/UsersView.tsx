@@ -1,12 +1,14 @@
+// noinspection JSUnusedLocalSymbols
+
 import {IUserCard} from "../Interface.ts";
 import {useEffect, useState} from "react";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {Divider, Input, List} from "antd";
+import {Divider,List} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
 import {UserList} from "../constants/test.ts";
 import "./css/UsersView.css"
+import { SearchBox } from "../components/Home/SearchBox.tsx";
 
-const {Search} = Input;
 
 export interface ITab {
 	tab: string;
@@ -60,17 +62,18 @@ export const UsersView = () => {
 				<h2>Users</h2>
 			</div>
 			<div className={"search-bar-container"}>
-				<Search
-					id="userfilter"
-					name="userfilter"
-					className="filter-input"
-					autoComplete="off"
-					placeholder="Filter by user"
-					value={filterText}
-					onChange={e => setFilterText(e.target.value)}
-				>
-				</Search>
-				<FilterTabItem tabs={tabs} func={getUserByTab}/>
+				{/*<Search*/}
+				{/*	id="userfilter"*/}
+				{/*	name="userfilter"*/}
+				{/*	className="filter-input"*/}
+				{/*	autoComplete="off"*/}
+				{/*	placeholder="Filter by user"*/}
+				{/*	value={filterText}*/}
+				{/*	onChange={e => setFilterText(e.target.value)}*/}
+				{/*>*/}
+				{/*</Search>*/}
+				<SearchBox placeholder={'Filter by user'} onSearch={(s:string) => setFilterText(s)} />
+					<FilterTabItem tabs={tabs} func={getUserByTab}/>
 			</div>
 			<Divider style={{marginBottom: '0px', marginTop: '2px'}}/>
 			<div className={"user-card-container"}>

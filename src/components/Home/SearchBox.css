@@ -1,0 +1,35 @@
+.search-box {
+    border-radius: 1rem;
+    background-color: #eeeeee;
+    border: #cdcdcd solid 1px;
+    height: 90%;
+    width: 90%;
+}
+
+.search-box-icon {
+    position: relative;
+    display: inline-block;
+    top: 15%;
+    width: 5%;
+    margin-left: 2%;
+}
+
+.search-box-input-box-container {
+    display: inline-block;
+    top:5%;
+    margin-left: 2%;
+    width: 85%;
+    position: relative;
+}
+
+.search-box-input-box {
+    background-color: #eeeeee;
+    width: 85%;
+    height: 100%;
+}
+
+.search-box-input-box:focus {
+    background-color: #eeeeee;
+    width: 85%!important;
+    height: 100%!important;
+}

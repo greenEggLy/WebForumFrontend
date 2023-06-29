@@ -17,10 +17,35 @@ h2 {
 
 .filter-container {
     height: 5vh;
+    margin-left: 1rem;
 }
 
 .question-list-container {
     height: auto;
     width: 100%;
+}
+
+.post-question-button {
+    position: relative;
+    top:0;
+    background-color: deepskyblue;
+    color:white;
+    box-shadow: darkgray 0px 0px 5px 0.2px;
+    border-radius: 0.5rem;
+    width: 10rem;
+    height: 3rem;
+    font-size: 0.9rem;
+}
+
+.post-question-button:focus {
+    position: relative;
+    top:0;
+    background-color: deepskyblue;
+    color:white;
+    box-shadow: darkgray 0px 0px 5px 0.2px;
+    border-radius: 0.5rem;
+    width: 10rem;
+    height: 3rem;
+    font-size: 0.9rem;
 }
 
