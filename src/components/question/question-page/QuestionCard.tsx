@@ -20,7 +20,7 @@ export const QuestionCard = ({question, click}: Props,) => {
 		<div className={"question-card"} >
 			<div className={"question-popularity-container"}>
 				<Row>
-					<Col span={6} >{question.AnswerNumber + (question.AnswerNumber == 1 ? ' Answer' : ' Answers')}</Col>
+					<Col span={3} >{question.AnswerNumber + (question.AnswerNumber == 1 ? ' Answer' : ' Answers')}</Col>
 					<Col span={6} >{question.VoteNumber + (question.VoteNumber == 1 ? ' Like' : ' Likes')}</Col>
 				</Row>
 			</div>

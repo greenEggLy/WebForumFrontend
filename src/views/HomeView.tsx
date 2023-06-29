@@ -27,7 +27,7 @@ export const HomeView = () => {
 
 const styles: { [key: string]: CSSProperties } = {
   searchBar: {
-    height: '2rem',
+    height: '3rem',
   },
   home:{
     height: '100vh',
