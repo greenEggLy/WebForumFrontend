@@ -1,7 +1,7 @@
 import {getRequestInit, root} from "./global.ts";
 
 
-const questionsRoot = `${root}/Question`;
+const questionsRoot = `${root}/question`;
 
 export const QuesGetByTab = async (tab: string, currentPage: number, pageSize: number) => {
 	const url = `${questionsRoot}?tab=${tab}&currentPage=${currentPage}&pageSize=${pageSize}`

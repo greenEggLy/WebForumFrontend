@@ -7,8 +7,6 @@ import {IQuestionCard, ISearchQuestionsResponse} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import './css/QuestionsView.css'
 import {testQuestion1, testQuestion2, testQuestion3} from "../constants/test";
-
-import RankCard from "../components/SideCard/RankCard.tsx";
 import {QuesGetByTab} from "../service/QuestionsService.ts";
 
 
@@ -106,9 +104,9 @@ export const QuestionsView = () => {
 							}}/>
 			</div>
 		</div>
-		<div className={"side-container"}>
-			<RankCard questions={hotquestions} type={"最热问题"}/>
-		</div>
+		{/*<div className={"side-container"}>*/}
+		{/*	<RankCard questions={hotquestions} type={"最热问题"}/>*/}
+		{/*</div>*/}
 	</div>;
 };
 
