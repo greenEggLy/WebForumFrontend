@@ -1,18 +1,22 @@
 import {ITab} from "../../views/UsersView.tsx";
 import {Segmented} from "antd";
-import {CSSProperties} from "react";
+import React, {CSSProperties} from "react";
 
 interface Props {
 	tabs: ITab[]
+	setTab?: React.Dispatch<React.SetStateAction<ITab>>
 	func: (tab: ITab) => Promise<void>
 }
 
 // questions filter
-export const FilterTabItem = ({tabs, func}: Props) => {
+export const FilterTabItem = ({tabs, setTab, func}: Props) => {
 	const onChange = async (value: string | number) => {
 		for (const tab of tabs) {
-			if (tab.tab === value)
+			if (tab.tab === value) {
+				if (tab && setTab) setTab(tab);
 				await func(tab)
+
+			}
 		}
 	}
 

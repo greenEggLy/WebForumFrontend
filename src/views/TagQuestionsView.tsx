@@ -3,14 +3,15 @@ import {useEffect, useState} from "react";
 import {IQuestionCard} from "../Interface.ts";
 import {history} from "../service/History.ts";
 import {message} from "antd";
-import {Ques_GetQuestionsByTag, Ques_GetQuestionsByTagAndTab} from "../service/QuestionsService.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {Tabs} from "./QuestionsView.tsx";
 import {ITab} from "./UsersView.tsx";
+import {QuesGetByTag} from "../service/QuestionsService.ts";
 
 export const TagQuestionsView = () => {
 	const params = useParams();
+	const [tab, setTab] = useState<ITab>(Tabs[0]);
 	const [tag, setTag] = useState<string>("")
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
 	const navigate = useNavigate()
@@ -26,7 +27,7 @@ export const TagQuestionsView = () => {
 	}, [params.content])
 
 	const getQuestionsByTag = async (tag: string) => {
-		const response = await Ques_GetQuestionsByTag(tag)
+		const response = await QuesGetByTag(tag, tab.tab)
 		if (!response.ok) {
 			message.error("error")
 			history.back();
@@ -38,9 +39,9 @@ export const TagQuestionsView = () => {
 	const tabFilter = async (tab: ITab | string) => {
 		let response: Response
 		if (typeof tab === "string")
-			response = await Ques_GetQuestionsByTagAndTab(tag, tab)
+			response = await QuesGetByTag(tag, tab)
 		else {
-			response = await Ques_GetQuestionsByTagAndTab(tag, tab.tab)
+			response = await QuesGetByTag(tag, tab.tab)
 		}
 		if (!response.ok) {
 			message.error("err")
@@ -61,7 +62,7 @@ export const TagQuestionsView = () => {
 				{`Filter Questions by Tag: ${params.content}`}
 			</div>
 			<div className="filter-tabs">
-				<FilterTabItem tabs={Tabs} func={tabFilter}/>
+				<FilterTabItem tabs={Tabs} func={tabFilter} setTab={setTab}/>
 			</div>
 			<div className={"questions"}>
 				{

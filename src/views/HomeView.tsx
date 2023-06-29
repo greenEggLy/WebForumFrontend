@@ -4,8 +4,6 @@ import {Outlet} from "react-router-dom";
 import {CSSProperties} from "react";
 
 export const HomeView = () => {
-	// @ts-ignore
-	// @ts-ignore
 	return (
 		<div style={styles.home}>
 			<div style={styles.searchBar}>
