@@ -25,7 +25,7 @@ export const TagsView = () => {
 		setTags(await response.json());
 	}
 	return (<div>
-		<div className={"view-title"}>
+		<div className={"title-container"}>
 			<h2>Tags</h2>
 		</div>
 		<div className={'tag-search-bar-container'}>

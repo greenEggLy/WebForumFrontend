@@ -98,7 +98,7 @@ export const QuestionView = () => {
 
 	return (
 		<div className={'container'}>
-			<div className={"question-title-container"}>
+			<div className={"title-container"}>
 				<h1>{question.title}</h1>
 			</div>
 			<div className={"question-info"}>

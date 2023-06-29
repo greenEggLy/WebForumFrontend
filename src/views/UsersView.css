@@ -1,4 +1,7 @@
 
+.users-view-container {
+    min-width: 1200px;
+}
 
 .user-card-container {
     /*background-color: #f5f5f5;*/
