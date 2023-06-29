@@ -3,14 +3,16 @@
     box-shadow: darkgray 0px 0px 5px 0.2px;
     background-color: white;
     margin: 0.5rem;
-    height: 10rem;
+    height: 8rem;
+    width: 15rem;
 }
 
 .user-avatar-container {
     height: 100%;
     width: 40%;
     float: left;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .avatar {
@@ -23,27 +25,36 @@ p{
 }
 
 .username{
-    font-size: 1.0rem;
+    font-size: 1rem!important;
     font-weight: bold;
+    margin-top: -0.5rem;
 }
 
 .location{
     font-size: 0.5rem;
     color: darkgray;
+    margin-top: -0.3rem;
 }
 
 .follower_number{
     font-size: 0.5rem;
     color: darkgray;
+    margin-top: -0.3rem;
 }
 
 .profile{
     font-size: 0.75rem;
+    margin-top: -0.2rem;
+}
+.register_time{
+    font-size: 0.75rem;
+    margin-right: 1rem
+;
 }
 
 .user-description-container{
     height: 100%;
-    width: 60%;
+    width: 55%;
     float: right;
     margin-top: 1rem;
 }

@@ -1,10 +1,16 @@
 import {SearchOutlined} from "@ant-design/icons";
-import { Input } from "antd";
+import {Input} from "antd";
+import "./SearchBar.css"
+import logo from "../../assets/logos/logo.png"
 
 export const SearchBar = () => {
   return (
-    <div style={styles.searchBar} >
-      <Input style={styles.search} size='small' prefix={<SearchOutlined />}/>
+    <div className={'top-search-bar-container'} >
+      <img src={logo} className={'logo'} style={{width:'7rem', margin:'0.5rem'}}/>
+      <Input style={styles.search} prefix={<SearchOutlined />}/>
+      <div className={'logout-button-container'}>
+        <a href={'/login'} style={{position:'relative' ,top:'0.5rem', color:"white"}}>登出</a>
+      </div>
     </div>
   );
 }
@@ -15,9 +21,10 @@ const styles = {
     backgroundColor: 'black',
   },
   search: {
-    marginTop: '0.3rem',
+    marginTop: '0.65rem',
     width: '50vw',
-    marginLeft: '25vw',
+    marginLeft: '10vw',
+    top: '-1.5rem',
     borderRadius: '1rem',
   }
 }

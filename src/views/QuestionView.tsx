@@ -25,21 +25,25 @@ const testQuestion: IQuestion = {
 	userStar: true,
 	userLike: false,
 	userDislike: false,
+	CreateTime: new Date(),
 	tags: [
 		{
 			id: 1,
 			content: "暑假",
-			description: "关于暑假的问题"
+			description: "关于暑假的问题",
+			question_number: 3
 		},
 		{
 			id: 2,
 			content: "SJTU",
-			description: "关于SJTU的问题"
+			description: "关于SJTU的问题",
+			question_number: 3
 		},
 		{
 			id: 3,
 			content: "SE",
-			description: "关于SE的问题"
+			description: "关于SE的问题",
+			question_number: 3
 		}
 	],
 	answers: [
@@ -94,8 +98,11 @@ export const QuestionView = () => {
 
 	return (
 		<div className={'container'}>
-			<div className={"view-title"}>
+			<div className={"title-container"}>
 				<h1>{question.title}</h1>
+			</div>
+			<div className={"question-info"}>
+				{'Asked at ' + question.CreateTime + ' by ' + question.userCard.userName}
 			</div>
 			<Space size={[0, 8]}>
 				{question.tags.map(tag => (

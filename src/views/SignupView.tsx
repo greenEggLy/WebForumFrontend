@@ -1,4 +1,10 @@
-import RegisterForm from "../components/register/registerbox.tsx";
+import RegisterBox from "../components/register/registerbox";
 export const SignupView = () => {
-  return <div><RegisterForm/></div>;
+  return (
+    <div className={'login-view-container'}>
+      <div className={'login-card-container'}>
+        <RegisterBox/>
+      </div>
+    </div>
+  );
 };

@@ -1,0 +1,21 @@
+.top-search-bar-container {
+    width: 100%;
+    height: 100%;
+    background-color: #171134;
+}
+
+.logout-button-container{
+    float: right;
+    width: 5rem;
+    height: 80%;
+    margin-right: 1.5rem;
+    margin-top: 0.4rem;
+    background-color: deepskyblue;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    border-color: red;
+    border-radius: 5px;
+    border-width: thick;
+}
+

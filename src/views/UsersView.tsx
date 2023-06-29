@@ -53,9 +53,9 @@ export const UsersView = () => {
 	})
 
 	return (
-		<div>
-			<div className={"view-title"}>
-				<h2>Users</h2>
+		<div className={'users-view-container'}>
+			<div className={"title-container"}>
+				<h2 >Users</h2>
 			</div>
 			<div className={"search-bar-container"}>
 						<Search
@@ -75,13 +75,8 @@ export const UsersView = () => {
 			<List
 
 				grid={{
-					gutter:10,
-					xs: 1,
-					sm: 2,
-					md: 3,
-					lg: 3,
-					xl:4,
-					xxl:4,
+					gutter:16,
+					column:4
 				}}
 				dataSource={users}
 				renderItem={(user) => (

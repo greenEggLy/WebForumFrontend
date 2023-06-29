@@ -20,6 +20,14 @@
     background-color: white;
 }
 
+.question-info {
+    margin-bottom:1rem;
+    margin-left: 1rem;
+    color: gray;
+    font-size: small;
+}
+
 h1 {
-    font-weight: normal;
+    font-weight: normal!important;
+    font-size: medium;
 }

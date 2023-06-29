@@ -1,7 +1,15 @@
 h2 {
     font-weight: normal!important;
 }
-
+.central-container{
+    width: 65%;
+    float: left;
+}
+.side-container{
+    width: 28%;
+    float: right;
+    margin-right: 3%;
+}
 .title-container {
     height: 10vh;
     margin-left: 1rem;
@@ -11,6 +19,8 @@ h2 {
     height: 5vh;
 }
 
-.question-container {
-    background-color: #f5f5f5;
+.question-list-container {
+    height: auto;
+    width: 100%;
 }
+

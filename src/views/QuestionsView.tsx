@@ -6,19 +6,10 @@ import {IQuestionCard, ISearchQuestionsResponse} from "../Interface.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {QuestionsService} from "../service/QuestionsService.ts";
 import './QuestionsView.css'
-import {useNavigate} from "react-router-dom";
+import {testQuestion1, testQuestion2, testQuestion3} from "../constants/test";
 
-//for test
-const testQuestion: IQuestionCard = {
-	Id: 1,
-	Title: '为什么我还没放暑假？',
-	VoteNumber: 3,
-	AnswerNumber: 2,
-	Tags: [
-		{id: 1, content: 'test1'},
-		{id: 2, content: 'test2'},
-	]
-}
+import RankCard from "../components/SideCard/RankCard.tsx";
+
 
 export const Tabs: ITab[] = [
 	{tab: 'heat', title: 'Thumbs'},
@@ -32,10 +23,12 @@ export const QuestionsView = () => {
 	const [totalItems, setTotalItems] = useState<number>(0);
 	const [tab, setTab] = useState<ITab>(Tabs[0])
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
+	const [hotquestions, setHotquestions] = useState<IQuestionCard[]>([])
 	useEffect(() => {
 		init().catch(err => console.error(err));
 		//for test
-		setQuestions([testQuestion, testQuestion, testQuestion])
+		setQuestions([testQuestion1, testQuestion2, testQuestion3]);
+		setHotquestions([testQuestion1,testQuestion2,testQuestion3])
 	}, [])
 
 	const init = async () => {
@@ -85,22 +78,34 @@ export const QuestionsView = () => {
 	}
 
 	return <div>
+		<div className={"central-container"}>
 		<div className={"title-container"} >
 			<h2>All Questions</h2>
 		</div>
 		<div className="filter-container" >
 			<FilterTabItem tabs={Tabs} func={changeTab} />
 		</div>
-		<div className={"question-container"} >
+		<div className={"question-list-container"} >
+			<List>
 			{
-				questions.map(question => (<QuestionCard question={question} click={clickQuestion}/>))
+				questions.map(question => (
+					<div>
+						<QuestionCard question={question} click={clickQuestion}/>
+					</div>
+						)
+				)
 			}
+			</List>
 		</div>
 		<div className={"pagination"}>
 			<Pagination defaultCurrent={1} total={totalItems} current={currentPage} defaultPageSize={30}
 						onChange={(page, pageSize) => {
 							fetchMore(page, pageSize).catch(err => console.error(err));
 						}}/>
+		</div>
+		</div>
+		<div className = {"side-container"}>
+			<RankCard questions={hotquestions} type={"最热问题"}/>
 		</div>
 	</div>;
 };

@@ -1,0 +1,75 @@
+.info-all{
+    padding-left: 2vw;
+    height: 10vh;
+}
+.view-title{
+    height: 6vh;
+    font-size: 5vh;
+    marginLeft: 10px;
+    color: #4b6584;
+}
+.user-avatar-container {
+    height: 100%;
+    width: 15%;
+    float: left;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+}
+.user-description-container{
+    height: 100%;
+    width:80%;
+    float: right;
+    margin-top: 1rem;
+}
+.simple-info{
+    height:20vh;
+}
+.details{
+    height:20vh;
+    width: 100%;
+}
+
+.user-card {
+    border-radius: 0.5rem;
+    box-shadow: darkgray 0px 0px 5px 0.2px;
+    background-color: white;
+    margin: 0.5rem;
+    height: 8rem;
+    width: 17rem;
+}
+
+
+
+.avatar {
+    width: 100%;
+    margin: 2%;
+    border-radius: 10%;
+}
+
+p{
+    margin: 0.2rem;
+}
+
+.username{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: -0.5rem;
+}
+
+.location{
+    font-size: 0.5rem;
+    color: darkgray;
+    margin-top: -0.3rem;
+}
+
+.follower_number{
+    font-size: 0.5rem;
+    color: darkgray;
+    margin-top: -0.3rem;
+}
+
+.profile{
+    font-size: 0.75rem;
+    margin-top: -0.2rem;
+}
+

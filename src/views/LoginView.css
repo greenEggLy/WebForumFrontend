@@ -1,0 +1,17 @@
+.login-view-container {
+    background-color: #f0f0f0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-card-container {
+    position: absolute;
+    width: 60rem;
+    height: 30rem;
+    left: 15rem;
+    top: 10rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: darkgray 0px 0px 15px 2px;
+}

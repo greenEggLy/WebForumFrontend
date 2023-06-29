@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@antv/g2": "^4.2.10",
     "@bytemd/plugin-frontmatter": "^1.21.0",
     "@bytemd/plugin-gfm": "^1.21.0",
     "@bytemd/plugin-highlight": "^1.21.0",
