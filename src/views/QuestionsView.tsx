@@ -10,8 +10,7 @@ const fetchNum = 50;
 import './QuestionsView.css'
 import {testQuestion1, testQuestion2, testQuestion3} from "../constants/test";
 
-//for test
-//@ts-ignore
+import RankCard from "../components/SideCard/RankCard.tsx";
 
 
 export const tabs: ITab[] = [
@@ -25,11 +24,13 @@ export const QuestionsView = () => {
 	const [nextFetch, setNextFetch] = useState<number>(0);
 	const [tab, setTab] = useState<ITab>(tabs[0])
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
+	const [hotquestions, setHotquestions] = useState<IQuestionCard[]>([])
 	useEffect(() => {
 		Ques_GetQuestionsByTab(tabs[0].tab, nextFetch, fetchNum).catch(err => console.error(err))
 		setNextFetch(nextFetch + fetchNum)
 		//for test
-		setQuestions([testQuestion1, testQuestion2, testQuestion3])
+		setQuestions([testQuestion1, testQuestion2, testQuestion3]);
+		setHotquestions([testQuestion1,testQuestion2,testQuestion3])
 	}, [])
 
 	const changeTab = async (selectTab: ITab) => {
@@ -61,6 +62,7 @@ export const QuestionsView = () => {
 	}
 
 	return <div>
+		<div className={"central-container"}>
 		<div className={"title-container"} >
 			<h2>All Questions</h2>
 		</div>
@@ -84,6 +86,10 @@ export const QuestionsView = () => {
 				fetchMore(tab.tab).catch(err => console.error(err))
 			}}>show more
 			</button>
+		</div>
+		</div>
+		<div className = {"side-container"}>
+			<RankCard questions={hotquestions} type={"最热问题"}/>
 		</div>
 	</div>;
 };
