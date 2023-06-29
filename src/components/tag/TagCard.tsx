@@ -1,6 +1,6 @@
 import {ITag} from "../../Interface.ts";
 import './TagCard.css'
-import { Tag } from "antd";
+import {Tag} from "antd";
 
 
 interface Props {

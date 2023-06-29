@@ -1,11 +1,13 @@
 import {IUserCard} from "../Interface.ts";
 import {useEffect, useState} from "react";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {Input, List, Divider} from "antd";
+import {Divider, Input, List} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
 import {UserList} from "../constants/test.ts";
-const { Search } = Input;
-import "./UsersView.css"
+import "./css/UsersView.css"
+
+const {Search} = Input;
+
 export interface ITab {
 	tab: string;
 	title: string;
@@ -48,43 +50,43 @@ export const UsersView = () => {
 	// 	}, 2000)
 	// 	return () => clearTimeout(getUsers)
 	// }, [filterText])
-	useEffect(()=>{
+	useEffect(() => {
 		setUsers(UserList);
 	})
 
 	return (
 		<div className={'users-view-container'}>
 			<div className={"title-container"}>
-				<h2 >Users</h2>
+				<h2>Users</h2>
 			</div>
 			<div className={"search-bar-container"}>
-						<Search
-							id="userfilter"
-							name="userfilter"
-							className="filter-input"
-							autoComplete="off"
-							placeholder="Filter by user"
-							value={filterText}
-							onChange={e => setFilterText(e.target.value)}
-						>
-						</Search>
-						<FilterTabItem tabs={tabs} func={getUserByTab} />
+				<Search
+					id="userfilter"
+					name="userfilter"
+					className="filter-input"
+					autoComplete="off"
+					placeholder="Filter by user"
+					value={filterText}
+					onChange={e => setFilterText(e.target.value)}
+				>
+				</Search>
+				<FilterTabItem tabs={tabs} func={getUserByTab}/>
 			</div>
-			<Divider style={{marginBottom:'0px',marginTop:'2px'}}/>
-			<div className={"user-card-container"} >
-			<List
+			<Divider style={{marginBottom: '0px', marginTop: '2px'}}/>
+			<div className={"user-card-container"}>
+				<List
 
-				grid={{
-					gutter:16,
-					column:4
-				}}
-				dataSource={users}
-				renderItem={(user) => (
-					<List.Item>
-						<UserCardItem user={user}/>
-					</List.Item>
-				)}
-			/>
+					grid={{
+						gutter: 16,
+						column: 4
+					}}
+					dataSource={users}
+					renderItem={(user) => (
+						<List.Item>
+							<UserCardItem user={user}/>
+						</List.Item>
+					)}
+				/>
 			</div>
 		</div>)
 }

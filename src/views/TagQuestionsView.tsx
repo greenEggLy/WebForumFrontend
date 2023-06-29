@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {IQuestionCard} from "../Interface.ts";
 import {history} from "../service/History.ts";
@@ -8,7 +8,6 @@ import {QuestionCard} from "../components/question/question-page/QuestionCard.ts
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {Tabs} from "./QuestionsView.tsx";
 import {ITab} from "./UsersView.tsx";
-import { useNavigate } from "react-router-dom";
 
 export const TagQuestionsView = () => {
 	const params = useParams();

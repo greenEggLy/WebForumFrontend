@@ -1,17 +1,17 @@
-import { BrowserRouter } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
-import { RootRouter } from "./RootRouter.tsx";
+import {RootRouter} from "./RootRouter.tsx";
 
 function App() {
-  return (
-    <>
-      <div>
-        <BrowserRouter>
-          <RootRouter />
-        </BrowserRouter>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<div>
+				<BrowserRouter>
+					<RootRouter/>
+				</BrowserRouter>
+			</div>
+		</>
+	);
 }
 
 export default App;

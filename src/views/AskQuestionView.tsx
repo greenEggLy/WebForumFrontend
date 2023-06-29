@@ -3,10 +3,10 @@ import {useEffect, useState} from "react";
 import {ITag} from "../Interface.ts";
 import {TagSelectItem} from "../components/tag/TagSelectItem.tsx";
 import {Tag_GetPossibleTags} from "../service/TagService.ts";
-import { message } from "antd";
+import {message} from "antd";
 import {TagSelector} from "../components/tag/TagSelector.tsx";
 import {Que_PostQuestion} from "../service/QuestionService.ts";
-import "./AskQuestionView.css"
+import "./css/AskQuestionView.css"
 
 
 //edit and ask question
@@ -37,24 +37,24 @@ export const AskQuestionView = () => {
 	};
 
 	return (
-			<div className={"ask-question-view-container"}>
-				<h2 >我要提问</h2>
-				<div className={'ask-question-container'}>
-					<text style={{fontWeight:'bold'}}>问题标题</text>
-					<div className={"raw-text-editor"}>
-						<input
-							value={title}
-							className = {"input-box"}
-							onChange={(event) => setTitle(event.target.value)}
-							placeholder={'你遇到了什么问题？'}
-						/>
-					</div>
-					<text style={{fontWeight:'bold'}}>问题内容</text>
-					<div className={"markdown-editor"}>
-						<MarkDownEditor value={content} setValue={setContent}/>
-					</div>
+		<div className={"ask-question-view-container"}>
+			<h2>我要提问</h2>
+			<div className={'ask-question-container'}>
+				<text style={{fontWeight: 'bold'}}>问题标题</text>
+				<div className={"raw-text-editor"}>
+					<input
+						value={title}
+						className={"input-box"}
+						onChange={(event) => setTitle(event.target.value)}
+						placeholder={'你遇到了什么问题？'}
+					/>
+				</div>
+				<text style={{fontWeight: 'bold'}}>问题内容</text>
+				<div className={"markdown-editor"}>
+					<MarkDownEditor value={content} setValue={setContent}/>
+				</div>
 				<div className={"tag-chose"}>
-					<text style={{fontWeight:'bold'}}>问题标签（至多5个）</text>
+					<text style={{fontWeight: 'bold'}}>问题标签（至多5个）</text>
 					<div className={"chosen-tags"}>
 						{
 							questionTags.map(item => {

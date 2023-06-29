@@ -1,14 +1,13 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {CSSProperties, useEffect, useState} from "react";
 import {IQuestion} from "../Interface.ts";
 import {EmptyQuestion} from "../data/EmptyObject.ts";
 import {Que_GetQuestion} from "../service/QuestionService.ts";
-import { message, Space, Tag } from "antd";
+import {message, Space, Tag} from "antd";
 import {VoteBar} from "../components/question/question-page/VoteBar.tsx";
 import {AnswerContent} from "../components/question/question-page/AnswerContent.tsx";
-import {CSSProperties} from "react";
-import { Editor } from "@bytemd/react";
-import "./QuestionView.css"
+import {Editor} from "@bytemd/react";
+import "./css/QuestionView.css"
 
 const testQuestion: IQuestion = {
 	id: '3',
@@ -106,12 +105,12 @@ export const QuestionView = () => {
 			</div>
 			<Space size={[0, 8]}>
 				{question.tags.map(tag => (
-					    <Tag color="blue">{tag.content}</Tag>
-					))
+					<Tag color="blue">{tag.content}</Tag>
+				))
 				}
 			</Space>
 			<div className={"question-container"}>
-				<div className={'vote-bar-container'} >
+				<div className={'vote-bar-container'}>
 					<VoteBar content={question}/>
 				</div>
 				<div className={'question-content-container'}>
@@ -123,17 +122,17 @@ export const QuestionView = () => {
 			</div>
 			<div className={"question-answers"}>
 				{
-				question.answers.map(answer => (
-					<div className={'question-container'}>
-						<hr color='#f1f1f1'/>
-						<div style={styles.voteBarContainer}>
-							<VoteBar content={answer}/>
-						</div>
+					question.answers.map(answer => (
 						<div className={'question-container'}>
-							<AnswerContent content={answer.content}/>
+							<hr color='#f1f1f1'/>
+							<div style={styles.voteBarContainer}>
+								<VoteBar content={answer}/>
+							</div>
+							<div className={'question-container'}>
+								<AnswerContent content={answer.content}/>
+							</div>
 						</div>
-					</div>
-				))
+					))
 				}
 			</div>
 			<div className={"question-answer-input"}>
@@ -152,7 +151,7 @@ const styles: { [name: string]: CSSProperties } = {
 		width: "8%",
 		float: "left",
 	},
-	questionContainer:{
+	questionContainer: {
 		width: "100%",
 		height: "30vh"
 	},
