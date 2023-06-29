@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {ITag} from "../Interface.ts";
 import {TagSelectItem} from "../components/tag/TagSelectItem.tsx";
 import {Tag_GetPossibleTags} from "../service/TagService.ts";
-import {message} from "antd";
+import { message } from "antd";
 import {TagSelector} from "../components/tag/TagSelector.tsx";
 import {Que_PostQuestion} from "../service/QuestionService.ts";
 import "./AskQuestionView.css"
@@ -81,12 +81,11 @@ export const AskQuestionView = () => {
 						setQuestionTags={setQuestionTags}
 					/>
 				</div>
-
-				<div className={"post-button-frame"}>
-					<button className={"post-button"} onClick={postNewQuestion}>
-						{"POST QUESTION"}
-					</button>
-				</div>
+			</div>
+			<div className={"post-button-frame"}>
+				<button className={"post-question-button"} onClick={postNewQuestion}>
+					{"POST QUESTION"}
+				</button>
 			</div>
 		</div>
 	);
