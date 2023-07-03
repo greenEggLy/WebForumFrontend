@@ -1,6 +1,5 @@
 .info-all{
-    padding-left: 2vw;
-    height: 10vh;
+    padding-left: 2%;
 }
 .view-title{
     height: 6vh;
@@ -11,21 +10,20 @@
 .user-avatar-container {
     height: 100%;
     width: 15%;
-    float: left;
     margin-top: 1rem;
     margin-left: 0.5rem;
+}
+.simple-info{
+    height: 100%;
 }
 .user-description-container{
     height: 100%;
     width:80%;
-    float: right;
     margin-top: 1rem;
 }
-.simple-info{
-    height:20vh;
-}
+
 .details{
-    height:20vh;
+
     width: 100%;
 }
 
