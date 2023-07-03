@@ -1,6 +1,11 @@
 h2 {
     font-weight: normal!important;
 }
+
+.questions-view-container {
+    min-width: 1000px
+}
+
 .central-container{
     width: 65%;
     float: left;

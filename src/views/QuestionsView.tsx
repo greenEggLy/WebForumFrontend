@@ -42,8 +42,8 @@ export const QuestionsView = () => {
 			.catch(err => console.error(err))
 		// .catch(_ => navigate("/questions"));
 		//for test
-		setQuestions([testQuestion1, testQuestion2, testQuestion3]);
-		setHotquestions([testQuestion1, testQuestion2, testQuestion3])
+		// setQuestions([testQuestion1, testQuestion2, testQuestion3]);
+		// setHotquestions([testQuestion1, testQuestion2, testQuestion3])
 	}, [])
 
 	const getQues = async () => {
@@ -92,7 +92,8 @@ export const QuestionsView = () => {
 		// setTotalPages(json.totalPages);
 	}
 
-	return <div>
+	return (
+	<div className={"questions-view-container"}>
 		<div className={"central-container"}>
 			<div className={"title-container"}>
 				<h2>All Questions</h2>
@@ -123,6 +124,7 @@ export const QuestionsView = () => {
 		<div className={"side-container"}>
 			<RankCard questions={hotquestions} type={"最热问题"}/>
 		</div>
-	</div>;
+	</div>
+)
 };
 

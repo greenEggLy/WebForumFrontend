@@ -6,6 +6,7 @@ import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
 import {Divider,List} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
 import {UserList} from "../constants/test.ts";
+import { message } from "antd";
 import "./css/UsersView.css"
 import { SearchBox } from "../components/Home/SearchBox.tsx";
 
@@ -27,34 +28,31 @@ export const UsersView = () => {
 	const [users, setUsers] = useState<IUserCard[]>([]);
 	const [filterText, setFilterText] = useState<string>("")
 	// @ts-ignore
-	const getUserByTab = async (tab: ITab) => {
-		setUsers(UserList);
-	};
-
 	// const getUserByTab = async (tab: ITab) => {
-	// 	const response = await Users_FilterByTab(tab.tab);
-	// 	if (!response.ok) message.error(`get user by ${tab} error!`);
-	// 	const json: Promise<IUserCard[]> = response.json();
-	// 	setUsers(await json);
+	// 	setUsers(UserList);
 	// };
-	// useEffect(() => {
-	// 	getUserByTab(tabs[0]).catch(err => console.error(err))
-	// }, [])
 
-	// useEffect(() => {
-	// 	const getUsers = setTimeout(async () => {
-	// 		const response = await Users_FilterByName(filterText)
-	// 		if (!response.ok) {
-	// 			message.error("暂不能获取用户信息")
-	// 			return;
-	// 		}
-	// 		setUsers(await response.json())
-	// 	}, 2000)
-	// 	return () => clearTimeout(getUsers)
-	// }, [filterText])
+	const getUserByTab = async (tab: ITab) => {
+		const response = await Users_FilterByTab(tab.tab);
+		if (!response.ok) message.error(`get user by ${tab} error!`);
+		const json: Promise<IUserCard[]> = response.json();
+		setUsers(await json);
+	};
 	useEffect(() => {
-		setUsers(UserList);
-	})
+		getUserByTab(tabs[0]).catch(err => console.error(err))
+	}, [])
+
+	useEffect(() => {
+		const getUsers = setTimeout(async () => {
+			const response = await Users_FilterByName(filterText)
+			if (!response.ok) {
+				message.error("暂不能获取用户信息")
+				return;
+			}
+			setUsers(await response.json())
+		}, 2000)
+		return () => clearTimeout(getUsers)
+	}, [filterText])
 
 	return (
 		<div className={'users-view-container'}>

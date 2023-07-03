@@ -13,7 +13,7 @@ export const TagsView = () => {
 	useEffect(() => {
 		getAllTags().catch(err => console.error(err))
 		//for test
-		setTags([tag1, tag2, tag3, tag1, tag2])
+		//setTags([tag1, tag2, tag3, tag1, tag2])
 	}, [])
 
 	const getAllTags = async () => {

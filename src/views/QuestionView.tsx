@@ -89,10 +89,10 @@ export const QuestionView = () => {
 				message.error("get question error");
 				return;
 			}
-			//setQuestion(await response.json());
+			setQuestion(await response.json());
 		};
 		getQuestionById().catch((err) => console.error(err));
-		setQuestion(testQuestion)
+		//setQuestion(testQuestion)
 	}, [params.quesid]);
 
 	return (
