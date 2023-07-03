@@ -4,7 +4,6 @@ import {CaretDownOutlined, CaretUpOutlined, StarFilled, StarOutlined} from '@ant
 import {useEffect, useState} from "react";
 import {Que_DislikeQuestion, Que_LikeQuestion, Que_StarQuestion} from "../../../service/QuestionService.ts";
 import "./VoteBar.css"
-
 interface Props {
 	content: IQuestion | IAnswerBrief;
 }

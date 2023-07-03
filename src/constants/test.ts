@@ -1,4 +1,5 @@
-import {IQuestionCard, ITag, IUserCard} from "../Interface.ts";
+import {IQuestionCard, IStatisticTag, ITag, IUserCard} from "../Interface.ts";
+
 
 export const tag1: ITag = {
 	id: 1,
@@ -18,7 +19,7 @@ export const tag3: ITag = {
 	description: "计算机",
 	question_number: 233,
 }
-const User1: IUserCard = {
+export const User1: IUserCard = {
 	id: 1,
 	avatar: "https://tse2-mm.cn.bing.net/th/id/OIP-C.PcOT-lN3-IAT3szcXiXvQgAAAA?w=186&h=186&c=7&r=0&o=5&dpr=2&pid=1.7",
 	username: "沈备军",
@@ -75,17 +76,29 @@ export const testQuestion3: IQuestionCard = {
 
 export const UserList: IUserCard[] = [User1, User2, User1, User2, User1, User2, User1, User2];
 
-export const TestUser: IUser = {
-	id: 2,
-	avatar: "https://tse2-mm.cn.bing.net/th/id/OIP-C.PcOT-lN3-IAT3szcXiXvQgAAAA?w=186&h=186&c=7&r=0&o=5&dpr=2&pid=1.7",
-	username: "沈备军",
-	location: "中国上海",
-	profile: "一名软件学院老师",
-	fields: [tag1, tag2, tag3],
-	email: 'jkdsahkjdas@qq.com',
-	create_time: new Date('2021.1.2'),
-	last_login: new Date(),
-	is_admin: false,
-	is_banned: false
-
+export const STag1:IStatisticTag={
+	id:1,
+	content:'睡觉',
+	number:123
 }
+export const STag2:IStatisticTag={
+	id:2,
+	content:'编程',
+	number:80
+}
+export const STag3:IStatisticTag={
+	id:3,
+	content:'爬行',
+	number:22
+}
+export const STag4:IStatisticTag={
+	id:4,
+	content:'困',
+	number:40
+}
+export const STag5:IStatisticTag={
+	id:5,
+	content:'精神失常',
+	number:20
+}
+export const StatisticData:IStatisticTag[]=[STag1,STag2,STag3,STag4,STag5]

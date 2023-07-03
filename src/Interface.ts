@@ -143,3 +143,11 @@ export interface ISearchUserCardResponse {
 	totalPages: number;
 	totalItems: number; // 所有满足条件的结果数
 }
+//用于用户数据统计时的接口
+//需要从后端返回一个格式为{id,Tag内容,涉及数目}的列表
+export interface IStatisticTag {
+	id:number;
+	content: string;
+	number: number;
+}
+

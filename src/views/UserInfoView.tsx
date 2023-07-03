@@ -1,8 +1,27 @@
 import {useParams} from "react-router-dom";
 import {TagShowItem} from "../components/tag/TagShowItem.tsx";
-import {TestUser} from "../constants/test.ts";
+import {User1} from "../constants/test.ts";
 import './css/UserInfoView.css'
+import {ITag} from "../Interface.ts";
+import StatisticBar from "../components/statistic/StatisticBar.tsx";
+import {Input} from "antd";
 
+const options =
+	[
+		{
+			value:'answer',
+			label:'回答',
+		},
+		{
+			value:'ask',
+			label:'提问',
+		},
+		{
+			value: 'star',
+			label: '收藏'
+		}
+	]
+;
 // user-self data view
 export const UserInfoView = () => {
 	const params = useParams();
@@ -16,7 +35,7 @@ export const UserInfoView = () => {
 	// 	if (!params.userid) return;
 	// 	getUserInfo(params.userid).catch((err) => console.error(err));
 	// }, [params.userid]);
-	const user = TestUser;
+	const user = User1;
 	return (
 		<div className={"info-all"}>
 			<div className={"simple-info"}>
@@ -27,15 +46,16 @@ export const UserInfoView = () => {
 					<div className={"username"}>{user.username}</div>
 					<div>
 						<text className={"register_time"}>注册时间:2022-06-27</text>
-
 						<text className={"location"}>{user.location}</text>
 
 					</div>
 					<text className={"profile"}>{user.profile}</text>
 				</div>
 			</div>
+
 			<div className={"details"}>
-				<p>
+				<Input placeholder="个人简介"></Input>
+				<p className={"tags"}>
 					<text>我的标签:</text>
 					<span>
 					{user.fields.map((field: ITag) => (
@@ -43,8 +63,10 @@ export const UserInfoView = () => {
 					))}
 					</span>
 				</p>
-				<p className={"email"}>邮箱:{user.email}</p>
 				<p>地址:{user.location}</p>
+			</div>
+			<div>
+				<StatisticBar options={options}/>
 			</div>
 			{/*<div className={"user-likes-and-save"}>*/}
 			{/*	{*/}
