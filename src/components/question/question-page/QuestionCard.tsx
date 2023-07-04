@@ -24,7 +24,7 @@ export const QuestionCard = ({question}: Props,) => {
 			</div>
 			<div className={"question-card-title-container"}>
 				<a className={"question-card-title"} onClick={() => {
-					navigate(`/question/${question.Id}`)
+					navigate(`/question/${question.id}`)
 				}}>{question.title}</a>
 				<div className={'question-time-container'}>
 					{timeDiff(question.createTime)}

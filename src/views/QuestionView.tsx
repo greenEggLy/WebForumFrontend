@@ -24,7 +24,7 @@ const testQuestion: IQuestion = {
 	userStar: true,
 	userLike: false,
 	userDislike: false,
-	CreateTime: new Date(),
+	createTime: new Date().toTimeString(),
 	tags: [
 		{
 			id: 1,
@@ -83,6 +83,11 @@ const testAnswers:IAnswerBrief[]=[
 	}
 ]
 
+const parseQuestionURL = (url:string) => {
+	let n = url.lastIndexOf('/')
+	return url.substring(n + 1)
+}
+
 export const QuestionView = () => {
 	const [question, setQuestion] = useState<IQuestion>(EmptyQuestion);
 	const [answers, setAnswers] = useState<IAnswerBrief[]>([])
@@ -93,7 +98,7 @@ export const QuestionView = () => {
 	const [totalItems, setTotalItems] = useState<number>(0)
 	useEffect(() => {
 		const getQuestionById = async () => {
-			const quesId = getQuestionId(window.location.href);
+			const quesId = parseQuestionURL(window.location.href);
 			if (quesId === "") return;
 			const response = await Que_GetQuestion(quesId);
 			const ansResponse = await Que_GetQuesAnswer(quesId);
@@ -101,7 +106,7 @@ export const QuestionView = () => {
 				message.error("get question error");
 				return;
 			}
-			const pagedAnswers: ISearchAnswersResponse = await response.json()
+			const pagedAnswers: ISearchAnswersResponse = await ansResponse.json()
 			setQuestion(await response.json());
 			setAnswers(pagedAnswers.result)
 			setCurrentPage(pagedAnswers.currentPage)
@@ -118,7 +123,7 @@ export const QuestionView = () => {
 				<h1>{question.title}</h1>
 			</div>
 			<div className={"question-info"}>
-				{'Asked at ' + question.CreateTime + ' by ' + question.userCard.userName}
+				{'Asked at ' + question.createTime + ' by ' + question.userCard.userName}
 			</div>
 			<Space size={[0, 8]}>
 				{question.tags.map(tag => (

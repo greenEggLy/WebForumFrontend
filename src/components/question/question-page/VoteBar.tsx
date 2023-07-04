@@ -2,6 +2,7 @@ import {IAnswerBrief, IQuestion} from "../../../Interface.ts";
 import {Button} from "antd";
 import {CaretDownOutlined, CaretUpOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
 import {useEffect, useState} from "react";
+import { message } from "antd";
 import {Que_DislikeQuestion, Que_LikeQuestion, Que_StarQuestion} from "../../../service/QuestionService.ts";
 import "./VoteBar.css"
 interface Props {

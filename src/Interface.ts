@@ -79,7 +79,7 @@ export interface IAnswer {
 }
 
 export interface IQuestionCard {
-	Id: string;
+	id: string;
 	title: string;
 	voteNumber: number;
 	answerNumber: number;

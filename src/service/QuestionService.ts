@@ -17,7 +17,7 @@ export const Que_PostQuestion = async (
 };
 
 export const Que_GetQuestion = async (id: string) => {
-	const url = `${root}/question?id=${id}`;
+	const url = `${root}/question/${id}`;
 	return await fetch(url, getRequestInit());
 };
 
