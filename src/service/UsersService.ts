@@ -1,11 +1,9 @@
 import {getRequestInit, root} from "./global.ts";
 
-export const Users_FilterByTab = async (tab: string) => {
-	const url = `${root}/users?tab=${tab}`;
+export const Users_GetUsers = async (tab: string, currentPage: number, pageSize: number, keyword: string) => {
+	let url = `${root}/users?tab=${tab}&currentPage=${currentPage}&pageSize=${pageSize}`;
+	if (keyword !== "") {
+		url = `${url}&keyword=${keyword}`
+	}
 	return await fetch(url, getRequestInit());
 };
-
-export const Users_FilterByName = async (name: string) => {
-	const url = `${root}/users?name=${name}`
-	return await fetch(url, getRequestInit());
-}

@@ -11,7 +11,7 @@ const initialState: TagState = {
 }
 
 export const TagSlice = createSlice({
-	name: 'keyword',
+	name: 'tag',
 	initialState,
 	reducers: {
 		changeTag: (state, action: PayloadAction<string>) => {

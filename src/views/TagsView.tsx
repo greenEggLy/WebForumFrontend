@@ -3,12 +3,12 @@ import {useEffect, useState} from "react";
 import {ITag} from "../Interface.ts";
 import {TagCard} from "../components/tag/TagCard.tsx";
 import {Tag_GetAllTags} from "../service/TagService.ts";
-import {tag1, tag2, tag3} from "../constants/test"
 import './css/TagsView.css'
-import { SearchBox } from "../components/Home/SearchBox.tsx";
+import {SearchBox} from "../components/Home/SearchBox.tsx";
 
 export const TagsView = () => {
 	const [tags, setTags] = useState<ITag[]>([])
+	const [text, setText] = useState<string>("")
 
 	useEffect(() => {
 		getAllTags().catch(err => console.error(err))
@@ -31,7 +31,9 @@ export const TagsView = () => {
 			</div>
 			<div className={'tag-search-bar-container'}>
 				{/*<Search placeholder={"Search tags"}/>*/}
-				<SearchBox placeholder={'search'} onSearch={(s:string) => console.log(s)}/>
+				<SearchBox
+					placeholder={'search'}
+					category={"tag"} value={text} onChange={setText}/>
 			</div>
 			<div className={'tag-card-container'}>
 				<List

@@ -2,7 +2,7 @@ import {MarkDownEditor} from "../components/question/question-create/MarkDownEdi
 import {useEffect, useState} from "react";
 import {ITag} from "../Interface.ts";
 import {TagSelectItem} from "../components/tag/TagSelectItem.tsx";
-import {Tag_GetPossibleTags} from "../service/TagService.ts";
+import {Tag_SearchTag} from "../service/TagService.ts";
 import {message} from "antd";
 import {TagSelector} from "../components/tag/TagSelector.tsx";
 import {Que_PostQuestion} from "../service/QuestionService.ts";
@@ -19,7 +19,7 @@ export const AskQuestionView = () => {
 
 	useEffect(() => {
 		const getPossibleTags = setTimeout(async () => {
-			const response = await Tag_GetPossibleTags(tagText);
+			const response = await Tag_SearchTag(tagText);
 			if (!response.ok) message.error("get tags error!");
 			const json: Promise<ITag[]> = response.json();
 			setFoundTags(await json);
