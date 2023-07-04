@@ -46,36 +46,42 @@ const testQuestion: IQuestion = {
 		}
 	],
 	answers: [
-		{
-			id: '1',
-			userCard: {
-				id: '3',
-				userName: "test",
-				avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-			},
-			content: "我也想放暑假",
-			likeCount: 233,
-			dislikeCount: 2023,
-			userLike: false,
-			userDislike: true,
-			userStar: false,
-		},
-		{
-			id: '2',
-			userCard: {
-				id: '3',
-				userName: "test",
-				avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-			},
-			content: "还有18天就放暑假了",
-			likeCount: 233,
-			dislikeCount: 2023,
-			userLike: false,
-			userDislike: true,
-			userStar: false,
-		}
+
 	]
 }
+
+const testAnswers:IAnswerBrief[]=[
+	{
+		id: '1',
+		userCard: {
+			id: '3',
+			userName: "test",
+			avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+		},
+		content: "我也想放暑假",
+		likeCount: 233,
+		dislikeCount: 2023,
+		userLike: false,
+		userDislike: true,
+		userStar: false,
+		createTime: new Date()
+	},
+	{
+		id: '2',
+		userCard: {
+			id: '3',
+			userName: "test",
+			avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+		},
+		content: "还有18天就放暑假了",
+		likeCount: 233,
+		dislikeCount: 2023,
+		userLike: false,
+		userDislike: true,
+		userStar: false,
+		createTime: new Date(),
+	}
+]
 
 export const QuestionView = () => {
 	const [question, setQuestion] = useState<IQuestion>(EmptyQuestion);
@@ -95,8 +101,8 @@ export const QuestionView = () => {
 				message.error("get question error");
 				return;
 			}
-			setQuestion(await response.json());
 			const pagedAnswers: ISearchAnswersResponse = await response.json()
+			setQuestion(await response.json());
 			setAnswers(pagedAnswers.result)
 			setCurrentPage(pagedAnswers.currentPage)
 			setTotoalPages(pagedAnswers.totalPages)

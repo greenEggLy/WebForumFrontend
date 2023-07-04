@@ -1,4 +1,5 @@
-export function timeDiff(date:Date) {
+export function timeDiff(date_string:string) {
+  let date = new Date(Date.parse(date_string))
   // 获取当前时间的毫秒数
   let now = Date.now();
   // 获取参数时间的毫秒数

@@ -117,7 +117,7 @@ export const QuestionsView = () => {
 						{
 							questions.map(question => (
 									<div>
-										<QuestionCard question={question} click={clickQuestion}/>
+										<QuestionCard question={question}/>
 									</div>
 								)
 							)

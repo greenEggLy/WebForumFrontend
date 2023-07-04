@@ -18,29 +18,30 @@ export const QuestionCard = ({question}: Props,) => {
 		<div className={"question-card"}>
 			<div className={"question-popularity-container"}>
 				<Row>
-					<Col span={3}>{question.AnswerNumber + (question.AnswerNumber == 1 ? ' Answer' : ' Answers')}</Col>
-					<Col span={6}>{question.VoteNumber + (question.VoteNumber == 1 ? ' Like' : ' Likes')}</Col>
+					<Col span={3}>{question.answerNumber + (question.answerNumber == 1 ? ' Answer' : ' Answers')}</Col>
+					<Col span={6}>{question.voteNumber + (question.voteNumber == 1 ? ' Like' : ' Likes')}</Col>
 				</Row>
 			</div>
 			<div className={"question-card-title-container"}>
 				<a className={"question-card-title"} onClick={() => {
 					navigate(`/question/${question.Id}`)
-				}}>{question.Title}</a>
+				}}>{question.title}</a>
+				<div className={'question-time-container'}>
+					{timeDiff(question.createTime)}
+				</div>
 			</div>
 			<div className={'question-card-footer'}>
 				<div className={"question-card-tag-container"}>
 					{
-						question.Tags?
-							question.Tags.map(tag => {
+						question.tags?
+							question.tags.map(tag => {
 								return (<span> <TagShowItem tag_name={tag.content} /> </span>)
 							})
 							:
 							[]
 					}
 				</div>
-				<div className={'question-time-container'}>
-					{timeDiff(question.createTime)}
-				</div>
+
 			</div>
 		</div>
 	);
