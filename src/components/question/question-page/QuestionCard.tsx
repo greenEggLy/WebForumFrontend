@@ -3,18 +3,17 @@ import {TagShowItem} from "../../tag/TagShowItem.tsx";
 import './QuestionCard.css'
 import {Col, Row} from "antd";
 import {timeDiff} from "../../../utils/time.ts";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
 	question: IQuestionCard;
-	click: (id: number) => void;
 }
 
 // 问题缩略图
-export const QuestionCard = ({question, click}: Props,) => {
+export const QuestionCard = ({question}: Props,) => {
 
+	const navigate = useNavigate();
 	// 定义一个函数，接受一个Date类型的参数
-
-
 	return (
 		<div className={"question-card"}>
 			<div className={"question-popularity-container"}>
@@ -25,7 +24,7 @@ export const QuestionCard = ({question, click}: Props,) => {
 			</div>
 			<div className={"question-card-title-container"}>
 				<a className={"question-card-title"} onClick={() => {
-					click(question.Id)
+					navigate(`/question/${question.Id}`)
 				}}>{question.Title}</a>
 			</div>
 			<div className={'question-card-footer'}>

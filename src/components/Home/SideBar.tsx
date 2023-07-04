@@ -3,6 +3,8 @@ import {BulbOutlined, TagsOutlined, UserOutlined} from '@ant-design/icons';
 import type {MenuProps} from 'antd';
 import {Menu} from 'antd';
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {changeTab} from "../../features/tab/tabSlice.ts";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -38,9 +40,18 @@ const items: MenuProps['items'] = [
 
 export const SideBar: React.FC = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch()
+
 	const onClick: MenuProps['onClick'] = (e) => {
-		console.log('click ', e);
-		navigate('/' + e.key);
+		if (e.key === 'questions') {
+			dispatch(changeTab('heat'))
+			navigate('/questions')
+		}
+		if (e.key === 'unanswered') {
+			dispatch(changeTab('unanswered'))
+			navigate('/questions')
+		} else
+			navigate('/' + e.key);
 	};
 
 	return (

@@ -1,5 +1,5 @@
 export interface IUser {
-	id: number;
+	id: string;
 	username: string;
 	email: string;
 	create_time: Date;
@@ -31,6 +31,7 @@ export interface IUserBrief {
 	avatar: string;
 }
 
+// answers in question detail
 export interface IAnswerBrief {
 	id: string;
 	userCard: IUserBrief;
@@ -40,6 +41,7 @@ export interface IAnswerBrief {
 	userLike: boolean;
 	userDislike: boolean;
 	userStar: boolean;
+	createTime: Date;
 }
 
 export interface IQuestion {
@@ -68,7 +70,7 @@ export interface ITag {
 
 
 export interface IAnswer {
-	id: number;
+	id: string;
 	content: string;
 	create_time: Date;
 	user: IUser;
@@ -76,23 +78,8 @@ export interface IAnswer {
 	question: IQuestion;
 }
 
-
-// export interface IQuestion {
-// 	id: number;
-// 	title: string;
-// 	content: string;
-// 	create_time: Date;
-// 	last_edit: Date;
-// 	browse_time: number;
-// 	user: IUserCard;
-// 	tags: ITag[];
-// 	star_users: IUserCard[];
-// 	like_users: IUserCard[];
-// 	answers: IAnswerRecord[];
-// }
-
 export interface IQuestionCard {
-	Id: number;
+	Id: string;
 	Title: string;
 	VoteNumber: number;
 	AnswerNumber: number;
@@ -101,13 +88,13 @@ export interface IQuestionCard {
 }
 
 export interface IAnswerRecord {
-	id: number;
+	id: string;
 	content: string;
 	create_time: Date;
 }
 
 export interface IAnswerCard {
-	id: number;
+	id: string;
 	content: string;
 	create_time: Date;
 	question: string; // question title
@@ -115,7 +102,7 @@ export interface IAnswerCard {
 }
 
 export interface IUserCard {
-	id: number;
+	id: string;
 	avatar: string;
 	username: string;
 	location: string;
@@ -125,7 +112,7 @@ export interface IUserCard {
 }
 
 export interface IUserFollow {
-	id: number;
+	id: string;
 	avatar: string;
 	username: string;
 }
@@ -137,16 +124,24 @@ export interface ISearchQuestionsResponse {
 	totalItems: number; // 所有满足条件的结果数
 }
 
+export interface ISearchAnswersResponse {
+	result: IAnswerBrief[];
+	currentPage: number;
+	totalPages: number;
+	totalItems: number;
+}
+
 export interface ISearchUserCardResponse {
 	result: IUserCard[];
 	currentPage: number;
 	totalPages: number;
 	totalItems: number; // 所有满足条件的结果数
 }
+
 //用于用户数据统计时的接口
 //需要从后端返回一个格式为{id,Tag内容,涉及数目}的列表
 export interface IStatisticTag {
-	id:number;
+	id: number;
 	content: string;
 	number: number;
 }

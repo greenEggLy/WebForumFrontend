@@ -1,13 +1,13 @@
-import {useParams} from "react-router-dom";
 import {CSSProperties, useEffect, useState} from "react";
-import { IQuestion, IQuestionCard } from "../Interface.ts";
+import {IAnswerBrief, IQuestion, ISearchAnswersResponse} from "../Interface.ts";
 import {EmptyQuestion} from "../data/EmptyObject.ts";
-import {Que_GetQuestion} from "../service/QuestionService.ts";
-import {message, Space, Tag} from "antd";
+import {Que_GetQuesAnswer, Que_GetQuestion} from "../service/QuestionService.ts";
+import {message, Pagination, Space, Tag} from "antd";
 import {VoteBar} from "../components/question/question-page/VoteBar.tsx";
 import {AnswerContent} from "../components/question/question-page/AnswerContent.tsx";
 import {Editor} from "@bytemd/react";
 import "./css/QuestionView.css"
+import {getQuestionId} from "../utils/path.ts";
 
 const testQuestion: IQuestion = {
 	id: '3',
@@ -77,25 +77,34 @@ const testQuestion: IQuestion = {
 	]
 }
 
-
-
 export const QuestionView = () => {
-	const params = useParams();
 	const [question, setQuestion] = useState<IQuestion>(EmptyQuestion);
+	const [answers, setAnswers] = useState<IAnswerBrief[]>([])
 	const [answer, setAnswer] = useState<string>("");
+	const [currentPage, setCurrentPage] = useState<number>(0)
+	const [pageSize, setPageSize] = useState<number>(20);
+	const [, setTotoalPages] = useState<number>(0)
+	const [totalItems, setTotalItems] = useState<number>(0)
 	useEffect(() => {
 		const getQuestionById = async () => {
-			if (!params.quesid) return;
-			const response = await Que_GetQuestion(params.quesid);
-			if (!response.ok) {
+			const quesId = getQuestionId(window.location.href);
+			if (quesId === "") return;
+			const response = await Que_GetQuestion(quesId);
+			const ansResponse = await Que_GetQuesAnswer(quesId);
+			if (!response.ok || !ansResponse.ok) {
 				message.error("get question error");
 				return;
 			}
 			setQuestion(await response.json());
+			const pagedAnswers: ISearchAnswersResponse = await response.json()
+			setAnswers(pagedAnswers.result)
+			setCurrentPage(pagedAnswers.currentPage)
+			setTotoalPages(pagedAnswers.totalPages)
+			setTotalItems(pagedAnswers.totalItems)
 		};
 		getQuestionById().catch((err) => console.error(err));
-		setQuestion(testQuestion)
-	}, [params.quesid]);
+		//setQuestion(testQuestion)
+	}, []);
 
 	return (
 		<div className={'container'}>
@@ -124,7 +133,7 @@ export const QuestionView = () => {
 			</div>
 			<div className={"question-answers"}>
 				{
-					question.answers.map(answer => (
+					answers.map(answer => (
 						<div className={'question-container'}>
 							<hr color='#f1f1f1'/>
 							<div style={styles.voteBarContainer}>
@@ -136,6 +145,17 @@ export const QuestionView = () => {
 						</div>
 					))
 				}
+				<Pagination total={totalItems} defaultPageSize={20} current={currentPage} pageSize={pageSize}
+							onChange={async (page, pageSize) => {
+								setCurrentPage(page);
+								setPageSize(pageSize)
+								const response = await Que_GetQuesAnswer(getQuestionId(window.location.href), page, pageSize)
+								if (!response.ok) return;
+								const answers: ISearchAnswersResponse = await response.json();
+								setCurrentPage(answers.currentPage)
+								setTotoalPages(answers.totalPages)
+								setTotalItems(answers.totalItems)
+							}}/>
 			</div>
 			<div className={"question-answer-input"}>
 				<Editor value={answer} onChange={(v) => setAnswer(v)}/>

@@ -21,6 +21,13 @@ export const Que_GetQuestion = async (id: string) => {
 	return await fetch(url, getRequestInit());
 };
 
+export const Que_GetQuesAnswer = async (id: string, currentPage?: number, pageSize?: number) => {
+	if (!currentPage) currentPage = 1;
+	if (!pageSize) pageSize = 15;
+	const url = `${root}/question/${id}/answers?currentPage=${currentPage}&pageSize=${pageSize}`
+	return await fetch(url, getRequestInit());
+}
+
 export const Que_LikeQuestion = async (id: string) => {
 	const url = `${root}/question/like`
 	const body = JSON.stringify({Id: id});

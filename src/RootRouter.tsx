@@ -12,22 +12,23 @@ import {QuestionView} from "./views/QuestionView.tsx";
 export const RootRouter = () => {
 	return (
 		<Routes>
-			<Route index path={"/login"} element={<LoginView/>}/>
-			<Route element={<SignupView/>} path={"/sign-up"}/>
+			<Route id={"login"} index path={"/login"} element={<LoginView/>}/>
+			<Route id={"signup"} element={<SignupView/>} path={"/sign-up"}/>
 			<Route
+				id={"main"}
 				path={"/"}
 				element={<HomeView/>}
 				children={[
-					<Route element={<QuestionsView/>} path={"/questions/*"}>
+					<Route id={"questions"} element={<QuestionsView/>} path={"/questions/*"}>
 						{/*<Route element={<TagQuestionsView/>} path={"questions/tagged/:content"}></Route>*/}
 					</Route>,
-					<Route element={<TagsView/>} path={"/tags"}/>,
-					<Route element={<UsersView/>} path={"/users"}/>,
-					<Route element={<UserInfoView/>} path={"/user/:userid"}/>,
-					<Route element={<QuestionView/>} path={"/question/:quesid"}/>,
+					<Route id={'tags'} element={<TagsView/>} path={"/tags"}/>,
+					<Route id={'users'} element={<UsersView/>} path={"/users"}/>,
+					<Route id={'user'} element={<UserInfoView/>} path={"/user/:userid"}/>,
+					<Route id={'question'} element={<QuestionView/>} path={"/question/:quesid"}/>,
 				]}
 			/>
-			<Route element={<AskQuestionView/>} path={"/create-question"}/>
+			<Route id={'create'} element={<AskQuestionView/>} path={"/create-question"}/>
 		</Routes>
 	);
 };

@@ -3,10 +3,9 @@ import {getRequestInit, root} from "./global.ts";
 
 const questionsRoot = `${root}/question`;
 
-export const QuesGet = async (tab?: string | null, currentPage?: number | null, pageSize?: number | null, tagName?: string | null, keyword?: string | null) => {
-	if (!tab) tab = "heat";
+export const QuesGet = async (tab: string, currentPage?: number | null, pageSize?: number | null, tagName?: string | null, keyword?: string | null) => {
 	if (!currentPage) currentPage = 0;
-	if (!pageSize) pageSize = 30;
+	if (!pageSize) pageSize = 20;
 	let url = questionsRoot;
 	if (tagName && tagName !== "") {
 		url = `${url}/tagged/${tagName}`;

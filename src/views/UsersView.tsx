@@ -3,13 +3,16 @@
 import {IUserCard} from "../Interface.ts";
 import {useEffect, useState} from "react";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {Divider,List} from "antd";
+import {Divider, List, message} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
-import {UserList} from "../constants/test.ts";
-import { message } from "antd";
 import "./css/UsersView.css"
-import { SearchBox } from "../components/Home/SearchBox.tsx";
-import { Users_FilterByName, Users_FilterByTab } from "../service/UsersService.ts";
+import {SearchBox} from "../components/Home/SearchBox.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../app/store.ts";
+import {changeUserTab, IUserTab} from "../features/tab/userTabSlice.ts";
+import {Users_GetUsers} from "../service/UsersService.ts";
+import {changeKeyword} from "../features/keyword/keywordSlice.ts";
+import {changePage} from "../features/page/pageSlice.ts";
 
 
 export interface ITab {
@@ -17,44 +20,39 @@ export interface ITab {
 	title: string;
 }
 
-const tabs: ITab[] = [
-	{tab: "reputation", title: "Reputation"},
-	{tab: "newusers", title: "New Users"},
-	{tab: "voters", title: "Voters"},
-	{tab: "editors", title: "Editors"},
-	{tab: "moderators", title: "Moderators"},
+const tabs: IUserTab[] = [
+	{tab: "reputation", title: "All Users"},
+	{tab: "newuser", title: "All Users"},
+	{tab: "editor", title: "All Users"},
 ];
 // 用户搜索,总览
 export const UsersView = () => {
-	const [users, setUsers] = useState<IUserCard[]>([]);
-	const [filterText, setFilterText] = useState<string>("")
-	// @ts-ignore
-	// const getUserByTab = async (tab: ITab) => {
-	// 	setUsers(UserList);
-	// };
+	const userTab = useSelector((state: RootState) => state.userTab)
+	const page = useSelector((state: RootState) => state.page)
+	const [text, setText] = useState<string>('')
 
-	const getUserByTab = async (tab: ITab) => {
-		const response = await Users_FilterByTab(tab.tab);
+	const dispatch = useDispatch();
+
+	const [users, setUsers] = useState<IUserCard[]>([]);
+	
+	const getUserByTab = async (tab: IUserTab) => {
+		const response = await Users_GetUsers(tab.tab, page.currentPage, page.pageSize, text);
 		if (!response.ok) message.error(`get user by ${tab} error!`);
 		const json: Promise<IUserCard[]> = response.json();
 		setUsers(await json);
 	};
+
 	useEffect(() => {
-		//getUserByTab(tabs[0]).catch(err => console.error(err))
-		setUsers(UserList)
+		dispatch(changeKeyword(""))
+		dispatch(changeUserTab(tabs[0].tab))
+		dispatch(changePage({currentPage: 0, pageSize: 20}))
+		getUserByTab(tabs[0]).catch(err => console.error(err))
 	}, [])
 
 	useEffect(() => {
-		const getUsers = setTimeout(async () => {
-			const response = await Users_FilterByName(filterText)
-			if (!response.ok) {
-				message.error("暂不能获取用户信息")
-				return;
-			}
-			setUsers(await response.json())
-		}, 2000)
-		return () => clearTimeout(getUsers)
-	}, [filterText])
+		dispatch(changeKeyword(""))
+		dispatch(changePage({currentPage: 0, pageSize: 20}))
+	}, [userTab])
 
 	return (
 		<div className={'users-view-container'}>
@@ -62,23 +60,19 @@ export const UsersView = () => {
 				<h2>Users</h2>
 			</div>
 			<div className={"search-bar-container"}>
-				{/*<Search*/}
-				{/*	id="userfilter"*/}
-				{/*	name="userfilter"*/}
-				{/*	className="filter-input"*/}
-				{/*	autoComplete="off"*/}
-				{/*	placeholder="Filter by user"*/}
-				{/*	value={filterText}*/}
-				{/*	onChange={e => setFilterText(e.target.value)}*/}
-				{/*>*/}
-				{/*</Search>*/}
-				<SearchBox placeholder={'Filter by user'} onSearch={(s:string) => setFilterText(s)} />
-					<FilterTabItem tabs={tabs} func={getUserByTab}/>
+				<SearchBox
+					placeholder={'Filter by user'}
+					category={"user"}
+					value={text}
+					onChange={setText}
+				/>
+				{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+				{/*@ts-ignore*/}
+				<FilterTabItem tabs={tabs} func={getUserByTab} setTab={(text) => dispatch(changeUserTab(text))}/>
 			</div>
 			<Divider style={{marginBottom: '0px', marginTop: '2px'}}/>
 			<div className={"user-card-container"}>
 				<List
-
 					grid={{
 						gutter: 16,
 						column: 4
