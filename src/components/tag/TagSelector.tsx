@@ -19,7 +19,11 @@ export const TagSelector = ({
 								setTagsFound,
 								setQuestionTags,
 							}: Props) => {
-	if (tagsFound.length === 0) return <></>
+	console.log(tagsFound)
+	if (tagsFound.length == 0) {
+		console.log("nothing found here!")
+		return <></>
+	}
 	return (
 		<List
 			size="small"

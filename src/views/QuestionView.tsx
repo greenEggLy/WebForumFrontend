@@ -2,6 +2,7 @@ import {CSSProperties, useEffect, useState} from "react";
 import {IAnswerBrief, IQuestion, ISearchAnswersResponse} from "../Interface.ts";
 import {EmptyQuestion} from "../data/EmptyObject.ts";
 import {Que_GetQuesAnswer, Que_GetQuestion} from "../service/QuestionService.ts";
+import {Ans_PostAnswer} from "../service/AnswerService.ts";
 import {message, Pagination, Space, Tag} from "antd";
 import {VoteBar} from "../components/question/question-page/VoteBar.tsx";
 import {AnswerContent} from "../components/question/question-page/AnswerContent.tsx";
@@ -88,6 +89,8 @@ const parseQuestionURL = (url:string) => {
 	return url.substring(n + 1)
 }
 
+
+
 export const QuestionView = () => {
 	const [question, setQuestion] = useState<IQuestion>(EmptyQuestion);
 	const [answers, setAnswers] = useState<IAnswerBrief[]>([])
@@ -96,6 +99,9 @@ export const QuestionView = () => {
 	const [pageSize, setPageSize] = useState<number>(20);
 	const [, setTotoalPages] = useState<number>(0)
 	const [totalItems, setTotalItems] = useState<number>(0)
+	const postAnswer = () => {
+		Ans_PostAnswer(answer, question.id)
+	}
 	useEffect(() => {
 		const getQuestionById = async () => {
 			const quesId = parseQuestionURL(window.location.href);
@@ -170,6 +176,11 @@ export const QuestionView = () => {
 			</div>
 			<div className={"question-answer-input"}>
 				<Editor value={answer} onChange={(v) => setAnswer(v)}/>
+			</div>
+			<div className={"post-answer-button-container"} onClick={postAnswer}>
+				<div className={"post-answer-button"}>
+					发布答案
+				</div>
 			</div>
 		</div>
 	);

@@ -21,8 +21,8 @@ export const AskQuestionView = () => {
 		const getPossibleTags = setTimeout(async () => {
 			const response = await Tag_SearchTag(tagText);
 			if (!response.ok) message.error("get tags error!");
-			const json: Promise<ITag[]> = response.json();
-			setFoundTags(await json);
+			const json = await response.json();
+			setFoundTags(json);
 		}, 2000)
 		return () => clearTimeout(getPossibleTags)
 	}, [tagText])
@@ -57,10 +57,13 @@ export const AskQuestionView = () => {
 					<text style={{fontWeight: 'bold'}}>问题标签（至多5个）</text>
 					<div className={"chosen-tags"}>
 						{
+							questionTags?
 							questionTags.map(item => {
 								return <span><TagSelectItem tag={item} tags={questionTags}
 															setTags={setQuestionTags}/></span>
 							})
+								:
+								[]
 						}
 					</div>
 					<input

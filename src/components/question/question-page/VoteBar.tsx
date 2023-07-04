@@ -25,7 +25,7 @@ export const VoteBar = ({content}: Props) => {
 		else if (content.userDislike) setStatus(2);
 		else setStatus(0)
 	}, [content.userDislike, content.userLike])
-	const getColor = (button: string): string => {
+	const getColor = (button: "up" | "down" | "none"): string => {
 		if (button === "up") {
 			if (status === 1) return buttonColor[1];
 			else return buttonColor[0]
@@ -82,13 +82,13 @@ export const VoteBar = ({content}: Props) => {
 	return (
 		<div className="question-vote-bar">
 			<Button className={"vote-button"} color={getColor("up")} onClick={() => clickLike()}>
-				<CaretUpOutlined className={'icon'}/>
+				<CaretUpOutlined className={'icon'} style={{color: status == 1 ? buttonColor[1] : buttonColor[0]}}/>
 			</Button>
 			<div className="vote-number">{likeCount}</div>
 			<Button className={"vote-button"} color={getColor("down")} onClick={() => clickDislike()}>
-				<CaretDownOutlined className={'icon'}/>
+				<CaretDownOutlined className={'icon'} style={{color: status == 2 ? buttonColor[2] : buttonColor[0]}}/>
 			</Button>
-			<Button className={"star-button"} color={getColor("star")} onClick={() => clickStar()}>
+			<Button className={"star-button"} onClick={() => clickStar()}>
 				{star ? <StarFilled className={'icon-star'}/> : <StarOutlined className={"icon"}/>}
 			</Button>
 		</div>

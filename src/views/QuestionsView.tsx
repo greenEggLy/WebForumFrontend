@@ -108,6 +108,9 @@ export const QuestionsView = () => {
 					<h2>{title}</h2>
 				</div>
 				<div className="filter-container">
+					<div className="post-question">
+						<a href='/create-question' style={{color:'white'}}>发布问题</a>
+					</div>
 					{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
 					{/*@ts-ignore*/}
 					<FilterTabItem tabs={Tabs} func={ChangeTab} setTab={(text) => dispatch(changeTab(text))}/>
