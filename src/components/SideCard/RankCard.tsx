@@ -27,7 +27,7 @@ export const QuestionContent = ({question, click}: Props,) => {
 
 			<div className={"question-card-title-container"}>
 				<a className={"question-card-title"} onClick={() => {
-					click(question.Id)
+					click(question.id)
 				}}>{question.Title}</a>
 			</div>
 			<div className={"question-popularity-container"}>

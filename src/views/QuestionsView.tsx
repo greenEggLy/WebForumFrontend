@@ -37,7 +37,6 @@ export const QuestionsView = () => {
 	const [questions, setQuestions] = useState<IQuestionCard[]>([])
 	const [hotQuestions] = useState<IQuestionCard[]>([])
 	useEffect(() => {
-		console.log('haha')
 		const tagName = getTagName(window.location.href);
 		dispatch(changeTag(tagName));
 		dispatch(changePage({currentPage: 0, pageSize: 20}))
@@ -77,6 +76,7 @@ export const QuestionsView = () => {
 			return
 		}
 		const json: ISearchQuestionsResponse = await response.json();
+		console.table(json.result)
 		setQuestions(json.result);
 		setTotalItems(json.totalItems);
 		dispatch(changePage({pageSize: page.pageSize, currentPage: json.currentPage}))

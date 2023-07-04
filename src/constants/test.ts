@@ -39,7 +39,7 @@ const User2: IUserCard = {
 }
 
 export const testQuestion1: IQuestionCard = {
-	Id: 1,
+	id: 1,
 	Title: '为什么我还没放暑假？',
 	createTime: new Date(2023, 5, 27, 16, 50, 0),
 	Tags: [
@@ -51,7 +51,7 @@ export const testQuestion1: IQuestionCard = {
 }
 
 export const testQuestion2: IQuestionCard = {
-	Id: 2,
+	id: 2,
 	Title: '为什么别人都放暑假了？',
 	createTime: new Date(2023, 5, 27, 10, 50, 0),
 	Tags: [
@@ -63,7 +63,7 @@ export const testQuestion2: IQuestionCard = {
 }
 
 export const testQuestion3: IQuestionCard = {
-	Id: 3,
+	id: 3,
 	Title: '我啥时候才能放暑假？',
 	createTime: new Date(2023, 5, 27, 10, 50, 0),
 	Tags: [
@@ -76,29 +76,29 @@ export const testQuestion3: IQuestionCard = {
 
 export const UserList: IUserCard[] = [User1, User2, User1, User2, User1, User2, User1, User2];
 
-export const STag1:IStatisticTag={
-	id:1,
-	content:'睡觉',
-	number:123
+export const STag1: IStatisticTag = {
+	id: 1,
+	content: '睡觉',
+	number: 123
 }
-export const STag2:IStatisticTag={
-	id:2,
-	content:'编程',
-	number:80
+export const STag2: IStatisticTag = {
+	id: 2,
+	content: '编程',
+	number: 80
 }
-export const STag3:IStatisticTag={
-	id:3,
-	content:'爬行',
-	number:22
+export const STag3: IStatisticTag = {
+	id: 3,
+	content: '爬行',
+	number: 22
 }
-export const STag4:IStatisticTag={
-	id:4,
-	content:'困',
-	number:40
+export const STag4: IStatisticTag = {
+	id: 4,
+	content: '困',
+	number: 40
 }
-export const STag5:IStatisticTag={
-	id:5,
-	content:'精神失常',
-	number:20
+export const STag5: IStatisticTag = {
+	id: 5,
+	content: '精神失常',
+	number: 20
 }
-export const StatisticData:IStatisticTag[]=[STag1,STag2,STag3,STag4,STag5]
+export const StatisticData: IStatisticTag[] = [STag1, STag2, STag3, STag4, STag5]

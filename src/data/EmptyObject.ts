@@ -1,7 +1,7 @@
 import {IAnswerBrief, IQuestion, ITag, IUser, IUserBrief, IUserCard} from "../Interface.ts";
 
 export const EmptyUser: IUser = {
-	id: 0,
+	id: "0",
 	username: "",
 	email: "",
 	create_time: new Date(),
@@ -29,7 +29,7 @@ export const EmptyUserBrief: IUserBrief = {
 
 
 export const EmptyUserCard: IUserCard = {
-	id: 0,
+	id: "0",
 	avatar: "",
 	username: "",
 	location: "",
@@ -44,8 +44,12 @@ export const EmptyAnswerBrief: IAnswerBrief = {
 	content: "",
 	likeCount: 0,
 	dislikeCount: 0,
-	userLike: false,
-	userDislike: false,
+	userAction: {
+		userStar: false,
+		userDislike: false,
+		userLike: false
+	},
+	createTime: new Date().toTimeString()
 }
 
 export const EmptyQuestion: IQuestion = {
@@ -56,14 +60,19 @@ export const EmptyQuestion: IQuestion = {
 	starCount: 0,
 	likeCount: 0,
 	dislikeCount: 0,
-	userStar: false,
-	userLike: false,
-	userDislike: false,
+	userAction: {
+		userStar: false,
+		userDislike: false,
+		userLike: false
+	},
+	createTime: new Date().toTimeString(),
 	answers: [],
 	tags: []
 };
 
 export const EmptyTag: ITag = {
 	id: 0,
-	content: ""
+	content: "",
+	description: "",
+	question_number: 0,
 }

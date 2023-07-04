@@ -1,9 +1,9 @@
 // noinspection JSUnusedLocalSymbols
 
-import {IUserCard} from "../Interface.ts";
+import {ISearchUserCardResponse, IUserCard} from "../Interface.ts";
 import {useEffect, useState} from "react";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
-import {Divider, List, message} from "antd";
+import {Divider, List, message, Pagination} from "antd";
 import {UserCardItem} from "../components/users/UserCardItem.tsx";
 import "./css/UsersView.css"
 import {SearchBox} from "../components/Home/SearchBox.tsx";
@@ -12,7 +12,7 @@ import {RootState} from "../app/store.ts";
 import {changeUserTab, IUserTab} from "../features/tab/userTabSlice.ts";
 import {Users_GetUsers} from "../service/UsersService.ts";
 import {changeKeyword} from "../features/keyword/keywordSlice.ts";
-import {changePage} from "../features/page/pageSlice.ts";
+import {Tag_SearchTag} from "../service/TagService.ts";
 
 
 export interface ITab {
@@ -28,15 +28,19 @@ const tabs: IUserTab[] = [
 // 用户搜索,总览
 export const UsersView = () => {
 	const userTab = useSelector((state: RootState) => state.userTab)
-	const page = useSelector((state: RootState) => state.page)
 	const [text, setText] = useState<string>('')
+
+	const [currentPage, setCurrentPage] = useState<number>(0)
+	const [pageSize, setPageSize] = useState<number>(20);
+	const [, setTotalPages] = useState<number>(0)
+	const [totalItems, setTotalItems] = useState<number>(0)
 
 	const dispatch = useDispatch();
 
 	const [users, setUsers] = useState<IUserCard[]>([]);
-	
+
 	const getUserByTab = async (tab: IUserTab) => {
-		const response = await Users_GetUsers(tab.tab, page.currentPage, page.pageSize, text);
+		const response = await Users_GetUsers(tab.tab, currentPage, pageSize, text);
 		if (!response.ok) message.error(`get user by ${tab} error!`);
 		const json: Promise<IUserCard[]> = response.json();
 		setUsers(await json);
@@ -45,13 +49,11 @@ export const UsersView = () => {
 	useEffect(() => {
 		dispatch(changeKeyword(""))
 		dispatch(changeUserTab(tabs[0].tab))
-		dispatch(changePage({currentPage: 0, pageSize: 20}))
 		getUserByTab(tabs[0]).catch(err => console.error(err))
 	}, [])
 
 	useEffect(() => {
 		dispatch(changeKeyword(""))
-		dispatch(changePage({currentPage: 0, pageSize: 20}))
 	}, [userTab])
 
 	return (
@@ -85,5 +87,16 @@ export const UsersView = () => {
 					)}
 				/>
 			</div>
+			<Pagination defaultPageSize={20} pageSize={pageSize} total={totalItems} current={currentPage}
+						onChange={async (page, pageSize) => {
+							const response = await Tag_SearchTag(page, pageSize, text)
+							if (!response.ok) {
+								message.error(response.statusText)
+								return;
+							}
+							const json: ISearchUserCardResponse = await response.json();
+							setUsers(json.result)
+							setCurrentPage(json.currentPage)
+						}}/>
 		</div>)
 }

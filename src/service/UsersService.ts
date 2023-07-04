@@ -5,5 +5,5 @@ export const Users_GetUsers = async (tab: string, currentPage: number, pageSize:
 	if (keyword !== "") {
 		url = `${url}&keyword=${keyword}`
 	}
-	return await fetch(url, getRequestInit());
+	return await fetch(url, await getRequestInit());
 };

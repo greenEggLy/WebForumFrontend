@@ -1,10 +1,10 @@
 import {IAnswerBrief, IQuestion} from "../../../Interface.ts";
-import {Button} from "antd";
+import {Button, message} from "antd";
 import {CaretDownOutlined, CaretUpOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
 import {useEffect, useState} from "react";
-import { message } from "antd";
 import {Que_DislikeQuestion, Que_LikeQuestion, Que_StarQuestion} from "../../../service/QuestionService.ts";
 import "./VoteBar.css"
+
 interface Props {
 	content: IQuestion | IAnswerBrief;
 }
@@ -17,14 +17,19 @@ const buttonColor = [
 
 // 问题点赞
 export const VoteBar = ({content}: Props) => {
+	// 0 none, 1 up, 2 down
 	const [status, setStatus] = useState<0 | 1 | 2>(0)
-	const [likeCount, setLikeCount] = useState<number>(content.likeCount);
-	const [star, setStar] = useState<boolean>(content.userStar)
+	const [likeCount, setLikeCount] = useState<number>(content.likeCount - content.dislikeCount);
+	const [star, setStar] = useState<boolean>(content.userAction.userStar)
 	useEffect(() => {
-		if (content.userLike) setStatus(1);
-		else if (content.userDislike) setStatus(2);
+		console.table(content)
+		if (content.userAction.userLike) setStatus(1);
+		else if (content.userAction.userDislike) setStatus(2);
 		else setStatus(0)
-	}, [content.userDislike, content.userLike])
+		setStar(content.userAction.userStar)
+		setLikeCount(content.likeCount - content.dislikeCount)
+	}, [content])
+
 	const getColor = (button: "up" | "down" | "none"): string => {
 		if (button === "up") {
 			if (status === 1) return buttonColor[1];
@@ -39,43 +44,48 @@ export const VoteBar = ({content}: Props) => {
 	}
 
 	const clickLike = async () => {
+		const response = await Que_LikeQuestion(content.id)
+		if (!response.ok) {
+			message.error(`like failed: ${response.statusText}`)
+			return;
+		}
 		if (status === 1) {
 			setLikeCount(likeCount - 1)
 			setStatus(0)
+		} else if (status === 2) {
+			setLikeCount(likeCount + 2)
+			setStatus(1)
 		} else {
 			setLikeCount(likeCount + 1);
 			setStatus(1);
 		}
-		const response = await Que_LikeQuestion(content.id)
-		if (!response.ok) {
-			message.error("like fail")
-			return;
-		}
 	}
 
 	const clickDislike = async () => {
-		if (status === 1) {
-			setLikeCount(likeCount - 1)
-			setStatus(2)
-		} else if (status === 0) {
-			setStatus(2)
-		} else {
-			setStatus(0)
-		}
 		const response = await Que_DislikeQuestion(content.id)
 		if (!response.ok) {
-			message.error("dislike fail")
+			message.error(`dislike failed: ${response.statusText}`)
 			return;
+		}
+		if (status === 1) {
+			setLikeCount(likeCount - 2)
+			setStatus(2)
+		} else if (status === 0) {
+			setLikeCount(likeCount - 1)
+			setStatus(2)
+		} else {
+			setLikeCount(likeCount + 1)
+			setStatus(0)
 		}
 	}
 
 	const clickStar = async () => {
-		setStar(!star);
 		const response = await Que_StarQuestion(content.id)
 		if (!response.ok) {
-			message.error("star fail")
+			message.error(`star failed: ${response.statusText}`)
 			return;
 		}
+		setStar(!star);
 	}
 
 

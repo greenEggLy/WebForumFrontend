@@ -1,35 +1,37 @@
 //export const root = "/api";
-//export const root = "http://121.37.158.48:5000/api"
+// export const root = "http://192.168.137.1:5000/api"
+import {GetToken} from "./LoginService.ts";
+
 export const root = "http://localhost:5173/api"
 // export const;
 
-export const getRequestInit = (): RequestInit => {
-	const token = localStorage.getItem("token");
+export const getRequestInit = async (): Promise<RequestInit> => {
+	const token = await GetToken();
 	return {
 		method: "GET",
 		headers: {
-			Authentication: `Bearer ${token}`,
+			Authorization: `Bearer ${token}`,
 		},
 	};
 };
 
-export const emptyPostRequestInit = (): RequestInit => {
-	// const token = localStorage.getItem("token");
+export const emptyPostRequestInit = async (): Promise<RequestInit> => {
+	const token = await GetToken();
 	return {
 		method: "POST",
 		headers: {
-			// Authentication: `Bearer ${token}`,
+			Authorization: `Bearer ${token}`,
 		}
 	}
 }
 
-export const postRequestInit = (content: string | FormData): RequestInit => {
-	// const token = localStorage.getItem("token");
+export const postRequestInit = async (content: string | FormData): Promise<RequestInit> => {
+	const token = await GetToken();
 	return {
 		method: "POST",
 		body: content,
 		headers: {
-			// Authentication: `Bearer ${token}`,
+			Authorization: `Bearer ${token}`,
 			"Content-Type":
 				typeof content === "string"
 					? "application/json"

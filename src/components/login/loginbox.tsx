@@ -1,60 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Checkbox, Form, Input} from 'antd';
+import {Button, Checkbox, Form, Input, message} from 'antd';
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import color from "../../constants/color.ts";
 import Logo from '../../assets/logos/biglogo.png';
-import {history} from "../../service/History.ts";
 import {useNavigate} from "react-router-dom";
+import {GetToken, LoginService} from "../../service/LoginService.ts";
+import {ILoginResponse} from "../../Interface.ts";
 
 const LoginForm: React.FC = () => {
 	const [form] = Form.useForm();
 	const [remember, setRemember] = useState(false);
-	const [finish, setFinish] = useState(false);
 	const navigate = useNavigate();
-	// const getToken = async () => {
-	//     return await AsyncStorage.getItem("token");
-	// };
 	useEffect(() => {
 		const autologin = async () => {
-			// if (await getToken()) {
-			//     setFinish(true);
-			//     navigation.navigate("Home");
-			// }
-			history.push('/');
-			setFinish(true);
+			const token = await GetToken();
+			if (token == '') return;
+			navigate('/questions')
 		};
-		autologin();
+		autologin().catch(err => console.error(err));
 	}, []);
 
-
 	const handleLogin = async () => {
-		// const username = form.getFieldValue(["username"]);
-		// const password = form.getFieldValue(["password"]);
-		// login_user(username, password).then(async (res) => {
-		//     if (res.access) {
-		//         // console.log(res.access);
-		//         await AsyncStorage.multiSet([
-		//             ["token", res.access],
-		//             ["refresh", res.refresh],
-		//         ]).then(navigation.navigate("Home"));
-		//         // navigation.navigate("Home");
-		//     } else {
-		//         // 处理未成功获取到token的情况
-		//         setPassword("");
-		//     }
-		// });
+		const username = form.getFieldValue(["username"]);
+		const password = form.getFieldValue(["password"]);
+		const response = await LoginService(username, password)
+		if (!response.ok) {
+			message.error(response.statusText)
+			return;
+		}
+		const json: ILoginResponse = await response.json();
+		localStorage.setItem('accessToken', json.accessToken)
+		localStorage.setItem('refreshToken', json.refreshToken)
+		localStorage.setItem('expire', json.expire)
+		navigate('/questions')
 	};
-	const doReg = () => {
-		navigate('/sign-up')
-	};
-	const findAccount = () => {
-	};
-	if (!finish) return (
-		<a>waiting......</a>
-	);
+
 	return (
-		<div className={'login-card'}
-			 style={{alignItems: "center", marginTop: '10%', marginLeft: '5%', marginRight: '5%'}}>
+		<div className={'login-card'} style={
+			{alignItems: "center", marginTop: '10%', marginLeft: '5%', marginRight: '5%'}
+		}>
 			<h1 style={{textAlign: "center", color: color.dgrayblue}}>登录</h1>
 			<Form form={form} onSubmitCapture={handleLogin} style={{marginBottom: '15%'}}>
 				<Form.Item
@@ -95,13 +79,15 @@ const LoginForm: React.FC = () => {
 
 				<Form.Item
 				>
-					<a style={{fontSize: 14, textDecorationLine: "underline", alignSelf: "flex-start", marginRight: 5}}
-					   onClick={doReg}>
+					<a
+						style={{fontSize: 14, textDecorationLine: "underline", alignSelf: "flex-start", marginRight: 5}}
+						onClick={() => navigate('sign-up')}>
 						免费注册
 					</a>
 
-					<a style={{fontSize: 14, textDecorationLine: "underline", alignSelf: "flex-end"}}
-					   onClick={findAccount}>
+					<a
+						style={{fontSize: 14, textDecorationLine: "underline", alignSelf: "flex-end"}}
+						onClick={() => alert("你先别急")}>
 						找回密码
 					</a>
 				</Form.Item>

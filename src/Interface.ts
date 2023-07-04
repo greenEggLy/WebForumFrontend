@@ -38,10 +38,8 @@ export interface IAnswerBrief {
 	content: string;
 	likeCount: number;
 	dislikeCount: number;
-	userLike: boolean;
-	userDislike: boolean;
-	userStar: boolean;
-	createTime: Date;
+	userAction: IUserAction;
+	createTime: string;
 }
 
 export interface IQuestion {
@@ -52,12 +50,16 @@ export interface IQuestion {
 	starCount: number;
 	likeCount: number;
 	dislikeCount: number;
-	userStar: boolean;
-	userLike: boolean;
-	userDislike: boolean;
+	userAction: IUserAction;
 	createTime: string;
 	answers: IAnswerBrief[];
 	tags: ITag[]
+}
+
+interface IUserAction {
+	userLike: boolean;
+	userDislike: boolean;
+	userStar: boolean;
 }
 
 
@@ -117,6 +119,13 @@ export interface IUserFollow {
 	username: string;
 }
 
+export interface ISearchTagsResponse {
+	result: ITag[];
+	currentPage: number;
+	totalPages: number;
+	totalItems: number;
+}
+
 export interface ISearchQuestionsResponse {
 	result: IQuestionCard[];
 	currentPage: number;
@@ -136,6 +145,12 @@ export interface ISearchUserCardResponse {
 	currentPage: number;
 	totalPages: number;
 	totalItems: number; // 所有满足条件的结果数
+}
+
+export interface ILoginResponse {
+	accessToken: string;
+	refreshToken: string;
+	expire: string;
 }
 
 //用于用户数据统计时的接口

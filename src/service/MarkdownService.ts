@@ -57,7 +57,7 @@ const Code_RunCode = async (lang: string, content: string) => {
 		},
 		timeLimit: 1,
 	};
-	const response = await fetch(url, postRequestInit(JSON.stringify(body)));
+	const response = await fetch(url, await postRequestInit(JSON.stringify(body)));
 	if (!response.ok) message.error("error");
 	let msg = await response.json();
 	console.table(msg);
