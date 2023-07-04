@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {CSSProperties, useEffect, useState} from "react";
-import {IQuestion} from "../Interface.ts";
+import { IQuestion, IQuestionCard } from "../Interface.ts";
 import {EmptyQuestion} from "../data/EmptyObject.ts";
 import {Que_GetQuestion} from "../service/QuestionService.ts";
 import {message, Space, Tag} from "antd";
@@ -77,6 +77,8 @@ const testQuestion: IQuestion = {
 	]
 }
 
+
+
 export const QuestionView = () => {
 	const params = useParams();
 	const [question, setQuestion] = useState<IQuestion>(EmptyQuestion);
@@ -92,7 +94,7 @@ export const QuestionView = () => {
 			setQuestion(await response.json());
 		};
 		getQuestionById().catch((err) => console.error(err));
-		//setQuestion(testQuestion)
+		setQuestion(testQuestion)
 	}, [params.quesid]);
 
 	return (

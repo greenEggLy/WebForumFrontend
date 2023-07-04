@@ -1,4 +1,6 @@
-export const root = "http://121.37.158.48:8080/api";
+//export const root = "/api";
+//export const root = "http://121.37.158.48:5000/api"
+export const root = "http://localhost:5173/api"
 // export const;
 
 export const getRequestInit = (): RequestInit => {

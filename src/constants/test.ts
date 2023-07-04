@@ -41,7 +41,7 @@ const User2: IUserCard = {
 export const testQuestion1: IQuestionCard = {
 	Id: 1,
 	Title: '为什么我还没放暑假？',
-	CreateTime: new Date(2023, 5, 27, 16, 50, 0),
+	createTime: new Date(2023, 5, 27, 16, 50, 0),
 	Tags: [
 		{id: 1, content: 'test1', description: 'test1', question_number: 2},
 		{id: 2, content: 'test2', description: 'test2', question_number: 2},
@@ -53,7 +53,7 @@ export const testQuestion1: IQuestionCard = {
 export const testQuestion2: IQuestionCard = {
 	Id: 2,
 	Title: '为什么别人都放暑假了？',
-	CreateTime: new Date(2023, 5, 27, 10, 50, 0),
+	createTime: new Date(2023, 5, 27, 10, 50, 0),
 	Tags: [
 		{id: 1, content: 'test1', description: 'test1', question_number: 2},
 		{id: 3, content: 'test3', description: 'test3', question_number: 2},
@@ -65,7 +65,7 @@ export const testQuestion2: IQuestionCard = {
 export const testQuestion3: IQuestionCard = {
 	Id: 3,
 	Title: '我啥时候才能放暑假？',
-	CreateTime: new Date(2023, 5, 27, 10, 50, 0),
+	createTime: new Date(2023, 5, 27, 10, 50, 0),
 	Tags: [
 		{id: 1, content: 'test1', description: 'test1', question_number: 2},
 		{id: 4, content: 'test4', description: 'test4', question_number: 2},

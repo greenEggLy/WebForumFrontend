@@ -31,13 +31,16 @@ export const QuestionCard = ({question, click}: Props,) => {
 			<div className={'question-card-footer'}>
 				<div className={"question-card-tag-container"}>
 					{
-						question.Tags.map(tag => {
-							return (<span> <TagShowItem tag_name={tag.content}/> </span>)
-						})
+						question.Tags?
+							question.Tags.map(tag => {
+								return (<span> <TagShowItem tag_name={tag.content} /> </span>)
+							})
+							:
+							[]
 					}
 				</div>
 				<div className={'question-time-container'}>
-					{timeDiff(question.CreateTime)}
+					{timeDiff(question.createTime)}
 				</div>
 			</div>
 		</div>

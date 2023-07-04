@@ -96,7 +96,7 @@ export interface IQuestionCard {
 	Title: string;
 	VoteNumber: number;
 	AnswerNumber: number;
-	CreateTime: Date;
+	createTime: Date;
 	Tags: ITag[];
 }
 

@@ -54,6 +54,7 @@ export const QuestionsView = () => {
 			return;
 		}
 		const json: ISearchQuestionsResponse = await response.json();
+		console.log(json.result)
 		setQuestions(json.result);
 		// setTotalPages(json.totalPages);
 		setTotalItems(json.totalItems);

@@ -9,6 +9,7 @@ import {UserList} from "../constants/test.ts";
 import { message } from "antd";
 import "./css/UsersView.css"
 import { SearchBox } from "../components/Home/SearchBox.tsx";
+import { Users_FilterByName, Users_FilterByTab } from "../service/UsersService.ts";
 
 
 export interface ITab {
@@ -39,7 +40,8 @@ export const UsersView = () => {
 		setUsers(await json);
 	};
 	useEffect(() => {
-		getUserByTab(tabs[0]).catch(err => console.error(err))
+		//getUserByTab(tabs[0]).catch(err => console.error(err))
+		setUsers(UserList)
 	}, [])
 
 	useEffect(() => {
