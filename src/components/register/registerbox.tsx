@@ -25,7 +25,7 @@ const RegisterForm: React.FC = () => {
 		// const username = form.getFieldValue(["username"]);
 		const password = form.getFieldValue(["password"]);
 		const password_conf = form.getFieldValue(["password_conf"]);
-		if (!password === password_conf) {
+		if (!(password === password_conf)) {
 			message.error("请输入相同密码");
 		}
 		// login_user(username, password).then(async (res) => {
@@ -62,7 +62,7 @@ const RegisterForm: React.FC = () => {
 				<Form.Item name="tel" rules={[{required: true, message: 'Please input your phonenumber!'}]}>
 					<Input placeholder="请输入你的手机号码"/>
 				</Form.Item>
-				<Form.Item rules={[{required: true, message: 'Please input you email!'}]}>
+				<Form.Item name="email" rules={[{required: true, message: 'Please input you email!'}]}>
 					<Input type="email" placeholder="邮箱"/>
 				</Form.Item>
 				<Form.Item name="address">
