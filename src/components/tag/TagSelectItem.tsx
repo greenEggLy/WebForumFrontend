@@ -1,3 +1,6 @@
+//ABORTED
+
+
 import {ITag} from "../../Interface.ts";
 import React from "react";
 
@@ -20,6 +23,7 @@ export const TagSelectItem = ({tag, tags, setTags}: Props) => {
 					const index = tags.indexOf(tag);
 					const tags_tmp = tags;
 					tags_tmp.splice(index, 1);
+					console.log(tags_tmp);
 					setTags(tags_tmp);
 				}}
 			>

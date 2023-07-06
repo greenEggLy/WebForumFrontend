@@ -42,7 +42,7 @@ export const SearchBox = ({placeholder, category, value, onChange, isNavigate}: 
 			} else if (category === 'user')
 				Users_GetUsers(userTab, page.currentPage, page.pageSize, value).catch(err => console.error(err))
 			else
-				Tag_SearchTag(value).catch(err => console.error(err))
+				Tag_SearchTag(undefined, value).catch(err => console.error(err))
 		}
 	}
 

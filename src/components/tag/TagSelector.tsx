@@ -1,6 +1,7 @@
 import {ITag} from "../../Interface.ts";
 import {List} from "antd";
 import React from "react";
+import "./TagSelector.css";
 
 interface Props {
 	tagsFound: ITag[];
@@ -35,9 +36,20 @@ export const TagSelector = ({
 						setTagText("");
 						setTagsFound([]);
 						const newTags = questionTags;
+						if(questionTags.length == 5){
+							alert("最多只能选择5个标签");
+							return;
+						}
+						for(let i = 0; i < questionTags.length; i++){
+							if(questionTags[i].id == item.id){
+								alert("不能重复选择标签");
+								return;
+							}
+						}
 						newTags.push(item);
 						setQuestionTags(newTags);
 					}}
+					className={"tag-select-item"}
 				>
 					{item.content}
 				</List.Item>

@@ -89,8 +89,8 @@ export const UsersView = () => {
 			</div>
 			<Pagination defaultPageSize={20} pageSize={pageSize} total={totalItems} current={currentPage}
 						onChange={async (page, pageSize) => {
-							const response = await Tag_SearchTag(page, pageSize, text)
-							if (!response.ok) {
+							const response = await Tag_SearchTag(text, page, pageSize)
+              if (!response.ok) {
 								message.error(response.statusText)
 								return;
 							}
