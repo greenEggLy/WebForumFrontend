@@ -7,7 +7,31 @@
     padding: 2rem;
 }
 
-.input-box {
+.title-input-box {
+    width: 99%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    border-color: gray;
+    border-width: 0.5px;
+}
+
+.title-input-box:focus {
+    width: 99%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    border-color: gray;
+    border-width: 0.5px;
+}
+
+.tag-input-box {
+    width: 99%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    border-color: gray;
+    border-width: 0.5px;
+}
+
+.tag-input-box:focus {
     width: 99%;
     height: 1.5rem;
     border-radius: 0.5rem;

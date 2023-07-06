@@ -43,7 +43,8 @@ export const QuestionView = () => {
 				return;
 			}
 			const pagedAnswers: ISearchAnswersResponse = await ansResponse.json()
-			setQuestion(await response.json());
+			const new_question = await response.json()
+			setQuestion(new_question);
 			setAnswers(pagedAnswers.result)
 			setCurrentPage(pagedAnswers.currentPage)
 			setTotalPages(pagedAnswers.totalPages)
@@ -76,7 +77,7 @@ export const QuestionView = () => {
 				</div>
 			</div>
 			<div>
-				<h2>{question.answers.length + (question.answers.length == 1 ? " Answer" : " Answers")}</h2>
+				<h2>{totalItems + (totalItems == 1 ? " Answer" : " Answers")}</h2>
 			</div>
 			<div className={"question-answers"}>
 				{

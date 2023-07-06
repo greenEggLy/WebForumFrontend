@@ -1,0 +1,7 @@
+.tag-select-item {
+    cursor: pointer;
+}
+
+.tag-select-item:hover {
+    background-color: #cdcdcd;
+}

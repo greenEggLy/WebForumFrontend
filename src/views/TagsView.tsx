@@ -21,7 +21,7 @@ export const TagsView = () => {
 	}, [])
 
 	const getAllTags = async () => {
-		const response = await Tag_SearchTag(currentPage, pageSize);
+		const response = await Tag_SearchTag(undefined, currentPage, pageSize);
 		if (!response.ok) {
 			message.error("error!");
 			return;
@@ -54,8 +54,8 @@ export const TagsView = () => {
 			</div>
 			<Pagination defaultPageSize={20} pageSize={pageSize} total={totalItems} current={currentPage}
 						onChange={async (page, pageSize) => {
-							const response = await Tag_SearchTag(page, pageSize, text)
-							if (!response.ok) {
+							const response = await Tag_SearchTag(text, page, pageSize)
+              if (!response.ok) {
 								message.error(response.statusText)
 								return;
 							}
