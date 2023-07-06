@@ -108,9 +108,9 @@ export interface IUserCard {
 	avatar: string;
 	username: string;
 	location: string;
-	followers_number: number;
-	profile: string;
-	fields: ITag[];
+	followedCount: number;
+	about: string;
+	tags: ITag[];
 }
 
 export interface IUserFollow {

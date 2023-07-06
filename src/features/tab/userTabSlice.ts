@@ -4,12 +4,12 @@ import {ITab} from "../../views/UsersView.tsx";
 
 
 export interface IUserTab extends ITab {
-	tab: "reputation" | "newuser" | "editor";
+	tab: "heat" | "newest",
 	title: "All Users"
 }
 
 const initialState: IUserTab = {
-	tab: "reputation",
+	tab: "heat",
 	title: "All Users"
 }
 
@@ -17,7 +17,7 @@ export const UserTabSlice = createSlice({
 	name: 'userTab',
 	initialState,
 	reducers: {
-		changeUserTab: (state, action: PayloadAction<"reputation" | "newuser" | "editor">) => {
+		changeUserTab: (state, action: PayloadAction<"heat" | "newest">) => {
 			state.tab = action.payload;
 		}
 	}
