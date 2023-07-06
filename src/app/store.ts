@@ -14,7 +14,7 @@ export const store = configureStore({
 		user: userReducer,
 		tab: tabReducer,
 		userTab: userTabReducer,
-		page: pageReducer
+		page: pageReducer,
 	},
 })
 
