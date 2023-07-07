@@ -45,13 +45,16 @@ export const SignupService = async (
 	username: string,
 	password: string,
 	email: string,
+	location:string
 ) => {
 	const url = `${root}/auth/register`;
 	const json = {
 		username: username,
 		password: password,
-		email: email
+		email: email,
+		location : location,
 	};
 	const body = JSON.stringify(json);
+	console.log(body);
 	return await fetch(url, await postRequestInit(body));
 }

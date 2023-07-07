@@ -10,7 +10,12 @@ import {useEffect, useState} from "react"
 import {User_GetUser} from "../service/UserService.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {AnswerCard} from "../components/users/AnswerCard.tsx";
-
+import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
+import {IQuestionTab} from "../features/tab/tabSlice.ts";
+export const Tabs = [
+	{tab: 'heat', title: '个人信息'},
+	{tab: 'newest', title: ''},
+]
 const options =
 	[
 		{
@@ -36,67 +41,68 @@ export const UserInfoView = () => {
 			const response = await User_GetUser(id);
 			if (!response.ok) return;
 			setUser(await response.json());
+			console.log(user);
 		};
 		if (!params.userid) return;
 		getUserInfo(params.userid).catch((err) => console.error(err));
 	}, [params.userid]);
-	const testUser = User1;
 	return (
 		<div className={"info-all"}>
 			<div className={"simple-info"}>
-				<div className={"user-avatar-container"}>
-					<img className={"avatar"} src={testUser.avatar}/>
+				<div className={"_user-avatar-container"}>
+					<img className={"_avatar"} src={user.avatar}/>
 				</div>
 				<div className={"user-description-container"}>
-					<div className={"username"}>{testUser.username}</div>
+					<div className={"username"}>{user.username}</div>
 					<div>
 						<text className={"register_time"}>注册时间:2022-06-27</text>
-						<text className={"location"}>{testUser.location}</text>
-
+						<text className={"location"}>{user.location}</text>
 					</div>
-					<text className={"profile"}>{testUser.profile}</text>
-				</div>
-			</div>
-
-			<div className={"details"}>
-				<Input placeholder="个人简介"></Input>
-				<p className={"tags"}>
-					<text>我的标签:</text>
-					<span>
-					{testUser.fields.map((field: ITag) => (
+					<text className={"profile"}>{user.profile}</text>
+					<p className={"tags"}>
+						<text style={{marginRight:'3%'}}>标签:</text>
+						<span>
+					{user.fields.map((field: ITag) => (
 						<TagShowItem tag_name={field.content}/>
 					))}
 					</span>
-				</p>
-				<p>地址:{testUser.location}</p>
+					</p>
+				</div>
 			</div>
-			<div>
-				<StatisticBar options={options}/>
-			</div>
-			<div className={"user-likes-and-save"}>
-				{
-					user.like_questions.map(question => (
-						<QuestionCard question={question}/>
-					))
-				}
-				{
-					user.star_questions.map(question => (
-						<QuestionCard question={question}/>
-					))
-				}
-			</div>
-			<div className={"user-creates-and-answers"}>
-				{
-					user.questions.map(question => (
-						<QuestionCard question={question}/>
-					))
-				}
-				{
-					user.answers.map(answer => (
-						<AnswerCard answer={answer}/>
-					))
-				}
-			</div>
+
 		</div>
+		// 	<div className={"details"}>
+		// 		<Input placeholder="个人简介"></Input>
+
+		// 		<p>地址:{testUser.location}</p>
+		// 	</div>
+		// 	<div>
+		// 		<StatisticBar options={options}/>
+		// 	</div>
+		// 	<div className={"user-likes-and-save"}>
+		// 		{
+		// 			user.like_questions.map(question => (
+		// 				<QuestionCard question={question}/>
+		// 			))
+		// 		}
+		// 		{
+		// 			user.star_questions.map(question => (
+		// 				<QuestionCard question={question}/>
+		// 			))
+		// 		}
+		// 	</div>
+		// 	<div className={"user-creates-and-answers"}>
+		// 		{
+		// 			user.questions.map(question => (
+		// 				<QuestionCard question={question}/>
+		// 			))
+		// 		}
+		// 		{
+		// 			user.answers.map(answer => (
+		// 				<AnswerCard answer={answer}/>
+		// 			))
+		// 		}
+		// 	</div>
+		// </div>
 	);
 };

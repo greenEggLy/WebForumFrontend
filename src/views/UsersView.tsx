@@ -41,6 +41,7 @@ export const UsersView = () => {
 
 	const getUserByTab = async (tab: IUserTab) => {
 		const response = await Users_GetUsers(tab.tab, currentPage, pageSize, text);
+		console.log(tab);
 		if (!response.ok) message.error(`get user by ${tab} error!`);
 		const json: Promise<IUserCard[]> = response.json();
 		setUsers(await json);
