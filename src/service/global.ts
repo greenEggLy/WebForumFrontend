@@ -39,3 +39,17 @@ export const postRequestInit = async (content: string | FormData): Promise<Reque
 		},
 	};
 };
+export const putRequestInit = async (content: string | FormData): Promise<RequestInit> => {
+	const token = await GetToken();
+	return {
+		method: "PUT",
+		body: content,
+		headers: {
+			Authorization: `Bearer ${token}`,
+			"Content-Type":
+				typeof content === "string"
+					? "application/json"
+					: "multipart/form-data",
+		},
+	};
+};

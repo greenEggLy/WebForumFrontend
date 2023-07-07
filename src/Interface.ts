@@ -30,7 +30,14 @@ export interface IUserBrief {
 	userName: string;
 	avatar: string;
 }
-
+export interface IUserInfo{
+	password: string,
+	username: string,
+	email: string,
+	location: string,
+	about: string,
+	avatar: string
+}
 // answers in question detail
 export interface IAnswerBrief {
 	id: string;
