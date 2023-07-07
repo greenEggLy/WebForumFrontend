@@ -70,7 +70,7 @@ export const QuestionView = () => {
 			</Space>
 			<div className={"question-container"}>
 				<div className={'vote-bar-container'}>
-					<VoteBar content={question}/>
+					<VoteBar content={question} type={"question"}/>
 				</div>
 				<div className={'question-content-container'}>
 					<AnswerContent content={question.content}/>
@@ -85,7 +85,7 @@ export const QuestionView = () => {
 						<div className={'question-container'}>
 							<hr color='#f1f1f1'/>
 							<div style={styles.voteBarContainer}>
-								<VoteBar content={answer}/>
+								<VoteBar content={answer} type={"answer"}/>
 							</div>
 							<div className={'question-container'}>
 								<AnswerContent content={answer.content}/>

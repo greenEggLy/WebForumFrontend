@@ -5,11 +5,17 @@ import color from "../../constants/color.ts";
 import Logo from '../../assets/logos/biglogo.png';
 import {useNavigate} from "react-router-dom";
 import {GetToken, LoginService} from "../../service/LoginService.ts";
-import {ILoginResponse} from "../../Interface.ts";
+import { ILoginResponse, IUserCard } from "../../Interface.ts";
+import { User_GetMyInfo } from "../../service/UserService.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store.ts";
+import { login } from "../../features/user/userSlice.ts";
 
 const LoginForm: React.FC = () => {
 	const [form] = Form.useForm();
 	const [remember, setRemember] = useState(false);
+	const userInfo = useSelector((state: RootState) => state.user);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	useEffect(() => {
 		const autologin = async () => {
@@ -33,8 +39,17 @@ const LoginForm: React.FC = () => {
 		localStorage.setItem( 'accessToken', json.accessToken)
 		localStorage.setItem('refreshToken', json.refreshToken)
 		localStorage.setItem('expire', json.expire)
+		await setUserInfo()
 		navigate('/questions')
 	};
+
+	const setUserInfo = async () => {
+		const response = await User_GetMyInfo();
+		const json:IUserCard = await response.json();
+		const username = json.username;
+		const avatar = json.avatar;
+		dispatch(login({username, avatar}));
+	}
 
 	return (
 		<div className={'login-card'} style={

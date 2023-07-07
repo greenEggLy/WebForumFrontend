@@ -4,9 +4,11 @@ import {CaretDownOutlined, CaretUpOutlined, StarFilled, StarOutlined} from '@ant
 import {useEffect, useState} from "react";
 import {Que_DislikeQuestion, Que_LikeQuestion, Que_StarQuestion} from "../../../service/QuestionService.ts";
 import "./VoteBar.css"
+import { Ans_DislikeAnswer, Ans_LikeAnswer, Ans_StarAnswer } from "../../../service/AnswerService.ts";
 
 interface Props {
 	content: IQuestion | IAnswerBrief;
+	type: "question" | "answer";
 }
 
 const buttonColor = [
@@ -16,7 +18,7 @@ const buttonColor = [
 ]
 
 // 问题点赞
-export const VoteBar = ({content}: Props) => {
+export const VoteBar = ({content, type}: Props) => {
 	// 0 none, 1 up, 2 down
 	const [status, setStatus] = useState<0 | 1 | 2>(0)
 	const [likeCount, setLikeCount] = useState<number>(content.likeCount - content.dislikeCount);
@@ -44,7 +46,12 @@ export const VoteBar = ({content}: Props) => {
 	}
 
 	const clickLike = async () => {
-		const response = await Que_LikeQuestion(content.id)
+		let response = null
+		if(type === "question") {
+			response = await Que_LikeQuestion(content.id)
+		}
+		else
+			response = await Ans_LikeAnswer(content.id)
 		if (!response.ok) {
 			message.error(`like failed: ${response.statusText}`)
 			return;
@@ -62,7 +69,12 @@ export const VoteBar = ({content}: Props) => {
 	}
 
 	const clickDislike = async () => {
-		const response = await Que_DislikeQuestion(content.id)
+		let response = null
+		if(type === "question") {
+			response = await Que_DislikeQuestion(content.id)
+		}else{
+			response = await Ans_DislikeAnswer(content.id)
+		}
 		if (!response.ok) {
 			message.error(`dislike failed: ${response.statusText}`)
 			return;
@@ -80,7 +92,12 @@ export const VoteBar = ({content}: Props) => {
 	}
 
 	const clickStar = async () => {
-		const response = await Que_StarQuestion(content.id)
+		let response = null
+		if(type === "question") {
+			response = await Que_StarQuestion(content.id)
+		}else{
+			response = await Ans_StarAnswer(content.id)
+		}
 		if (!response.ok) {
 			message.error(`star failed: ${response.statusText}`)
 			return;

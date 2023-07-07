@@ -21,9 +21,8 @@ export interface ITab {
 }
 
 const tabs: IUserTab[] = [
-	{tab: "reputation", title: "All Users"},
-	{tab: "newuser", title: "All Users"},
-	{tab: "editor", title: "All Users"},
+	{tab: "heat", title: "All Users"},
+	{tab: "newest", title: "All Users"},
 ];
 // 用户搜索,总览
 export const UsersView = () => {
@@ -43,8 +42,10 @@ export const UsersView = () => {
 		const response = await Users_GetUsers(tab.tab, currentPage, pageSize, text);
 		console.log(tab);
 		if (!response.ok) message.error(`get user by ${tab} error!`);
-		const json: Promise<IUserCard[]> = response.json();
-		setUsers(await json);
+		//const json: Promise<IUserCard[]> = response.json();
+		const json = await response.json();
+		setUsers(json.result);
+		console.log(json.result)
 	};
 
 	useEffect(() => {
@@ -75,7 +76,7 @@ export const UsersView = () => {
 			</div>
 			<Divider style={{marginBottom: '0px', marginTop: '2px'}}/>
 			<div className={"user-card-container"}>
-				<List
+				{users && <List
 					grid={{
 						gutter: 16,
 						column: 4
@@ -86,7 +87,7 @@ export const UsersView = () => {
 							<UserCardItem user={user}/>
 						</List.Item>
 					)}
-				/>
+				/>}
 			</div>
 			<Pagination defaultPageSize={20} pageSize={pageSize} total={totalItems} current={currentPage}
 						onChange={async (page, pageSize) => {

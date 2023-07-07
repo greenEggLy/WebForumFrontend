@@ -31,16 +31,37 @@
     top: 0;
 }
 
+.my-avatar {
+    display: inline-block;
+    padding: 0.5rem;
+    width: 20%;
+}
+
 .logout-button{
     float: right;
-    width: 50%;
+    width: 45%;
+    line-height: 2rem;
     height: 2rem;
     margin-right: 1.5rem;
     margin-top: 0.6rem;
     background-color: deepskyblue;
     color: white;
     text-align: center;
-    justify-content: center;
+    border-color: red;
+    border-radius: 5px;
+    border-width: thick;
+}
+
+.login-button{
+    float: right;
+    width: 15%;
+    line-height: 2rem;
+    height: 2rem;
+    margin-right: 1.5rem;
+    margin-top: 0.6rem;
+    background-color: deepskyblue;
+    color: white;
+    text-align: center;
     border-color: red;
     border-radius: 5px;
     border-width: thick;

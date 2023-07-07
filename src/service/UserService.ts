@@ -1,13 +1,14 @@
-import {getRequestInit, putRequestInit, root} from "./global.ts";
+import {getRequestInit, root} from "./global.ts";
 
 export const User_GetUser = async (id: string) => {
 	const url = `${root}/user?userid=${id}`;
 	return await fetch(url, await getRequestInit());
 };
-export const User_GetSelf = async (id: string) => {
+
+export const User_GetSelf = async () => {
 	const url = `${root}/user/me`;
 	return await fetch(url, await getRequestInit());
-};
+}
 export const User_changeInfo = async (
 	password: string,
 	username: string,

@@ -5,6 +5,7 @@
     margin: 0.5rem;
     height: 8rem;
     width: 15rem;
+    cursor: default;
 }
 
 .user-avatar-container {

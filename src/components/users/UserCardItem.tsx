@@ -1,6 +1,7 @@
 import {IUserCard} from "../../Interface.ts";
 import {TagShowItem} from "../tag/TagShowItem.tsx";
 import "./UserCardItem.css"
+import { useNavigate } from "react-router-dom";
 
 interface Props {
 	user: IUserCard;
@@ -8,8 +9,11 @@ interface Props {
 
 // users展示界面的用户卡片
 export const UserCardItem = ({user}: Props) => {
+	const navigate = useNavigate();
 	return (
-		<div className={"user-card"} >
+		<div className={"user-card"} onClick={() => {
+			navigate(`/user/${user.id}`)
+		}}>
 					<div className={"user-avatar-container"}>
 						<img className={'avatar'} src={user.avatar}/>
 					</div>
@@ -17,10 +21,10 @@ export const UserCardItem = ({user}: Props) => {
 					<div className={"user-description-container"}>
 						<p className={'username'}>{user.username}</p>
 						<p className={'location'}>{user.location}</p>
-						<p className={'follower_number'}>{`${user.followers_number} followers`}</p>
-						<p className={'profile'}>{user.profile}</p>
+						<p className={'follower_number'}>{`${user.followedCount} followers`}</p>
+						<p className={'profile'}>{user.about}</p>
 						<div className={"user-card-footer"}>
-							{user.fields.slice(0,4).map((field) => (
+							{user.tags.map((field) => (
 								<TagShowItem tag_name={field.content}/>
 							))}
 						</div>
