@@ -10,6 +10,7 @@ import { User_GetMyInfo } from "../../service/UserService.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store.ts";
 import { login } from "../../features/user/userSlice.ts";
+import { isLogin } from "../../utils/login.ts";
 
 const LoginForm: React.FC = () => {
 	const [form] = Form.useForm();
@@ -20,7 +21,7 @@ const LoginForm: React.FC = () => {
 	useEffect(() => {
 		const autologin = async () => {
 			const token = await GetToken();
-			if (token == '') return;
+			if (!isLogin()) return;
 			navigate('/questions')
 		};
 		autologin().catch(err => console.error(err));

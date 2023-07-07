@@ -45,16 +45,16 @@ export const UserInfoView = () => {
 		<div className={"info-all"}>
 			<div className={"simple-info"}>
 				<div className={"user-avatar-container"}>
-					<img className={"avatar"} src={testUser.avatar}/>
+					<img className={"avatar"} src={user.avatar} style={{width:'5rem'}}/>
 				</div>
 				<div className={"user-description-container"}>
-					<div className={"username"}>{testUser.username}</div>
+					<div className={"username"}>{user.username}</div>
 					<div>
 						<text className={"register_time"}>注册时间:2022-06-27</text>
-						<text className={"location"}>{testUser.location}</text>
+						<text className={"location"}>{user.location}</text>
 
 					</div>
-					<text className={"profile"}>{testUser.profile}</text>
+					<text className={"profile"}>{user.about}</text>
 				</div>
 			</div>
 
@@ -63,40 +63,44 @@ export const UserInfoView = () => {
 				<p className={"tags"}>
 					<text>我的标签:</text>
 					<span>
-					{testUser.fields.map((field: ITag) => (
+						{user.tags ?
+					user.tags.map((field: ITag) => (
 						<TagShowItem tag_name={field.content}/>
-					))}
+					))
+							:
+							null
+						}
 					</span>
 				</p>
-				<p>地址:{testUser.location}</p>
+				<p>地址:{user.location}</p>
 			</div>
 			<div>
 				<StatisticBar options={options}/>
 			</div>
-			<div className={"user-likes-and-save"}>
-				{
-					user.like_questions.map(question => (
-						<QuestionCard question={question}/>
-					))
-				}
-				{
-					user.star_questions.map(question => (
-						<QuestionCard question={question}/>
-					))
-				}
-			</div>
-			<div className={"user-creates-and-answers"}>
-				{
-					user.questions.map(question => (
-						<QuestionCard question={question}/>
-					))
-				}
-				{
-					user.answers.map(answer => (
-						<AnswerCard answer={answer}/>
-					))
-				}
-			</div>
+			{/*<div className={"user-likes-and-save"}>*/}
+			{/*	{*/}
+			{/*		user.like_questions.map(question => (*/}
+			{/*			<QuestionCard question={question}/>*/}
+			{/*		))*/}
+			{/*	}*/}
+			{/*	{*/}
+			{/*		user.star_questions.map(question => (*/}
+			{/*			<QuestionCard question={question}/>*/}
+			{/*		))*/}
+			{/*	}*/}
+			{/*</div>*/}
+			{/*<div className={"user-creates-and-answers"}>*/}
+			{/*	{*/}
+			{/*		user.questions.map(question => (*/}
+			{/*			<QuestionCard question={question}/>*/}
+			{/*		))*/}
+			{/*	}*/}
+			{/*	{*/}
+			{/*		user.answers.map(answer => (*/}
+			{/*			<AnswerCard answer={answer}/>*/}
+			{/*		))*/}
+			{/*	}*/}
+			{/*</div>*/}
 		</div>
 	);
 };

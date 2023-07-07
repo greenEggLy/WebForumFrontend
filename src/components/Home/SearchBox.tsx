@@ -35,14 +35,22 @@ export const SearchBox = ({placeholder, category, value, onChange, isNavigate}: 
 		if (event.key === 'Enter') {
 			if (category === 'question') {
 				if (isNavigate) {
-					navigate("/questions")
-					dispatch(changeTab("heat"))
+					if(window.location.pathname !== '/questions')
+						navigate(`/questions?keyword=${value}`)
+					else{
+						navigate(`/questions?keyword=${value}`)
+						window.location.reload()
+					}
 				}
-				QuesGet(tab, page.currentPage, page.pageSize, tag, value).catch(err => console.error(err))
-			} else if (category === 'user')
-				Users_GetUsers(userTab, page.currentPage, page.pageSize, value).catch(err => console.error(err))
-			else
-				Tag_SearchTag(undefined, value).catch(err => console.error(err))
+				//QuesGet(tab, page.currentPage, page.pageSize, tag, value).catch(err => console.error(err))
+			} else if (category === 'user'){
+				navigate(`/users?keyword=${value}`)
+				window.location.reload()
+			}
+			else {
+				navigate(`/tags?keyword=${value}`)
+				window.location.reload()
+			}
 		}
 	}
 

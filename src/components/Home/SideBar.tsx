@@ -29,10 +29,10 @@ const items: MenuProps['items'] = [
 	getItem('所有问题', 'all', <BulbOutlined/>, [
 		getItem('全部问题', 'questions'),
 		getItem('未回答的', 'unanswered'),
-		getItem('我的问题', 'myQuestions', null, [
-			getItem('我回答的', 'myAnswers'),
-			getItem('我提出的', 'myAsked'),
-		]),
+		// getItem('我的问题', 'myQuestions', null, [
+		// 	getItem('我回答的', 'myAnswers'),
+		// 	getItem('我提出的', 'myAsked'),
+		// ]),
 	]),
 	getItem('标签', 'tags', <TagsOutlined/>),
 	getItem('用户', 'users', <UserOutlined/>),

@@ -36,7 +36,7 @@ export const SearchBar = () => {
 			</div>
 			<div className={'top-search-box-container'}>
 				<SearchBox
-					placeholder={'Search'}
+					placeholder={'搜索问题'}
 					category={"question"}
 					value={keyword}
 					onChange={(text) => dispatch(changeKeyword(text))}

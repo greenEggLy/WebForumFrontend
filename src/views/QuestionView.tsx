@@ -8,6 +8,7 @@ import {VoteBar} from "../components/question/question-page/VoteBar.tsx";
 import {AnswerContent} from "../components/question/question-page/AnswerContent.tsx";
 import {Editor} from "@bytemd/react";
 import "./css/QuestionView.css"
+import { isLogin } from "../utils/login.ts";
 
 const parseQuestionURL = (url: string) => {
 	const n = url.lastIndexOf('/')
@@ -24,12 +25,16 @@ export const QuestionView = () => {
 	const [totalItems, setTotalItems] = useState<number>(0)
 	const [quesId, setQuesId] = useState<string>("")
 	const postAnswer = async () => {
-		const response = await Ans_PostAnswer(answer, question.id)
-		if (!response.ok) {
-			message.error(`post answer failed: ${response.statusText}`)
-			return
+		if(isLogin()) {
+			const response = await Ans_PostAnswer(answer, question.id)
+			if (!response.ok) {
+				message.error(`post answer failed: ${response.statusText}`)
+				return
+			}
+			window.location.reload();
+		}else{
+			message.error(`Please login first`)
 		}
-		window.location.reload();
 	}
 	useEffect(() => {
 		const getQuestionById = async () => {

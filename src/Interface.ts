@@ -2,16 +2,18 @@ export interface IUser {
 	id: string;
 	username: string;
 	email: string;
-	create_time: Date;
-	last_login: Date;
+	registerTime: Date;
+	lastLogin: Date;
 	location: string;
-	profile: string;
+	about: string;
 	avatar: string;
+	followedCount: number;
+	followingCount: number;
 
 	is_admin: boolean;
 	is_banned: boolean;
 
-	fields: ITag[];
+	tags: ITag[];
 
 	like_questions: IQuestionCard[];
 	like_answer: IAnswerCard[];

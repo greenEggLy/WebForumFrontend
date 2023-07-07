@@ -19,7 +19,7 @@ export const RootRouter = () => {
 				path={"/"}
 				element={<HomeView/>}
 				children={[
-					<Route id={"questions"} element={<QuestionsView/>} path={"/questions/*"}>
+					<Route id={"questions"} element={<QuestionsView/>} path={"/questions"}>
 						{/*<Route element={<TagQuestionsView/>} path={"questions/tagged/:content"}></Route>*/}
 					</Route>,
 					<Route id={'tags'} element={<TagsView/>} path={"/tags"}/>,
