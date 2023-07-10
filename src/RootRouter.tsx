@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {LoginView} from "./views/LoginView.tsx";
 import {HomeView} from "./views/HomeView.tsx";
 import {QuestionsView} from "./views/QuestionsView.tsx";
@@ -12,6 +12,7 @@ import {QuestionView} from "./views/QuestionView.tsx";
 export const RootRouter = () => {
 	return (
 		<Routes>
+			<Route id={"default"} path={"/"} element={<Navigate to={'/questions'} />}/>
 			<Route id={"login"} index path={"/login"} element={<LoginView/>}/>
 			<Route id={"signup"} element={<SignupView/>} path={"/sign-up"}/>
 			<Route

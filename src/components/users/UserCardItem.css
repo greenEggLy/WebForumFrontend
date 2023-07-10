@@ -8,9 +8,9 @@
     cursor: default;
 }
 
-.user-avatar-container {
+.usercard-avatar-container {
     height: 100%;
-    width: 40%;
+    width: 6rem;
     float: left;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
@@ -53,9 +53,9 @@ p{
 ;
 }
 
-.user-description-container{
+.usercard-description-container{
     height: 100%;
-    width: 55%;
+    width: 9rem;
     float: right;
     margin-top: 1rem;
 }

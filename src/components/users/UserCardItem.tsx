@@ -14,11 +14,11 @@ export const UserCardItem = ({user}: Props) => {
 		<div className={"user-card"} onClick={() => {
 			navigate(`/user/${user.id}`)
 		}}>
-					<div className={"user-avatar-container"}>
+					<div className={"usercard-avatar-container"}>
 						<img className={'avatar'} src={user.avatar}/>
 					</div>
 
-					<div className={"user-description-container"}>
+					<div className={"usercard-description-container"}>
 						<p className={'username'}>{user.username}</p>
 						<p className={'location'}>{user.location}</p>
 						<p className={'follower_number'}>{`${user.followedCount} followers`}</p>

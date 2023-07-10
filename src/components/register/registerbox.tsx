@@ -23,6 +23,7 @@ const RegisterForm: React.FC = () => {
 		const password_conf = form.getFieldValue(["password_conf"]);
 		if (!(password === password_conf)) {
 			message.error("请输入相同密码");
+			return;
 		}
 		const username = form.getFieldValue(["username"]);
 		const email = form.getFieldValue(["email"]);
@@ -47,10 +48,22 @@ const RegisterForm: React.FC = () => {
 		<div style={{margin: '1rem'}}>
 			<Form form={form} initialValues={{remember: true}} onSubmitCapture={handleRegister} className={"login_form"}>
 				<h1 style={{textAlign: "center", color: color.dgrayblue}}>注册用户</h1>
-				<Form.Item name="username" rules={[{required: true, message: 'Please input your username!'}]}>
+				<Form.Item name="username" rules={
+					[
+						{required: true, message: 'Please input your username!'},
+						{min: 4, message: '用户名至少4位'},
+						{max: 12, message: '用户名最多12位'},
+					]
+				}>
 					<Input style={{width:'100%'}}placeholder="用户名"/>
 				</Form.Item>
-				<Form.Item name="password" rules={[{required: true, message: 'Please input your password!'}]}>
+				<Form.Item name="password" rules={
+					[
+						{required: true, message: 'Please input your password!'},
+						{min: 6, message: '密码至少6位'},
+						{max: 18, message: '密码最多18位'},
+					]
+				}>
 					<Input style={{width:'100%'}}type="password" placeholder="密码"/>
 				</Form.Item>
 				<Form.Item name="password_conf" rules={[{required: true, message: 'Please confirm your password!'}]}>

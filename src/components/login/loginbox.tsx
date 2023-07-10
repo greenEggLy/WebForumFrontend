@@ -32,7 +32,7 @@ const LoginForm: React.FC = () => {
 		const password = form.getFieldValue(["password"]);
 		const response = await LoginService(username, password)
 		if (!response.ok) {
-			message.error(response.statusText)
+			message.error('用户名或密码错误')
 			return;
 		}
 		const json: ILoginResponse = await response.json();
