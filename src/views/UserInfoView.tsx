@@ -41,7 +41,6 @@ export const UserInfoView = () => {
 			const response = await User_GetUser(id);
 			if (!response.ok) return;
 			setUser(await response.json());
-			console.log(user);
 		};
 		if (!params.userid) return;
 		getUserInfo(params.userid).catch((err) => console.error(err));
@@ -55,17 +54,18 @@ export const UserInfoView = () => {
 				<div className={"user-description-container"}>
 					<div className={"username"}>{user.username}</div>
 					<div>
-						<text className={"register_time"}>注册时间:2022-06-27</text>
+						<text className={"register_time"}>{user.create_time}</text>
 						<text className={"location"}>{user.location}</text>
 					</div>
 					<text className={"profile"}>{user.profile}</text>
 					<p className={"tags"}>
 						<text style={{marginRight:'3%'}}>标签:</text>
-						<span>
-					{user.fields.map((field: ITag) => (
-						<TagShowItem tag_name={field.content}/>
-					))}
-					</span>
+					{/*	<span>*/}
+					{/*		(user.fields?)*/}
+					{/*{user.fields.map((field: ITag) => (*/}
+					{/*	<TagShowItem tag_name={field.content}/>*/}
+					{/*))}*/}
+					{/*</span>*/}
 					</p>
 				</div>
 			</div>
