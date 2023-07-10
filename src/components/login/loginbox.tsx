@@ -97,7 +97,7 @@ const LoginForm: React.FC = () => {
 				>
 					<a
 						style={{fontSize: 14, textDecorationLine: "underline", alignSelf: "flex-start", marginRight: 5}}
-						onClick={() => navigate('sign-up')}>
+						onClick={() => navigate('/sign-up')}>
 						免费注册
 					</a>
 
