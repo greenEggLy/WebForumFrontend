@@ -117,7 +117,7 @@ export const QuestionsView = () => {
 				</div>
 				<div className="filter-container">
 					<div className="post-question">
-						<a href={isLogin()? '/create-question' : '/login'} style={{color:'white'}}>发布问题</a>
+						<a id="ask-button"  href={isLogin()? '/create-question' : '/login'} style={{color:'white'}}>发布问题</a>
 					</div>
 					{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
 					{/*@ts-ignore*/}

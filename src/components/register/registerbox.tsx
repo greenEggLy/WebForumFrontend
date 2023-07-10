@@ -2,45 +2,42 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, message} from 'antd';
 import Logo from "../../assets/logos/biglogo.png";
 import color from "../../constants/color.ts";
+import {SignupService } from "../../service/LoginService.ts";
+import {useNavigate} from "react-router-dom";
 
 const RegisterForm: React.FC = () => {
+	const navigate = useNavigate();
 	const [form] = Form.useForm();
 	const [finish, setFinish] = useState(false);
 	// const getToken = async () => {
 	//     return await AsyncStorage.getItem("token");
 	// };
 	useEffect(() => {
-		const autologin = async () => {
-			// if (await getToken()) {
-			//     setFinish(true);
-			// navigation.navigate("Home");
-			// }
-			setFinish(true);
-		};
-		autologin();
+		setFinish(true)
 	}, []);
 
 
-	const handleLogin = async () => {
+	const handleRegister = async () => {
 		// const username = form.getFieldValue(["username"]);
 		const password = form.getFieldValue(["password"]);
 		const password_conf = form.getFieldValue(["password_conf"]);
 		if (!(password === password_conf)) {
 			message.error("请输入相同密码");
 		}
-		// login_user(username, password).then(async (res) => {
-		//     if (res.access) {
-		//         // console.log(res.access);
-		//         await AsyncStorage.multiSet([
-		//             ["token", res.access],
-		//             ["refresh", res.refresh],
-		//         ]).then(navigation.navigate("Home"));
-		//         // navigation.navigate("Home");
-		//     } else {
-		//         // 处理未成功获取到token的情况
-		//         setPassword("");
-		//     }
-		// });
+		const username = form.getFieldValue(["username"]);
+		const email = form.getFieldValue(["email"]);
+		const location = form.getFieldValue(["address"]);
+		const response = await SignupService(username,password,email,location);
+		console.log(response
+		);
+		if (!response.ok) {
+			message.error(response.statusText)
+			return;
+		}
+		else {
+			message.success("注册成功");
+			navigate('/login');
+		}
 	};
 
 	if (!finish) return (
@@ -48,25 +45,22 @@ const RegisterForm: React.FC = () => {
 	);
 	return (
 		<div style={{margin: '1rem'}}>
-			<Form form={form} initialValues={{remember: true}} onSubmitCapture={handleLogin} className={"login_form"}>
+			<Form form={form} initialValues={{remember: true}} onSubmitCapture={handleRegister} className={"login_form"}>
 				<h1 style={{textAlign: "center", color: color.dgrayblue}}>注册用户</h1>
 				<Form.Item name="username" rules={[{required: true, message: 'Please input your username!'}]}>
-					<Input placeholder="用户名"/>
+					<Input style={{width:'100%'}}placeholder="用户名"/>
 				</Form.Item>
 				<Form.Item name="password" rules={[{required: true, message: 'Please input your password!'}]}>
-					<Input type="password" placeholder="密码"/>
+					<Input style={{width:'100%'}}type="password" placeholder="密码"/>
 				</Form.Item>
 				<Form.Item name="password_conf" rules={[{required: true, message: 'Please confirm your password!'}]}>
-					<Input type="password" name="password_conf" placeholder="重复密码"/>
-				</Form.Item>
-				<Form.Item name="tel" rules={[{required: true, message: 'Please input your phonenumber!'}]}>
-					<Input placeholder="请输入你的手机号码"/>
+					<Input style={{width:'100%'}}type="password" name="password_conf" placeholder="重复密码"/>
 				</Form.Item>
 				<Form.Item name="email" rules={[{required: true, message: 'Please input you email!'}]}>
-					<Input type="email" placeholder="邮箱"/>
+					<Input style={{width:'100%'}}type="email" placeholder="邮箱"/>
 				</Form.Item>
 				<Form.Item name="address">
-					<Input placeholder="请输入你的地址"/>
+					<Input style={{width:'100%'}}placeholder="请输入你的地址"/>
 				</Form.Item>
 				<Form.Item>
 					<Button type="primary" htmlType="submit" className="login-form-button"
