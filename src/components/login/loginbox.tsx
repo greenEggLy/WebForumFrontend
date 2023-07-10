@@ -10,6 +10,7 @@ import { User_GetMyInfo } from "../../service/UserService.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store.ts";
 import { login } from "../../features/user/userSlice.ts";
+import { isLogin } from "../../utils/login.ts";
 
 const LoginForm: React.FC = () => {
 	const [form] = Form.useForm();
@@ -20,8 +21,8 @@ const LoginForm: React.FC = () => {
 	useEffect(() => {
 		const autologin = async () => {
 			const token = await GetToken();
-			if (token === '') return;
-			else navigate('/questions')
+			if (!isLogin()) return;
+			navigate('/questions')
 		};
 		autologin().catch(err => console.error(err));
 	}, []);
@@ -29,14 +30,13 @@ const LoginForm: React.FC = () => {
 	const handleLogin = async () => {
 		const username = form.getFieldValue(["username"]);
 		const password = form.getFieldValue(["password"]);
-		const response = await LoginService(username, password);
-
+		const response = await LoginService(username, password)
 		if (!response.ok) {
 			message.error(response.statusText)
 			return;
 		}
 		const json: ILoginResponse = await response.json();
-		localStorage.setItem( 'accessToken', json.accessToken)
+		localStorage.setItem('accessToken', json.accessToken)
 		localStorage.setItem('refreshToken', json.refreshToken)
 		localStorage.setItem('expire', json.expire)
 		await setUserInfo()

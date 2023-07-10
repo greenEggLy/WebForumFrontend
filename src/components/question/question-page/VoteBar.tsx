@@ -53,7 +53,9 @@ export const VoteBar = ({content, type}: Props) => {
 		else
 			response = await Ans_LikeAnswer(content.id)
 		if (!response.ok) {
-			message.error(`like failed: ${response.statusText}`)
+			//message.error(`like failed: ${response.statusText}`)
+			if(response.status === 401)
+				message.error("请先登录")
 			return;
 		}
 		if (status === 1) {
@@ -76,7 +78,9 @@ export const VoteBar = ({content, type}: Props) => {
 			response = await Ans_DislikeAnswer(content.id)
 		}
 		if (!response.ok) {
-			message.error(`dislike failed: ${response.statusText}`)
+			//message.error(`dislike failed: ${response.statusText}`)
+			if(response.status === 401)
+				message.error("请先登录")
 			return;
 		}
 		if (status === 1) {
@@ -99,7 +103,9 @@ export const VoteBar = ({content, type}: Props) => {
 			response = await Ans_StarAnswer(content.id)
 		}
 		if (!response.ok) {
-			message.error(`star failed: ${response.statusText}`)
+			//message.error(`star failed: ${response.statusText}`)
+			if(response.status === 401)
+				message.error("请先登录")
 			return;
 		}
 		setStar(!star);

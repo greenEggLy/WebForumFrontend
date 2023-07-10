@@ -5,6 +5,7 @@ import {TagCard} from "../components/tag/TagCard.tsx";
 import {Tag_SearchTag} from "../service/TagService.ts";
 import './css/TagsView.css'
 import {SearchBox} from "../components/Home/SearchBox.tsx";
+import { getUrlParam } from "../utils/path.ts";
 
 export const TagsView = () => {
 	const [tags, setTags] = useState<ITag[]>([])
@@ -15,13 +16,14 @@ export const TagsView = () => {
 	const [totalItems, setTotalItems] = useState<number>(0)
 
 	useEffect(() => {
-		getAllTags().catch(err => console.error(err))
+		let tagKeyword = getUrlParam("keyword")
+		getAllTags(tagKeyword ? tagKeyword : "").catch(err => console.error(err))
 		//for test
 		// setTags([tag1, tag2, tag3, tag1, tag2])
 	}, [])
 
-	const getAllTags = async () => {
-		const response = await Tag_SearchTag(undefined, currentPage, pageSize);
+	const getAllTags = async (tagKeyword:string) => {
+		const response = await Tag_SearchTag(tagKeyword, currentPage, pageSize);
 		if (!response.ok) {
 			message.error("error!");
 			return;

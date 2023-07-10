@@ -13,7 +13,7 @@ export const QuesGet = async (tab: string, currentPage?: number | null, pageSize
 		url = `${url}/search`
 	}
 	url = `${url}?tab=${tab}&currentPage=${currentPage}&pageSize=${pageSize}`
-	if (keyword && keyword !== "") {
+	if (keyword && keyword !== '') {
 		url = `${url}&keyword=${keyword}`;
 	}
 	console.log(url);

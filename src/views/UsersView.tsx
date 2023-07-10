@@ -13,6 +13,7 @@ import {changeUserTab, IUserTab} from "../features/tab/userTabSlice.ts";
 import {Users_GetUsers} from "../service/UsersService.ts";
 import {changeKeyword} from "../features/keyword/keywordSlice.ts";
 import {Tag_SearchTag} from "../service/TagService.ts";
+import { getUrlParam } from "../utils/path.ts";
 
 
 export interface ITab {
@@ -38,9 +39,8 @@ export const UsersView = () => {
 
 	const [users, setUsers] = useState<IUserCard[]>([]);
 
-	const getUserByTab = async (tab: IUserTab) => {
-		const response = await Users_GetUsers(tab.tab, currentPage, pageSize, text);
-		console.log(tab);
+	const getUserByTab = async (tab: IUserTab, keyword:string) => {
+		const response = await Users_GetUsers(tab.tab, currentPage, pageSize, keyword);
 		if (!response.ok) message.error(`get user by ${tab} error!`);
 		//const json: Promise<IUserCard[]> = response.json();
 		const json = await response.json();
@@ -51,7 +51,8 @@ export const UsersView = () => {
 	useEffect(() => {
 		dispatch(changeKeyword(""))
 		dispatch(changeUserTab(tabs[0].tab))
-		getUserByTab(tabs[0]).catch(err => console.error(err))
+		let keyword = getUrlParam('keyword')
+		getUserByTab(tabs[0], keyword ? keyword:'').catch(err => console.error(err))
 	}, [])
 
 	useEffect(() => {
