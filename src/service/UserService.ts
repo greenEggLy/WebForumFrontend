@@ -1,4 +1,4 @@
-import {getRequestInit, putRequestInit,root} from "./global.ts";
+import {getRequestInit, postRequestInit, putRequestInit, root} from "./global.ts";
 
 export const User_GetUser = async (id: string) => {
 	const url = `${root}/user/${id}`;
@@ -17,7 +17,7 @@ export const User_changeInfo = async (
 	about: string,
 	avatar: string
 ) => {
-	const url = `${root}/user/update`;
+	const url = `${root}/user/me/update`;
 	const json = {
 		username: username,
 		password: password,
@@ -28,6 +28,11 @@ export const User_changeInfo = async (
 	};
 	const body = JSON.stringify(json);
 	return await fetch(url, await putRequestInit(body));
+}
+export const User_changeAvatar=async (picture:ImageBitmap)=>{
+	const url = `${root}/file`;
+	const body = JSON.stringify(picture);
+	return await fetch(url, await postRequestInit(body));
 }
 
 export const User_GetQuestions = async (id: string) => {

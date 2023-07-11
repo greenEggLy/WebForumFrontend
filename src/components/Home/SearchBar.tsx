@@ -56,7 +56,10 @@ export const SearchBar = () => {
 				(avatar &&
 				<div className={'logout-button-container'}>
 					<div className={'my-avatar'} onClick={handleClickAvatar}>
-						<img src={avatar} style={{width: '2rem', height: '2rem', borderRadius: '1rem'}}/>
+						<a href={"/user/me"}>
+							<img src={avatar} style={{width: '2rem', height: '2rem', borderRadius: '1rem'}} />
+						</a>
+
 					</div>
 					<div className={'logout-button'}>
 						<a style={{color: "white"}} onClick={
