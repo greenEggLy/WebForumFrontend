@@ -9,11 +9,13 @@ import { IUserCard } from "../../Interface.ts";
 import { login } from "../../features/user/userSlice.ts";
 import { useEffect, useState } from "react";
 import { isLogin } from "../../utils/login.ts";
+import { useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
 	const keyword = useSelector((state: RootState) => state.keyword.value)
 	const avatar = useSelector((state: RootState) => state.user.avatar)
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const setUserInfo = async () => {
 		const response = await User_GetMyInfo();
@@ -21,6 +23,13 @@ export const SearchBar = () => {
 		const username = json.username;
 		const avatar = json.avatar;
 		dispatch(login({username, avatar}));
+	}
+
+	const handleClickAvatar = async () => {
+		const me_response = await User_GetMyInfo();
+		const me_json:IUserCard = await me_response.json();
+		console.log(me_json);
+		navigate(`/user/${me_json.id}`)
 	}
 
 	useEffect(() => {
@@ -43,13 +52,10 @@ export const SearchBar = () => {
 					isNavigate
 				/>
 			</div>
-			<div className={'my-avatar-container'}>
-
-			</div>
 			{
 				(avatar &&
 				<div className={'logout-button-container'}>
-					<div className={'my-avatar'}>
+					<div className={'my-avatar'} onClick={handleClickAvatar}>
 						<img src={avatar} style={{width: '2rem', height: '2rem', borderRadius: '1rem'}}/>
 					</div>
 					<div className={'logout-button'}>
