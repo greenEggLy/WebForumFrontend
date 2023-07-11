@@ -1,12 +1,13 @@
+import {parseDateFormat} from "../service/TimeService.ts";
 import {useParams} from "react-router-dom";
 import {TagShowItem} from "../components/tag/TagShowItem.tsx";
-import {User1} from "../constants/test.ts";
 import './css/UserInfoView.css'
+import {EnvironmentOutlined} from "@ant-design/icons";
 import {ITag, IUser} from "../Interface.ts";
 import StatisticBar from "../components/statistic/StatisticBar.tsx";
 import {Input} from "antd";
 import {EmptyUser} from "../data/EmptyObject.ts";
-import {useEffect, useState} from "react"
+import React, {useEffect, useState} from "react"
 import {User_GetUser} from "../service/UserService.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {AnswerCard} from "../components/users/AnswerCard.tsx";
@@ -40,7 +41,9 @@ export const UserInfoView = () => {
 		const getUserInfo = async (id: string) => {
 			const response = await User_GetUser(id);
 			if (!response.ok) return;
-			setUser(await response.json());
+			setUser(await response.json())
+			console.log(await
+				user);
 		};
 		if (!params.userid) return;
 		getUserInfo(params.userid).catch((err) => console.error(err));
@@ -54,10 +57,15 @@ export const UserInfoView = () => {
 				<div className={"user-description-container"}>
 					<div className={"username"}>{user.username}</div>
 					<div>
-						<text className={"register_time"}>{user.create_time}</text>
-						<text className={"location"}>{user.location}</text>
+						<text className={'follower_number'}>{`${user.followedCount} followers`}</text>
+						<text className={'following_number'}>{`${user.followingCount} following`}</text>
+						<p>
+							<text className={"register_time"}>注册时间:{`${user.registerTime}`}</text>
+							<text className={"last_login"}>最近登录:{`${user.lastLogin}`}</text>
+						</p>
+						<text className={"location"}><EnvironmentOutlined style={{fontSize:'0.8rem',marginRight:'0.5rem'}}/>{user.location}</text>
+						<text className={'profile'}>{user.about}</text>
 					</div>
-					<text className={"profile"}>{user.profile}</text>
 					<p className={"tags"}>
 						<text style={{marginRight:'3%'}}>标签:</text>
 					{/*	<span>*/}

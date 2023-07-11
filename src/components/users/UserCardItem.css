@@ -52,7 +52,10 @@ p{
     margin-right: 1%
 ;
 }
-
+.last_login{
+    font-size: 8%;
+    margin-right: 5%
+}
 .usercard-description-container{
     height: 100%;
     width: 9rem;

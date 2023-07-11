@@ -69,7 +69,12 @@ p{
     color: darkgray;
     margin-top: -0.3rem;
 }
-
+.following_number{
+    font-size: 0.5rem;
+    color: darkgray;
+    margin-top: -0.3rem;
+    margin-left: 1rem;
+}
 .profile{
     font-size: 0.75rem;
     margin-top: -0.2rem;
