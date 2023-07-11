@@ -99,9 +99,11 @@ export interface IQuestionCard {
 }
 
 export interface IAnswerRecord {
+	questionId: string;
 	id: string;
 	content: string;
-	create_time: Date;
+	voteNumber: number;
+	createTime: string;
 }
 
 export interface IAnswerCard {

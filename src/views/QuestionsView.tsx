@@ -14,6 +14,7 @@ import RankCard from "../components/SideCard/RankCard.tsx";
 import {changeTab, IQuestionTab} from "../features/tab/tabSlice.ts";
 import {changePage} from "../features/page/pageSlice.ts";
 import { isLogin } from "../utils/login.ts";
+import { QuestionList } from "../components/question/question-page/QuestionList.tsx";
 
 
 export const Tabs: IQuestionTab[] = [
@@ -123,18 +124,19 @@ export const QuestionsView = () => {
 					{/*@ts-ignore*/}
 					<FilterTabItem tabs={Tabs} func={ChangeTab} setTab={(text) => dispatch(changeTab(text))}/>
 				</div>
-				<div className={"question-list-container"}>
-					<List>
-						{
-							questions.map(question => (
-									<div>
-										<QuestionCard question={question}/>
-									</div>
-								)
-							)
-						}
-					</List>
-				</div>
+				{/*<div className={"question-list-container"}>*/}
+				{/*	<List>*/}
+				{/*		{*/}
+				{/*			questions.map(question => (*/}
+				{/*					<div>*/}
+				{/*						<QuestionCard question={question}/>*/}
+				{/*					</div>*/}
+				{/*				)*/}
+				{/*			)*/}
+				{/*		}*/}
+				{/*	</List>*/}
+				{/*</div>*/}
+				<QuestionList questions={questions} />
 				<div className={"pagination"}>
 					<Pagination defaultCurrent={1} total={totalItems} current={page.currentPage} defaultPageSize={20}
 								onChange={(page, pageSize) => {

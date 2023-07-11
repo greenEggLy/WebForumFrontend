@@ -79,4 +79,10 @@ p{
     font-size: 0.75rem;
     margin-top: -0.2rem;
 }
+.tab-bar-container {
+    margin: 1rem;
+}
+.ant-tabs-nav-wrap {
+    height: 3rem;
+}
 

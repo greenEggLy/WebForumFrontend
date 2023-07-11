@@ -9,10 +9,17 @@ import {AnswerContent} from "../components/question/question-page/AnswerContent.
 import {Editor} from "@bytemd/react";
 import "./css/QuestionView.css"
 import { isLogin } from "../utils/login.ts";
+import { getUrlParam } from "../utils/path.ts";
+
 
 const parseQuestionURL = (url: string) => {
-	const n = url.lastIndexOf('/')
-	return url.substring(n + 1)
+	const slash = url.lastIndexOf('/')
+	//return url.substring(slash + 1)
+	const questionMark = url.lastIndexOf('?')
+	if(questionMark === -1)
+		return url.substring(slash + 1)
+	else
+		return url.substring(slash + 1, questionMark)
 }
 
 export const QuestionView = () => {
@@ -36,6 +43,14 @@ export const QuestionView = () => {
 			message.error(`Please login first`)
 		}
 	}
+	const locateToAnswer = () => {
+		const answerId = getUrlParam("answerId")
+		if(answerId){
+			document.getElementById(answerId)?.scrollIntoView()
+		}else{
+			return
+		}
+	}
 	useEffect(() => {
 		const getQuestionById = async () => {
 			const quesId = parseQuestionURL(window.location.href);
@@ -57,6 +72,7 @@ export const QuestionView = () => {
 		};
 		getQuestionById().catch((err) => console.error(err));
 		//setQuestion(testQuestion)
+		setTimeout(locateToAnswer, 1000)
 	}, []);
 
 	return (
@@ -65,7 +81,7 @@ export const QuestionView = () => {
 				<h1>{question.title}</h1>
 			</div>
 			<div className={"question-info"}>
-				{'Asked at ' + question.createTime + ' by ' + question.userCard.userName}
+				{'Asked at ' + question.createTime.substring(0, 10) + ' by ' + question.userCard.userName}
 			</div>
 			<Space size={[0, 8]}>
 				{question.tags.map(tag => (
@@ -87,7 +103,7 @@ export const QuestionView = () => {
 			<div className={"question-answers"}>
 				{
 					answers.map(answer => (
-						<div className={'question-container'}>
+						<div className={'question-container'} id={answer.id}>
 							<hr color='#f1f1f1'/>
 							<div style={styles.voteBarContainer}>
 								<VoteBar content={answer} type={"answer"}/>

@@ -29,3 +29,13 @@ export const User_changeInfo = async (
 	const body = JSON.stringify(json);
 	return await fetch(url, await putRequestInit(body));
 }
+
+export const User_GetQuestions = async (id: string) => {
+	const url = `${root}/user/${id}/questions`;
+	return await fetch(url, await getRequestInit());
+}
+
+export const User_GetAnswers = async (id: string) => {
+	const url = `${root}/user/${id}/answers`;
+	return await fetch(url, await getRequestInit());
+}
