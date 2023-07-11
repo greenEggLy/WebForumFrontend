@@ -49,3 +49,13 @@ export const User_GetStarAnswers = async () => {
 	const url = `${root}/user/me/answers/star`;
 	return await fetch(url, await getRequestInit());
 }
+
+export const User_GetLikeQuestions = async () => {
+	const url = `${root}/user/me/questions/like`;
+	return await fetch(url, await getRequestInit());
+}
+
+export const User_GetLikeAnswers = async () => {
+	const url = `${root}/user/me/answers/like`;
+	return await fetch(url, await getRequestInit());
+}

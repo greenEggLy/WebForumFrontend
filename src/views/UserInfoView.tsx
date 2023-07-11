@@ -9,7 +9,7 @@ import { Input, List, Menu, Tabs } from "antd";
 import {EmptyUser} from "../data/EmptyObject.ts";
 import React, {useEffect, useState} from "react"
 import {
-	User_GetAnswers,
+	User_GetAnswers, User_GetLikeAnswers, User_GetLikeQuestions,
 	User_GetQuestions,
 	User_GetStarAnswers,
 	User_GetStarQuestions,
@@ -80,8 +80,10 @@ export const UserInfoView = () => {
 	const [user, setUser] = useState<IUser>(EmptyUser);
 	const [questions, setQuestions] = useState<IQuestionCard[]>([]);
 	const [questions_star, setQuestions_star] = useState<IQuestionCard[]>([]);
+	const [questions_like, setQuestions_like] = useState<IQuestionCard[]>([]);
 	const [answers, setAnswers] = useState<IAnswerRecord[]>([]);
 	const [answers_star, setAnswers_star] = useState<IAnswerRecord[]>([]);
+	const [answers_like, setAnswers_like] = useState<IAnswerRecord[]>([]);
 	const [tab, setTab] = useState<string>("提问");
 	const [tabKey, setTabKey] = useState<string>("ask")
 	const [me, setMe] = useState<boolean>(false);
@@ -119,6 +121,18 @@ export const UserInfoView = () => {
 			if (ans_star_response) {
 				let answers_star_json = await ans_star_response.json()
 				setAnswers_star(await answers_star_json.result)
+			}
+			//get all questions liked by this user
+			const ques_like_response = await User_GetLikeQuestions();
+			if(ques_like_response) {
+				let questions_like_json = await ques_like_response.json()
+				setQuestions_like(await questions_like_json.result)
+			}
+			//get all answers liked by this user
+			const ans_like_response = await User_GetLikeAnswers();
+			if (ans_like_response) {
+				let answers_like_json = await ans_like_response.json()
+				setAnswers_like(await answers_like_json.result)
 			}
 		};
 		if (!params.userid) return;
@@ -177,7 +191,10 @@ export const UserInfoView = () => {
 					tabKey == 'answer' && <AnswerList answers={answers}/>
 				}
 				{
-					tabKey == 'star' && <StarItemList questions={questions_star} answers={answers_star} />
+					tabKey == 'star' && <StarItemList questions={questions_star} answers={answers_star} type={'star'}/>
+				}
+				{
+					tabKey == 'like' && <StarItemList questions={questions_like} answers={answers_like} type={'like'}/>
 				}
 			</div>
 
