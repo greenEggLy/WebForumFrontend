@@ -18,8 +18,8 @@ export const QuestionCard = ({question}: Props,) => {
 		<div className={"question-card"}>
 			<div className={"question-popularity-container"}>
 				<Row>
-					<Col span={3}>{question.answerNumber + (question.answerNumber == 1 ? ' Answer' : ' Answers')}</Col>
-					<Col span={6}>{question.voteNumber + (question.voteNumber == 1 ? ' Like' : ' Likes')}</Col>
+					<Col span={6}>{question.answerNumber + (question.answerNumber == 1 ? ' Answer' : ' Answers')}</Col>
+					<Col span={6} offset={4}>{question.voteNumber + (question.voteNumber == 1 ? ' Like' : ' Likes')}</Col>
 				</Row>
 			</div>
 			<div className={"question-card-title-container"}>

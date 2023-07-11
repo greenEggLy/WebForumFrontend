@@ -1,0 +1,11 @@
+.star-question-list {
+    float: left;
+    width: 49%;
+    border-right: #f5f5f5;
+    border-right-style: solid;
+}
+
+.star-answer-list {
+    float: right;
+    width: 50%;
+}

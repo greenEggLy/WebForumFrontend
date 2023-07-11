@@ -39,3 +39,13 @@ export const User_GetAnswers = async (id: string) => {
 	const url = `${root}/user/${id}/answers`;
 	return await fetch(url, await getRequestInit());
 }
+
+export const User_GetStarQuestions = async () => {
+	const url = `${root}/user/me/questions/star`;
+	return await fetch(url, await getRequestInit());
+}
+
+export const User_GetStarAnswers = async () => {
+	const url = `${root}/user/me/answers/star`;
+	return await fetch(url, await getRequestInit());
+}

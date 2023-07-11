@@ -8,7 +8,13 @@ import StatisticBar from "../components/statistic/StatisticBar.tsx";
 import { Input, List, Menu, Tabs } from "antd";
 import {EmptyUser} from "../data/EmptyObject.ts";
 import React, {useEffect, useState} from "react"
-import { User_GetAnswers, User_GetQuestions, User_GetUser } from "../service/UserService.ts";
+import {
+	User_GetAnswers,
+	User_GetQuestions,
+	User_GetStarAnswers,
+	User_GetStarQuestions,
+	User_GetUser
+} from "../service/UserService.ts";
 import {QuestionCard} from "../components/question/question-page/QuestionCard.tsx";
 import {AnswerCard} from "../components/users/AnswerCard.tsx";
 import {FilterTabItem} from "../components/users/FilterTabItem.tsx";
@@ -16,6 +22,7 @@ import {IQuestionTab} from "../features/tab/tabSlice.ts";
 import { QuesGet } from "../service/QuestionsService.ts";
 import { QuestionList } from "../components/question/question-page/QuestionList.tsx";
 import { AnswerList } from "../components/answers/AnswerList.tsx";
+import { StarItemList } from "../components/user/StarItemList.tsx";
 export const myTabs = [
 	{tab: 'heat', title: '个人信息'},
 	{tab: 'newest', title: ''},
@@ -48,23 +55,47 @@ const topBar = [
 	}
 ]
 
+const topBar_me = [
+	{
+		label: '提问',
+		key: 'ask',
+	},
+	{
+		label: '回答',
+		key: 'answer',
+	},
+	{
+		label: '收藏',
+		key: 'star',
+	},
+	{
+		label: '点赞',
+		key: 'like',
+	}
+]
+
 // user-self data view
 export const UserInfoView = () => {
 	const params = useParams();
 	const [user, setUser] = useState<IUser>(EmptyUser);
 	const [questions, setQuestions] = useState<IQuestionCard[]>([]);
+	const [questions_star, setQuestions_star] = useState<IQuestionCard[]>([]);
 	const [answers, setAnswers] = useState<IAnswerRecord[]>([]);
+	const [answers_star, setAnswers_star] = useState<IAnswerRecord[]>([]);
 	const [tab, setTab] = useState<string>("提问");
-	const [tabKey, setTabKey] = useState<"ask" |"answer">("ask")
+	const [tabKey, setTabKey] = useState<string>("ask")
+	const [me, setMe] = useState<boolean>(false);
+	const [isFollowed, setIsFollowed] = useState<boolean>(false)
 	useEffect(() => {
 		const getUserInfo = async (id: string) => {
 			if(!params.userid) return;
 			//get user information
 			const user_response = await User_GetUser(id);
 			if (!user_response.ok) return;
-			setUser(await user_response.json())
-			console.log(await
-				user);
+			let new_user = await user_response.json();
+			setUser(new_user);
+			if(new_user.username == localStorage.getItem('username'))
+				setMe(true);
 			//get all questions raised by this user
 			const ques_response = await User_GetQuestions(params.userid);
 			if(ques_response) {
@@ -76,6 +107,18 @@ export const UserInfoView = () => {
 			if(ans_response) {
 				let answers_json = await ans_response.json()
 				setAnswers(await answers_json.result)
+			}
+			//get all questions starred by this user
+			const ques_star_response = await User_GetStarQuestions();
+			if(ques_star_response) {
+				let questions_star_json = await ques_star_response.json()
+				setQuestions_star(await questions_star_json.result)
+			}
+			//get all answers starred by this user
+			const ans_star_response = await User_GetStarAnswers();
+			if (ans_star_response) {
+				let answers_star_json = await ans_star_response.json()
+				setAnswers_star(await answers_star_json.result)
 			}
 		};
 		if (!params.userid) return;
@@ -95,6 +138,7 @@ export const UserInfoView = () => {
 						<text className={'following_number'}>{`${user.followingCount} following`}</text>
 						<p>
 							<text className={"register_time"}>注册时间:{`${user.registerTime}`}</text>
+							<br />
 							<text className={"last_login"}>最近登录:{`${user.lastLogin}`}</text>
 						</p>
 						<text className={"location"}><EnvironmentOutlined style={{fontSize:'0.8rem',marginRight:'0.5rem'}}/>{user.location}</text>
@@ -110,21 +154,30 @@ export const UserInfoView = () => {
 					{/*</span>*/}
 					</p>
 				</div>
+				<div className={"follow-button-container"}>
+					{
+						!me &&
+						<div className={"follow-button"}>关注</div>
+					}
+					{
+						me &&
+						<div className={"follow-button"}>编辑资料</div>
+					}
+				</div>
 			</div>
 			<div className={"tab-bar-container"}>
-				<Tabs defaultActiveKey="1" activeKey={tabKey} items={topBar} size={'large'} tabBarGutter={100} onChange={(value) =>{
+				<Tabs defaultActiveKey="1" activeKey={tabKey} items={me ? topBar_me : topBar} size={'large'} tabBarGutter={100} onChange={(value) =>{
 					setTab(value)
-					if(value == 'answer'){
-						setTabKey('answer')
-					}else {
-						setTabKey('ask')
-					}
+					setTabKey(value)
 				}}/>
 				{
 					tabKey == 'ask' && <QuestionList questions={questions}/>
 				}
 				{
 					tabKey == 'answer' && <AnswerList answers={answers}/>
+				}
+				{
+					tabKey == 'star' && <StarItemList questions={questions_star} answers={answers_star} />
 				}
 			</div>
 

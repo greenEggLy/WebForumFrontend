@@ -39,6 +39,7 @@ const LoginForm: React.FC = () => {
 		localStorage.setItem('accessToken', json.accessToken)
 		localStorage.setItem('refreshToken', json.refreshToken)
 		localStorage.setItem('expire', json.expire)
+		localStorage.setItem('username', username)
 		await setUserInfo()
 		navigate('/questions')
 	};

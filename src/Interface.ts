@@ -9,6 +9,7 @@ export interface IUser {
 	avatar: string;
 	followedCount: number;
 	followingCount: number;
+	isFollowing: boolean;
 
 	is_admin: boolean;
 	is_banned: boolean;
