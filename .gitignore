@@ -27,7 +27,7 @@ Frontend/dist-ssr
 *.njsproj
 *.sln
 *.sw?
-Frontend/package-lock.json
+#Frontend/package-lock.json
 Migrations/
 /WebForum.csproj.user
 .vs
