@@ -4,14 +4,17 @@ export const EmptyUser: IUser = {
 	id: "0",
 	username: "",
 	email: "",
-	create_time: new Date(),
-	last_login: new Date(),
+	registerTime: new Date(),
+	lastLogin: new Date(),
 	location: "",
-	profile: "",
+	about: "",
 	avatar: "",
+	followedCount: 0,
+	followingCount: 0,
+	isFollowing: false,
 	is_admin: false,
 	is_banned: false,
-	fields: [],
+	tags: [],
 	like_questions: [],
 	like_answer: [],
 	star_questions: [],
@@ -33,9 +36,9 @@ export const EmptyUserCard: IUserCard = {
 	avatar: "",
 	username: "",
 	location: "",
-	followers_number: 0,
-	profile: "",
-	fields: []
+	followedCount: 0,
+	about: "",
+	tags: []
 }
 
 export const EmptyAnswerBrief: IAnswerBrief = {

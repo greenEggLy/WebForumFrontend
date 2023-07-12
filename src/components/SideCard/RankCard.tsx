@@ -13,7 +13,7 @@ interface AllProps {
 
 interface Props {
 	question: IQuestionCard;
-	click: (id: number) => void;
+	click: (id: number | string) => void;
 }
 
 export const QuestionContent = ({question, click}: Props,) => {
@@ -28,12 +28,12 @@ export const QuestionContent = ({question, click}: Props,) => {
 			<div className={"question-card-title-container"}>
 				<a className={"question-card-title"} onClick={() => {
 					click(question.id)
-				}}>{question.Title}</a>
+				}}>{question.title}</a>
 			</div>
 			<div className={"question-popularity-container"}>
 				<Row>
-					<Col span={7}>{question.AnswerNumber + (question.AnswerNumber == 1 ? ' Answer' : ' Answers')}</Col>
-					<Col span={7}>{question.VoteNumber + (question.VoteNumber == 1 ? ' Like' : ' Likes')}</Col>
+					<Col span={7}>{question.answerNumber + (question.answerNumber == 1 ? ' Answer' : ' Answers')}</Col>
+					<Col span={7}>{question.voteNumber + (question.voteNumber == 1 ? ' Like' : ' Likes')}</Col>
 				</Row>
 			</div>
 		</div>
@@ -41,7 +41,7 @@ export const QuestionContent = ({question, click}: Props,) => {
 }
 export const RankCard = ({questions, type}: AllProps,) => {
 	const navigate = useNavigate()
-	const clickQuestion = (questionId: number) => {
+	const clickQuestion = (questionId: number | string) => {
 		const navigateUrl = `/question/${questionId}`
 		navigate(navigateUrl)
 	}

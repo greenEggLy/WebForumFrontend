@@ -20,58 +20,58 @@ export const tag3: ITag = {
 	question_number: 233,
 }
 export const User1: IUserCard = {
-	id: 1,
+	id: "1",
 	avatar: "https://tse2-mm.cn.bing.net/th/id/OIP-C.PcOT-lN3-IAT3szcXiXvQgAAAA?w=186&h=186&c=7&r=0&o=5&dpr=2&pid=1.7",
 	username: "沈备军",
 	location: "中国上海",
-	followers_number: 233,
-	profile: "一名软件学院老师",
-	fields: [tag1, tag2, tag3]
+	followedCount: 233,
+	about: "一名软件学院老师",
+	tags: [tag1, tag2, tag3]
 }
 const User2: IUserCard = {
-	id: 2,
+	id: "2",
 	avatar: "https://tse2-mm.cn.bing.net/th/id/OIP-C.PcOT-lN3-IAT3szcXiXvQgAAAA?w=186&h=186&c=7&r=0&o=5&dpr=2&pid=1.7",
 	username: "沈备军",
 	location: "中国上海",
-	followers_number: 233,
-	profile: "一名软件学院老师",
-	fields: [tag1, tag2, tag3]
+	followedCount: 233,
+	about: "一名软件学院老师",
+	tags: [tag1, tag2, tag3]
 }
 
 export const testQuestion1: IQuestionCard = {
-	id: 1,
-	Title: '为什么我还没放暑假？',
-	createTime: new Date(2023, 5, 27, 16, 50, 0),
-	Tags: [
+	id: "1",
+	title: '为什么我还没放暑假？',
+	createTime: new Date(2023, 5, 27, 16, 50, 0).toDateString(),
+	tags: [
 		{id: 1, content: 'test1', description: 'test1', question_number: 2},
 		{id: 2, content: 'test2', description: 'test2', question_number: 2},
 	],
-	VoteNumber: 10,
-	AnswerNumber: 20
+	voteNumber: 10,
+	answerNumber: 20
 }
 
 export const testQuestion2: IQuestionCard = {
-	id: 2,
-	Title: '为什么别人都放暑假了？',
-	createTime: new Date(2023, 5, 27, 10, 50, 0),
-	Tags: [
+	id: "2",
+	title: '为什么别人都放暑假了？',
+	createTime: new Date(2023, 5, 27, 10, 50, 0).toDateString(),
+	tags: [
 		{id: 1, content: 'test1', description: 'test1', question_number: 2},
 		{id: 3, content: 'test3', description: 'test3', question_number: 2},
 	],
-	VoteNumber: 30,
-	AnswerNumber: 15
+	voteNumber: 30,
+	answerNumber: 15
 }
 
 export const testQuestion3: IQuestionCard = {
-	id: 3,
-	Title: '我啥时候才能放暑假？',
-	createTime: new Date(2023, 5, 27, 10, 50, 0),
-	Tags: [
+	id: "3",
+	title: '我啥时候才能放暑假？',
+	createTime: new Date(2023, 5, 27, 10, 50, 0).toDateString(),
+	tags: [
 		{id: 1, content: 'test1', description: 'test1', question_number: 2},
 		{id: 4, content: 'test4', description: 'test4', question_number: 2},
 	],
-	VoteNumber: 13,
-	AnswerNumber: 28
+	voteNumber: 13,
+	answerNumber: 28
 }
 
 export const UserList: IUserCard[] = [User1, User2, User1, User2, User1, User2, User1, User2];

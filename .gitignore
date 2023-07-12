@@ -32,3 +32,4 @@ Migrations/
 /WebForum.csproj.user
 .vs
 script.sql
+secrets.txt

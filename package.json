@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://greeneggly.github.io/web-forum",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
   "scripts": {
     "dev": "vite --port 5173",
     "build": "tsc && vite build",
@@ -21,6 +24,7 @@
     "@types/node": "^20.3.1",
     "antd": "^5.6.1",
     "dayjs": "^1.11.8",
+    "gh-pages": "^5.0.0",
     "history": "^5.3.0",
     "http-proxy-middleware": "^2.0.6",
     "markdown-it": "^13.0.1",
