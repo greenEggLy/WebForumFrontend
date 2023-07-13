@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://greeneggly.github.io/web-forum",
+  "homepage": "https://greeneggly.github.io/WebForumFrontend",
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build",
   "scripts": {
